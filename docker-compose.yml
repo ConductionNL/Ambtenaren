@@ -11,7 +11,7 @@ x-cache:
     - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-h2-proxy
 
 services:
-  protocomponent-php:
+  mrc-php:
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php
     build:
       context: ./api
@@ -25,28 +25,28 @@ services:
       # If you develop on Linux, uncomment the following line to use a bind-mounted host directory instead
       # - ./api/var:/srv/api/var:rw
 
-  protocomponent-api:
+  mrc-api:
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-nginx
     build:
       context: ./api
       target: api_platform_nginx
       <<: *cache
     depends_on:
-      - protocomponent-php
+      - mrc-php
     # Comment out this volume in production
     volumes:
       - ./api/public:/srv/api/public:ro
     ports:
       - "8080:80"
 
-  protocomponent-cache-proxy:
+  mrc-cache-proxy:
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-varnish
     build:
       context: ./api
       target: api_platform_varnish
       <<: *cache
     depends_on:
-      - protocomponent-api
+      - mrc-api
     volumes:
       - ./api/docker/varnish/conf:/usr/local/etc/varnish:ro
     tmpfs:
@@ -122,8 +122,8 @@ services:
       - db
       - client
       - admin
-      - protocomponent-api
-      - protocomponent-cache-proxy
+      - mrc-api
+      - mrc-cache-proxy
     ports:
       - "443:443"
       - "444:444"
