@@ -82,7 +82,7 @@ class Employee
      */
     private $sourceOrganisation;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }

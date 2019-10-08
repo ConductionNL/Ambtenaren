@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: 'Proto Component (PC)'
+  title: 'Medewerkers Registratie Component (mrc)'
   version: 0.0.1
   description: |
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar. 
@@ -27,6 +27,336 @@ info:
     Let er bij het meegeven van JWT tokens op dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
     
 paths:
+  /employees:
+    get:
+      tags:
+        - Employee
+      operationId: getEmployeeCollection
+      summary: 'Retrieves the collection of Employee resources.'
+      responses:
+        200:
+          description: 'Employee collection response'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee-read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+    post:
+      tags:
+        - Employee
+      operationId: postEmployeeCollection
+      summary: 'Creates a Employee resource.'
+      responses:
+        201:
+          description: 'Employee resource created'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+          links:
+            GetEmployeeItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getEmployeeItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /employees/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+        description: 'The new Employee resource'
+  '/employees/{id}':
+    get:
+      tags:
+        - Employee
+      operationId: getEmployeeItem
+      summary: 'Retrieves a Employee resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Employee resource response'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Employee
+      operationId: deleteEmployeeItem
+      summary: 'Removes the Employee resource.'
+      responses:
+        204:
+          description: 'Employee resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Employee
+      operationId: putEmployeeItem
+      summary: 'Replaces the Employee resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Employee resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+        description: 'The updated Employee resource'
+    patch:
+      tags:
+        - Employee
+      operationId: patchEmployeeItem
+      summary: 'Updates the Employee resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Employee resource updated'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Employee-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Employee-write'
+        description: 'The updated Employee resource'
   /example_entities:
     get:
       tags:
@@ -371,6 +701,29 @@ paths:
         description: 'The updated ExampleEntity resource'
 components:
   schemas:
+    Employee-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: string
+        contact:
+          description: 'The person that is employed'
+          type: string
+        source_organisation:
+          description: 'The organisation where this person is employed'
+          type: string
+    Employee-write:
+      type: object
+      description: ''
+      properties:
+        contact:
+          description: 'The person that is employed'
+          type: string
+        source_organisation:
+          description: 'The organisation where this person is employed'
+          type: string
     ExampleEntity:
       type: object
       description: ''
