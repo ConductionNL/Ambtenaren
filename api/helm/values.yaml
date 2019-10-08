@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 php:
-  repository: docker.io/conduction/protocomponent-php
+  repository: docker.io/conduction/mrc-php
   tag: latest
   pullPolicy: Always
   replicaCount: 1
@@ -20,7 +20,7 @@ php:
     - 192.168.0.0/16
 
 nginx:
-  repository: docker.io/conduction/protocomponent-nginx
+  repository: docker.io/conduction/mrc-nginx
   tag: latest
   pullPolicy: Always
   replicaCount: 1
@@ -28,7 +28,7 @@ nginx:
 varnish:
   enabled: true
   #url: https://example.com
-  repository: docker.io/conduction/protocomponent-varnish
+  repository: docker.io/conduction/mrc-varnish
   tag: latest
   pullPolicy: Always
   replicaCount: 1
