@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -22,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 class Employee
 {
     /**
-     * @var \Ramsey\Uuid\UuidInterface
+     * @var UuidInterface
      *
      * @ApiProperty(
      * 	   identifier=true,
@@ -36,6 +37,7 @@ class Employee
      *     }
      * )
      *
+     * @Assert\Uuid
      * @Groups({"read"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -57,7 +59,11 @@ class Employee
      *         }
      *     }
      * )
-     *  
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max = 255
+     * )
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -76,7 +82,7 @@ class Employee
      *         }
      *     }
      * )
-     *  
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
