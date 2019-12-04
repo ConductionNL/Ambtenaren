@@ -5,7 +5,9 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -17,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Employee
 {
     /**
-     * @var \Ramsey\Uuid\UuidInterface
+     * @var UuidInterface
      *
      * @ApiProperty(
      * 	   identifier=true,
@@ -31,6 +33,7 @@ class Employee
      *     }
      * )
      *
+     * @Assert\Uuid
      * @Groups({"read"})
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -51,6 +54,10 @@ class Employee
      *             "example"="http://cc.zaakonline.nl/contact/2984465-190a-4562-829e-a8cca81aa35d"
      *         }
      *     }
+     * )
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max = 255
      * )
      *
      * @Groups({"read","write"})
