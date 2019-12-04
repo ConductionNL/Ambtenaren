@@ -4,13 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
@@ -45,7 +40,7 @@ class Employee
     private $id;
 
     /**
-     * @var string $contact The person that is employed
+     * @var string The person that is employed
      *
      * @ApiProperty(
      *     attributes={
@@ -57,14 +52,14 @@ class Employee
      *         }
      *     }
      * )
-     *  
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
     private $contact;
 
     /**
-     * @var string $sourceOrganisation The organisation where this person is employed
+     * @var string The organisation where this person is employed
      *
      * @ApiProperty(
      *     attributes={
@@ -76,7 +71,7 @@ class Employee
      *         }
      *     }
      * )
-     *  
+     *
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
