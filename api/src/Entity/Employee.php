@@ -21,18 +21,6 @@ class Employee
     /**
      * @var UuidInterface
      *
-     * @ApiProperty(
-     * 	   identifier=true,
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The UUID identifier of this object",
-     *             "type"="string",
-     *             "format"="uuid",
-     *             "example"="e2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     *
      * @Assert\Uuid
      * @Groups({"read"})
      * @ORM\Id
@@ -45,21 +33,10 @@ class Employee
     /**
      * @var string The person that is employed
      *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The person that is employed",
-     *             "type"="string",
-     *             "format"="url",
-     *             "example"="http://cc.zaakonline.nl/contact/2984465-190a-4562-829e-a8cca81aa35d"
-     *         }
-     *     }
-     * )
-     * @Assert\NotBlank
      * @Assert\Length(
      *     max = 255
      * )
-     *
+     * @Assert\NotNull
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -68,17 +45,10 @@ class Employee
     /**
      * @var string The organisation where this person is employed
      *
-     * @ApiProperty(
-     *     attributes={
-     *         "swagger_context"={
-     *         	   "description" = "The organisation where this person is employed",
-     *             "type"="string",
-     *             "format"="rsin",
-     *             "example"="123456789"
-     *         }
-     *     }
+     * @Assert\Length(
+     *     max = 255
      * )
-     *
+     * @Assert\NotNull
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
