@@ -4,8 +4,8 @@
 
 settings:
   registryBase: docker.io/conduction
-  projectName: pc
-  name: pc
+  projectName: mrc
+  name: mrc
   title: Proto Component
   version: V.0.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
@@ -28,7 +28,7 @@ settings:
   debug: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '^(.+\.)?conduction\.nl$|^(.+\.)?vng\.cloud$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?larping\.eu$|^(.+\.)?common-ground\.dev$|^(.+\.)?trouwplanner\.online$|^(.+\.)?zaakonline\.nl$|localhost'
+  trustedHosts: '^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?larping\.eu$|^(.+\.)?common-ground\.dev$|^(.+\.)?trouwplanner\.online$|^(.+\.)?zaakonline\.nl$|localhost'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:
@@ -48,7 +48,7 @@ settings:
 
 
 php:
-  repository: docker.io/conduction/mrc-php
+  repository: docker.io/conduction/protocomponent-php
   tag: latest
   mercure:
     jwtSecret: ""
@@ -56,7 +56,7 @@ php:
   secret: ""
 
 nginx:
-  repository: docker.io/conduction/mrc-nginx
+  repository: docker.io/conduction/protocomponent-nginx
   tag: latest
   pullPolicy: Always
   replicaCount: 1
@@ -64,7 +64,7 @@ nginx:
 varnish:
   enabled: true
   #url: https://example.com
-  repository: docker.io/conduction/mrc-varnish
+  repository: docker.io/conduction/protocomponent-varnish
   tag: latest
   pullPolicy: Always
   replicaCount: 1

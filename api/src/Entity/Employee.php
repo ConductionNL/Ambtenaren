@@ -20,6 +20,7 @@ class Employee
 {
     /**
      * @var UuidInterface
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
      * @Groups({"read"})
@@ -32,6 +33,7 @@ class Employee
 
     /**
      * @var string The person that is employed
+     * @example https://www.example.com/person1
      *
      * @Assert\Length(
      *     max = 255
@@ -44,6 +46,7 @@ class Employee
 
     /**
      * @var string The organisation where this person is employed
+     * @example https://www.example.com/organization1
      *
      * @Assert\Length(
      *     max = 255
