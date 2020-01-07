@@ -9,6 +9,7 @@ Het "Ambtenaren" component is ontwikkeld voor de gemeente Utrecht en heeft als d
 - [codebase](https://github.com/ConductionNL/love-common-ground) on github.
 - [codebase](https://github.com/ConductionNL/love-common-ground/archive/master.zip) as a download.
 - [Datamodel of this component](api/public/schema/datamodel.pdf)
+- [Postman test of this component](api/public/schema/mrc.postman_collection.json)
 
 Getting started
 -------
