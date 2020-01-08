@@ -63,8 +63,8 @@ jobs:
         run: docker-compose logs
       - name: Database Update
         run: docker-compose exec -T php bin/console doctrine:schema:update --force
-      - name: Database Check
-        run: docker-compose exec -T php bin/console doctrine:schema:validate
+      #- name: Database Check
+      #  run: docker-compose exec -T php bin/console doctrine:schema:validate
       - name: Security Checks
         run: docker-compose exec -T php composer req sensiolabs/security-checker
 
