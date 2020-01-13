@@ -8,8 +8,8 @@ info:
     - Reference: mrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/Proto-component-commonground) / [zip](https://github.com/ConductionNL/Proto-component-commonground/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pc-php) 
+    - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus) / [zip](https://github.com/ConductionNL/medewerkercatalogus/archive/master.zip)
+    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
@@ -597,7 +597,7 @@ components:
   schemas:
     Employee-read:
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       properties:
         id:
           readOnly: true
@@ -606,29 +606,37 @@ components:
           type: string
         contact:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         sourceOrganisation:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
       required:
         - contact
         - sourceOrganisation
     Employee-write:
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       required:
         - contact
         - sourceOrganisation
       properties:
         contact:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         sourceOrganisation:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
     'Employee:jsonld-read':
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       properties:
         '@context':
           readOnly: true
@@ -646,16 +654,20 @@ components:
           type: string
         contact:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         sourceOrganisation:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
       required:
         - contact
         - sourceOrganisation
     'Employee:jsonld-write':
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       required:
         - contact
         - sourceOrganisation
@@ -671,33 +683,51 @@ components:
           type: string
         contact:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         sourceOrganisation:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
 definitions:
   Employee-read:
     properties:
       id:
+        description: ''
+        type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       contact:
-        example: 'https://www.example.com/person1'
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       sourceOrganisation:
-        example: 'https://www.example.com/organization1'
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
     required:
       - contact
       - sourceOrganisation
   Employee-write:
     properties:
       contact:
-        example: 'https://www.example.com/person1'
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       sourceOrganisation:
-        example: 'https://www.example.com/organization1'
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
     required:
       - contact
       - sourceOrganisation
@@ -705,7 +735,7 @@ tags:
   -
     name: Employee
     description: |
-      
+      All properties that the entity Employee holds.
       
       
 securityDefinitions:
