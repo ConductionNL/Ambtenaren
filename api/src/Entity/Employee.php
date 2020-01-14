@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
@@ -22,6 +21,7 @@ class Employee
 {
     /**
      * @var UuidInterface
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -35,6 +35,7 @@ class Employee
 
     /**
      * @var string The person that is employed
+     *
      * @example https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Length(
@@ -49,6 +50,7 @@ class Employee
 
     /**
      * @var string The organisation where this person is employed
+     *
      * @example https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Length(
