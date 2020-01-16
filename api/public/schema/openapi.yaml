@@ -604,7 +604,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           externalDocs:
             url: 'http://schema.org/url'
@@ -615,16 +615,16 @@ components:
             url: 'http://schema.org/url'
           type: string
       required:
-        - contact
+        - person
         - sourceOrganisation
     Employee-write:
       type: object
       description: 'All properties that the entity Employee holds.'
       required:
-        - contact
+        - person
         - sourceOrganisation
       properties:
-        contact:
+        person:
           description: 'The person that is employed'
           externalDocs:
             url: 'http://schema.org/url'
@@ -652,7 +652,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           externalDocs:
             url: 'http://schema.org/url'
@@ -663,13 +663,13 @@ components:
             url: 'http://schema.org/url'
           type: string
       required:
-        - contact
+        - person
         - sourceOrganisation
     'Employee:jsonld-write':
       type: object
       description: 'All properties that the entity Employee holds.'
       required:
-        - contact
+        - person
         - sourceOrganisation
       properties:
         '@context':
@@ -681,7 +681,7 @@ components:
         '@type':
           readOnly: true
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           externalDocs:
             url: 'http://schema.org/url'
@@ -699,7 +699,7 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      contact:
+      person:
         description: 'The person that is employed'
         type: string
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
@@ -712,11 +712,11 @@ definitions:
         maxLength: 255
         format: url
     required:
-      - contact
+      - person
       - sourceOrganisation
   Employee-write:
     properties:
-      contact:
+      person:
         description: 'The person that is employed'
         type: string
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
@@ -729,7 +729,7 @@ definitions:
         maxLength: 255
         format: url
     required:
-      - contact
+      - person
       - sourceOrganisation
 tags:
   -
