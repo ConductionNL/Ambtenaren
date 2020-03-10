@@ -6,7 +6,7 @@ settings:
   registryBase: docker.io/conduction
   projectName: mrc
   name: mrc
-  title: Proto Component
+  title: Medewerker Catalogus Component
   version: V.0.1
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
   repro: 'https://github.com/ConductionNL/Proto-component-commonground'
@@ -52,7 +52,7 @@ security:
   applicationKey: "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
   userKey: "79d5b14c-70ab-41fb-ac02-917e3288870b"
   authorisationProviderUser: https://uc.larping.eu
-  authorisationProviderApplication: https://uc.larping.eu
+  authorisationProviderApplication: https://ac.larping.eu
 
 
 php:
