@@ -2020,7 +2020,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[contact]'
+          name: 'order[person]'
           in: query
           required: false
           schema:
@@ -2029,7 +2029,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[sourceOrganisation]'
+          name: 'order[organization]'
           in: query
           required: false
           schema:
@@ -2120,13 +2120,13 @@ paths:
           style: form
           explode: true
         -
-          name: contact
+          name: person
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'contact[]'
+          name: 'person[]'
           in: query
           required: false
           schema:
@@ -2136,13 +2136,13 @@ paths:
           style: form
           explode: true
         -
-          name: sourceOrganisation
+          name: organization
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'sourceOrganisation[]'
+          name: 'organization[]'
           in: query
           required: false
           schema:
@@ -2955,6 +2955,728 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /job_postings:
+    get:
+      tags:
+        - JobPosting
+      operationId: getJobPostingCollection
+      summary: 'Retrieves the collection of JobPosting resources.'
+      responses:
+        200:
+          description: 'JobPosting collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - JobPosting
+      operationId: postJobPostingCollection
+      summary: 'Creates a JobPosting resource.'
+      responses:
+        201:
+          description: 'JobPosting resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+          links:
+            GetJobPostingItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getJobPostingItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /job_postings/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/JobPosting:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+        description: 'The new JobPosting resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/job_postings/{id}':
+    get:
+      tags:
+        - JobPosting
+      operationId: getJobPostingItem
+      summary: 'Retrieves a JobPosting resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'JobPosting resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - JobPosting
+      operationId: deleteJobPostingItem
+      summary: 'Removes the JobPosting resource.'
+      responses:
+        204:
+          description: 'JobPosting resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - JobPosting
+      operationId: putJobPostingItem
+      summary: 'Replaces the JobPosting resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'JobPosting resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/JobPosting:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+        description: 'The updated JobPosting resource'
+    patch:
+      tags:
+        - JobPosting
+      operationId: patchJobPostingItem
+      summary: 'Updates the JobPosting resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'JobPosting resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting:jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+        description: 'The updated JobPosting resource'
 components:
   schemas:
     AuditTrail-read:
@@ -3348,10 +4070,10 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           type: string
-        sourceOrganisation:
+        organization:
           description: 'The organisation where this person is employed'
           type: string
         dateCreated:
@@ -3365,19 +4087,19 @@ components:
           type: string
           format: date-time
       required:
-        - contact
-        - sourceOrganisation
+        - person
+        - organization
     Employee-write:
       type: object
       description: ''
       required:
-        - contact
-        - sourceOrganisation
+        - person
+        - organization
       properties:
-        contact:
+        person:
           description: 'The person that is employed'
           type: string
-        sourceOrganisation:
+        organization:
           description: 'The organisation where this person is employed'
           type: string
     'Employee:jsonld-read':
@@ -3398,10 +4120,10 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           type: string
-        sourceOrganisation:
+        organization:
           description: 'The organisation where this person is employed'
           type: string
         dateCreated:
@@ -3415,14 +4137,14 @@ components:
           type: string
           format: date-time
       required:
-        - contact
-        - sourceOrganisation
+        - person
+        - organization
     'Employee:jsonld-write':
       type: object
       description: ''
       required:
-        - contact
-        - sourceOrganisation
+        - person
+        - organization
       properties:
         '@context':
           readOnly: true
@@ -3433,13 +4155,125 @@ components:
         '@type':
           readOnly: true
           type: string
-        contact:
+        person:
           description: 'The person that is employed'
           type: string
-        sourceOrganisation:
+        organization:
           description: 'The organisation where this person is employed'
           type: string
+    JobPosting:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        title:
+          type: string
+        employmentType:
+          type: string
+        hiringOrganization:
+          type: string
+        jobStartDate:
+          type: string
+          format: date-time
+        validThrough:
+          type: string
+          format: date-time
+        standardHours:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+        dateModified:
+          type: string
+          format: date-time
+    'JobPosting:jsonld':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        title:
+          type: string
+        employmentType:
+          type: string
+        hiringOrganization:
+          type: string
+        jobStartDate:
+          type: string
+          format: date-time
+        validThrough:
+          type: string
+          format: date-time
+        standardHours:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+        dateModified:
+          type: string
+          format: date-time
 definitions:
+  Employee-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://www.example.com/person1'
+        maxLength: 255
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://www.example.com/organization1'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+    required:
+      - person
+      - organization
+  Employee-write:
+    properties:
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://www.example.com/person1'
+        maxLength: 255
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://www.example.com/organization1'
+        maxLength: 255
+    required:
+      - person
+      - organization
   AuditTrail-read:
     properties:
       id:
@@ -3544,12 +4378,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:26:28'
+        example: '2020-03-24 13:32:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:26:28'
+        example: '2020-03-24 13:32:14'
     required: []
   AuditTrail-write:
     properties:
@@ -3597,12 +4431,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-11 09:26:28'
+        example: '2020-03-24 13:32:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-11 09:26:28'
+        example: '2020-03-24 13:32:14'
     required: []
   ChangeLog-write:
     properties:
@@ -3612,48 +4446,13 @@ definitions:
         example: 'This log line is suspicius'
         maxLength: 2555
     required: []
-  Employee-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      contact:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://www.example.com/person1'
-        maxLength: 255
-      sourceOrganisation:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://www.example.com/organization1'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-    required:
-      - contact
-      - sourceOrganisation
-  Employee-write:
-    properties:
-      contact:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://www.example.com/person1'
-        maxLength: 255
-      sourceOrganisation:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://www.example.com/organization1'
-        maxLength: 255
-    required:
-      - contact
-      - sourceOrganisation
 tags:
+  -
+    name: Employee
+    description: |
+      
+      
+      
   -
     name: AuditTrail
     description: |
@@ -3667,7 +4466,7 @@ tags:
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: Employee
+    name: JobPosting
     description: |
       
       
@@ -3678,15 +4477,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Employee resource'
-      write: 'write right to the Employee resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Employee resource'
-      write: 'write right to the Employee resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
