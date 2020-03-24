@@ -110,6 +110,11 @@ class Employee
      */
     private $dateModified;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="employee", cascade={"persist", "remove"})
+     */
+    private $jobPosting;
+
     public function getId()
     {
         return $this->id;
@@ -161,5 +166,22 @@ class Employee
     	$this->dateModified = $dateModified;
 
     	return $this;
+    }
+
+    public function getJobPosting(): ?JobPosting
+    {
+        return $this->jobPosting;
+    }
+
+    public function setJobPosting(JobPosting $jobPosting): self
+    {
+        $this->jobPosting = $jobPosting;
+
+        // set the owning side of the relation if necessary
+        if ($jobPosting->getEmployee() !== $this) {
+            $jobPosting->setEmployee($this);
+        }
+
+        return $this;
     }
 }

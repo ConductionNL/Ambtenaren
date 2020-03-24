@@ -68,6 +68,12 @@ class JobPosting
      */
     private $dateModified;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employee;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +195,18 @@ class JobPosting
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(Employee $employee): self
+    {
+        $this->employee = $employee;
 
         return $this;
     }
