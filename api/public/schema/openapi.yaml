@@ -2969,7 +2969,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -2979,7 +2979,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/JobPosting:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -2989,58 +2989,413 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/json+hal:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/json+vnd.api:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/health+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/json+health:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/JobPosting'
+                  $ref: '#/components/schemas/JobPosting-read'
       parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[title]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[employmentType]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[hiringOrganization]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[jobStartDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[validThrough]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[standardHours]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'jobStartDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobStartDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobStartDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobStartDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'validThrough[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'validThrough[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'validThrough[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'validThrough[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'title[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: employmentType
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'employmentType[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: hiringOrganization
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'hiringOrganization[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: jobStartDate
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobStartDate[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: validThrough
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'validThrough[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: standardHours
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'standardHours[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -3133,43 +3488,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
           links:
             GetJobPostingItem:
               parameters:
@@ -3184,43 +3539,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/JobPosting:jsonld'
+              $ref: '#/components/schemas/JobPosting:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/JobPosting:jsonld'
+              $ref: '#/components/schemas/JobPosting:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
         description: 'The new JobPosting resource'
       parameters:
         -
@@ -3342,93 +3697,47 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
         404:
           description: 'Resource not found'
       produces:
         - application/health+json
-    delete:
-      tags:
-        - JobPosting
-      operationId: deleteJobPostingItem
-      summary: 'Removes the JobPosting resource.'
-      responses:
-        204:
-          description: 'JobPosting resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
     put:
       tags:
         - JobPosting
@@ -3476,43 +3785,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
         400:
           description: 'Invalid input'
         404:
@@ -3521,49 +3830,54 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/JobPosting:jsonld'
+              $ref: '#/components/schemas/JobPosting:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/JobPosting:jsonld'
+              $ref: '#/components/schemas/JobPosting:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/JobPosting'
+              $ref: '#/components/schemas/JobPosting-write'
         description: 'The updated JobPosting resource'
-    patch:
+    delete:
       tags:
         - JobPosting
-      operationId: patchJobPostingItem
-      summary: 'Updates the JobPosting resource.'
+      operationId: deleteJobPostingItem
+      summary: 'Removes the JobPosting resource.'
+      responses:
+        204:
+          description: 'JobPosting resource deleted'
+        404:
+          description: 'Resource not found'
       parameters:
         -
           name: id
@@ -3600,83 +3914,268 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+  '/job_postings/{id}/audit_trail':
+    get:
+      tags:
+        - JobPosting
+      operationId: get_audit_trailJobPostingItem
+      summary: 'Retrieves a JobPosting resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
       responses:
         200:
-          description: 'JobPosting resource updated'
+          description: 'JobPosting resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/JobPosting:jsonld'
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/JobPosting'
+                $ref: '#/components/schemas/JobPosting-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/JobPosting'
-        400:
-          description: 'Invalid input'
+                $ref: '#/components/schemas/JobPosting-read'
         404:
           description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/JobPosting:jsonld'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          application/merge-patch+json:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          applications/x-yaml:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/JobPosting'
-        description: 'The updated JobPosting resource'
+      produces:
+        - application/health+json
+  '/job_postings/{id}/change_log':
+    get:
+      tags:
+        - JobPosting
+      operationId: get_change_logsJobPostingItem
+      summary: 'Retrieves a JobPosting resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'JobPosting resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/JobPosting:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/JobPosting-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
 components:
   schemas:
     AuditTrail-read:
@@ -4161,38 +4660,70 @@ components:
         organization:
           description: 'The organisation where this person is employed'
           type: string
-    JobPosting:
+    JobPosting-read:
       type: object
       description: ''
       properties:
         id:
           readOnly: true
-          type: integer
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
         name:
+          description: 'The name of this Job Posting'
           type: string
         description:
+          description: 'The description of this JobPosting'
           type: string
         title:
-          type: string
-        employmentType:
-          type: string
-        hiringOrganization:
+          description: 'The name of this Job Posting'
           type: string
         jobStartDate:
+          description: 'The start date of the contract'
           type: string
           format: date-time
         validThrough:
+          description: 'The end date of the contract'
           type: string
           format: date-time
-        standardHours:
-          type: integer
         dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
           type: string
           format: date-time
         dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
           type: string
           format: date-time
-    'JobPosting:jsonld':
+      required:
+        - name
+        - title
+    JobPosting-write:
+      type: object
+      description: ''
+      required:
+        - name
+        - title
+      properties:
+        name:
+          description: 'The name of this Job Posting'
+          type: string
+        description:
+          description: 'The description of this JobPosting'
+          type: string
+        title:
+          description: 'The name of this Job Posting'
+          type: string
+        jobStartDate:
+          description: 'The start date of the contract'
+          type: string
+          format: date-time
+        validThrough:
+          description: 'The end date of the contract'
+          type: string
+          format: date-time
+    'JobPosting:jsonld-read':
       type: object
       description: ''
       properties:
@@ -4207,29 +4738,70 @@ components:
           type: string
         id:
           readOnly: true
-          type: integer
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
         name:
+          description: 'The name of this Job Posting'
           type: string
         description:
+          description: 'The description of this JobPosting'
           type: string
         title:
-          type: string
-        employmentType:
-          type: string
-        hiringOrganization:
+          description: 'The name of this Job Posting'
           type: string
         jobStartDate:
+          description: 'The start date of the contract'
           type: string
           format: date-time
         validThrough:
+          description: 'The end date of the contract'
           type: string
           format: date-time
-        standardHours:
-          type: integer
         dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
           type: string
           format: date-time
         dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+      required:
+        - name
+        - title
+    'JobPosting:jsonld-write':
+      type: object
+      description: ''
+      required:
+        - name
+        - title
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of this Job Posting'
+          type: string
+        description:
+          description: 'The description of this JobPosting'
+          type: string
+        title:
+          description: 'The name of this Job Posting'
+          type: string
+        jobStartDate:
+          description: 'The start date of the contract'
+          type: string
+          format: date-time
+        validThrough:
+          description: 'The end date of the contract'
           type: string
           format: date-time
 definitions:
@@ -4378,12 +4950,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-24 13:32:14'
+        example: '2020-03-24 13:59:48'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-24 13:32:14'
+        example: '2020-03-24 13:59:48'
     required: []
   AuditTrail-write:
     properties:
@@ -4431,12 +5003,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-24 13:32:14'
+        example: '2020-03-24 13:59:48'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-24 13:32:14'
+        example: '2020-03-24 13:59:48'
     required: []
   ChangeLog-write:
     properties:
@@ -4446,6 +5018,75 @@ definitions:
         example: 'This log line is suspicius'
         maxLength: 2555
     required: []
+  JobPosting-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+    required:
+      - name
+      - title
+      - employmentType
+  JobPosting-write:
+    properties:
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+    required:
+      - name
+      - title
+      - employmentType
 tags:
   -
     name: Employee
@@ -4477,15 +5118,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the JobPosting resource'
+      write: 'write right to the JobPosting resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the JobPosting resource'
+      write: 'write right to the JobPosting resource'
 host: irc.zaakonline.nl
 servers:
   -
