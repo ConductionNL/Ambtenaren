@@ -131,7 +131,7 @@ class JobPosting
      * @var \DateTime The start date of the contract
      * @example 01-01-2020
      *
-     * @Groups({"read". "write"})
+     * @Groups({"read", "write"})
      * @ORM\Column(type="datetime")
      */
     private $jobStartDate;
