@@ -90,7 +90,7 @@ class Employee
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $sourceOrganisation;
+    private $organization;
 
     /**
      * @var Datetime $dateCreated The moment this resource was created
@@ -127,14 +127,14 @@ class Employee
         return $this;
     }
 
-    public function getSourceOrganisation(): ?string
+    public function getOrganization(): ?string
     {
-        return $this->sourceOrganisation;
+        return $this->organization;
     }
 
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setOrganization(string $organization): self
     {
-        $this->sourceOrganisation = $sourceOrganisation;
+        $this->organization = $organization;
 
         return $this;
     }
