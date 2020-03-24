@@ -43,7 +43,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * )
  * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
- * 
+ *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
@@ -76,7 +76,7 @@ class Employee
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $contact;
+    private $person;
 
     /**
      * @var string The organisation where this person is employed
@@ -90,8 +90,8 @@ class Employee
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $sourceOrganisation;
-    
+    private $organization;
+
     /**
      * @var Datetime $dateCreated The moment this resource was created
      *
@@ -100,66 +100,88 @@ class Employee
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateCreated;
-    
+
     /**
      * @var Datetime $dateModified  The moment this resource last Modified
      *
      * @Groups({"read"})
-     * @Gedmo\Timestampable(on="create")
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="employee", cascade={"persist", "remove"})
+     */
+    private $jobPosting;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getContact(): ?string
+    public function getPerson(): ?string
     {
-        return $this->contact;
+        return $this->person;
     }
 
-    public function setContact(string $contact): self
+    public function setPerson(string $person): self
     {
-        $this->contact = $contact;
+        $this->person = $person;
 
         return $this;
     }
 
-    public function getSourceOrganisation(): ?string
+    public function getOrganization(): ?string
     {
-        return $this->sourceOrganisation;
+        return $this->organization;
     }
 
-    public function setSourceOrganisation(string $sourceOrganisation): self
+    public function setOrganization(string $organization): self
     {
-        $this->sourceOrganisation = $sourceOrganisation;
+        $this->organization = $organization;
 
         return $this;
     }
-    
+
     public function getDateCreated(): ?\DateTimeInterface
     {
     	return $this->dateCreated;
     }
-    
+
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
     	$this->dateCreated= $dateCreated;
-    	
+
     	return $this;
     }
-    
+
     public function getDateModified(): ?\DateTimeInterface
     {
     	return $this->dateModified;
     }
-    
+
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
     	$this->dateModified = $dateModified;
-    	
+
     	return $this;
+    }
+
+    public function getJobPosting(): ?JobPosting
+    {
+        return $this->jobPosting;
+    }
+
+    public function setJobPosting(JobPosting $jobPosting): self
+    {
+        $this->jobPosting = $jobPosting;
+
+        // set the owning side of the relation if necessary
+        if ($jobPosting->getEmployee() !== $this) {
+            $jobPosting->setEmployee($this);
+        }
+
+        return $this;
     }
 }
