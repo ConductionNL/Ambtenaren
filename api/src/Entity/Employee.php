@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -112,7 +113,7 @@ class Employee
 
     /**
      * @Groups({"read", "write"})
-     * @Maxdepth(1)
+     * @MaxDepth(1)
      * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="employee", cascade={"persist", "remove"})
      */
     private $jobPosting;
