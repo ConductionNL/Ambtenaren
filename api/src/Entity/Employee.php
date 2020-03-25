@@ -111,6 +111,8 @@ class Employee
     private $dateModified;
 
     /**
+     * @Groups({"read", "write"})
+     * @Maxdepth(1)
      * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="employee", cascade={"persist", "remove"})
      */
     private $jobPosting;

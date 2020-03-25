@@ -113,6 +113,7 @@ class JobPosting
      * @Gedmo\Versioned
      * @Assert\Choice({"full-time","part-time","temporary","internship","seasonal"})
      * @Assert\NotNull
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      */
     private $employmentType;
@@ -151,6 +152,7 @@ class JobPosting
      * @var int The standard amount of hours per week for this JobPosting
      * @example 40
      *
+     * @Groups({"read", "write"})
      * @ORM\Column(type="integer")
      */
     private $standardHours;
@@ -174,6 +176,8 @@ class JobPosting
     private $dateModified;
 
     /**
+     * @Groups({"read", "write"})
+     * @Maxdepth(1)
      * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
