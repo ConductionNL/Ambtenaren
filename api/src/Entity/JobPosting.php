@@ -108,7 +108,7 @@ class JobPosting
     private $title;
 
     /**
-     * @var string The type of employment
+     * @var string The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**
      * @example full-time
      *
      * @Gedmo\Versioned
