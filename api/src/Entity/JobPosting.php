@@ -94,7 +94,7 @@ class JobPosting
     private $description;
 
     /**
-     * @var string The name of this Job Posting
+     * @var string The title of this Job Posting
      * @example my JobPosting
      *
      * @Gedmo\Versioned
@@ -120,11 +120,12 @@ class JobPosting
     private $employmentType;
 
     /**
-     * @var string The name of this Job Posting
+     * @var string The organization that hires the person
      * @example https://cc.zaakonline.nl/organizations/1
      *
      * @Gedmo\Versioned
      * @Assert\Url
+     * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $hiringOrganization;
@@ -144,7 +145,6 @@ class JobPosting
      * @example 01-01-2020
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="datetime")
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $validThrough;
@@ -153,6 +153,7 @@ class JobPosting
      * @var int The standard amount of hours per week for this JobPosting
      * @example 40
      *
+     * @Assert\NotNull
      * @Groups({"read", "write"})
      * @ORM\Column(type="integer")
      */
@@ -177,6 +178,8 @@ class JobPosting
     private $dateModified;
 
     /**
+     * @var Employee the employee this JobPosting relates to
+     *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting", cascade={"persist", "remove"})
