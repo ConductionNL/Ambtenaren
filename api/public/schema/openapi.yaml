@@ -4188,6 +4188,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         request:
           readOnly: true
           description: 'The id of the request within that application'
@@ -4318,6 +4319,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         request:
           readOnly: true
           description: 'The id of the request within that application'
@@ -4449,6 +4451,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         action:
           readOnly: true
           type: string
@@ -4509,6 +4512,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         action:
           readOnly: true
           type: string
@@ -4569,6 +4573,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         person:
           description: 'The person that is employed'
           type: string
@@ -4625,6 +4630,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         person:
           description: 'The person that is employed'
           type: string
@@ -4681,6 +4687,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         name:
           description: 'The name of this Job Posting'
           type: string
@@ -4785,6 +4792,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         name:
           description: 'The name of this Job Posting'
           type: string
@@ -4985,12 +4993,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-15 13:46:05'
+        example: '2020-04-21 13:00:19'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-15 13:46:05'
+        example: '2020-04-21 13:00:19'
     required: []
   AuditTrail-write:
     properties:
@@ -5038,12 +5046,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-15 13:46:05'
+        example: '2020-04-21 13:00:19'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-15 13:46:05'
+        example: '2020-04-21 13:00:19'
     required: []
   ChangeLog-write:
     properties:
