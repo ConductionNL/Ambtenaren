@@ -6,30 +6,28 @@ settings:
   registryBase: docker.io/conduction
   projectName: mrc
   name: mrc
-  title: Medewerker Catalogus Component
+  title: Medewerker Catalogus
   version: V.0.1
+  id: &#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: https://github.com/ConductionNL/medewerkercatalogus
-  demo: mrc.zaakonline.nl
+  type: component
+  repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
+  demo: pc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/mrc-php
-  subdomain: mrc  
-  domains:
-    - conduction.nl
-    - zaakonline.nl
-    - huwelijksplanner.online
-    - common-ground.dev
-  domainsJson: ["conduction.nl","zaakonline.nl","huwelijksplanner.online","common-ground.dev"]
+  domain: conduction.nl
+  subdomain: mrc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
   state: Noord-Holland
   locality: Amsterdam
-  unit: Common-Ground  
+  unit: Common-Ground
   env: dev
   debug: 1
+  cache: 1
   replicaCount: 1
   corsAllowOrigin: ['*']
-  trustedHosts: '127.0.0.1$|^(.+\.)?conduction\.nl$|^(.+\.)?huwelijksplanner\.online$|^(.+\.)?larping\.eu$|^(.+\.)?common-ground\.dev$|^(.+\.)?trouwplanner\.online$|^(.+\.)?zaakonline\.nl$|localhost'
+  trustedHosts: '^localhost$|^127.0.0.1$|^(.+\.)?conduction\.nl$'
   pullPolicy: Always
   # You will need these proxies on kubernetes
   trustedProxies:

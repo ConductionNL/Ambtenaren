@@ -1,14 +1,14 @@
 openapi: 3.0.2
 info:
-  title: 'Medewerker Catalogus Component'
+  title: 'Medewerker Catalogus'
   version: V.0.1
   description: |
     API Details
-    - Component: Medewerker Catalogus Component
+    - Component: Medewerker Catalogus
     - Reference: mrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus) / [zip](https://github.com/ConductionNL/medewerkercatalogus/archive/master.zip)
+    - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus/api/helm) / [zip](https://github.com/ConductionNL/medewerkercatalogus/api/helm/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -4585,6 +4585,9 @@ components:
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+        jobPosting:
+          description: 'the JobPosting associated to this employee'
+          $ref: '#/components/schemas/JobPosting-read'
       required:
         - person
         - organization
@@ -4601,6 +4604,9 @@ components:
         organization:
           description: 'The organisation where this person is employed'
           type: string
+        jobPosting:
+          description: 'the JobPosting associated to this employee'
+          $ref: '#/components/schemas/JobPosting-write'
     'Employee:jsonld-read':
       type: object
       description: ''
@@ -4635,6 +4641,9 @@ components:
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+        jobPosting:
+          description: 'the JobPosting associated to this employee'
+          $ref: '#/components/schemas/JobPosting:jsonld-read'
       required:
         - person
         - organization
@@ -4660,6 +4669,9 @@ components:
         organization:
           description: 'The organisation where this person is employed'
           type: string
+        jobPosting:
+          description: 'the JobPosting associated to this employee'
+          $ref: '#/components/schemas/JobPosting:jsonld-write'
     JobPosting-read:
       type: object
       description: ''
@@ -4676,7 +4688,15 @@ components:
           description: 'The description of this JobPosting'
           type: string
         title:
-          description: 'The name of this Job Posting'
+          description: 'The title of this Job Posting'
+          type: string
+        employmentType:
+          description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+          type: string
+        hiringOrganization:
+          description: 'The organization that hires the person'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobStartDate:
           description: 'The start date of the contract'
@@ -4686,6 +4706,9 @@ components:
           description: 'The end date of the contract'
           type: string
           format: date-time
+        standardHours:
+          description: 'The standard amount of hours per week for this JobPosting'
+          type: integer
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -4696,15 +4719,22 @@ components:
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+        employee:
+          description: 'the employee this JobPosting relates to'
+          $ref: '#/components/schemas/Employee-read'
       required:
         - name
         - title
+        - employmentType
+        - standardHours
     JobPosting-write:
       type: object
       description: ''
       required:
         - name
         - title
+        - employmentType
+        - standardHours
       properties:
         name:
           description: 'The name of this Job Posting'
@@ -4713,7 +4743,15 @@ components:
           description: 'The description of this JobPosting'
           type: string
         title:
-          description: 'The name of this Job Posting'
+          description: 'The title of this Job Posting'
+          type: string
+        employmentType:
+          description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+          type: string
+        hiringOrganization:
+          description: 'The organization that hires the person'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobStartDate:
           description: 'The start date of the contract'
@@ -4723,6 +4761,12 @@ components:
           description: 'The end date of the contract'
           type: string
           format: date-time
+        standardHours:
+          description: 'The standard amount of hours per week for this JobPosting'
+          type: integer
+        employee:
+          description: 'the employee this JobPosting relates to'
+          $ref: '#/components/schemas/Employee-write'
     'JobPosting:jsonld-read':
       type: object
       description: ''
@@ -4748,7 +4792,15 @@ components:
           description: 'The description of this JobPosting'
           type: string
         title:
-          description: 'The name of this Job Posting'
+          description: 'The title of this Job Posting'
+          type: string
+        employmentType:
+          description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+          type: string
+        hiringOrganization:
+          description: 'The organization that hires the person'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobStartDate:
           description: 'The start date of the contract'
@@ -4758,6 +4810,9 @@ components:
           description: 'The end date of the contract'
           type: string
           format: date-time
+        standardHours:
+          description: 'The standard amount of hours per week for this JobPosting'
+          type: integer
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -4768,15 +4823,22 @@ components:
           description: 'The moment this resource last Modified'
           type: string
           format: date-time
+        employee:
+          description: 'the employee this JobPosting relates to'
+          $ref: '#/components/schemas/Employee:jsonld-read'
       required:
         - name
         - title
+        - employmentType
+        - standardHours
     'JobPosting:jsonld-write':
       type: object
       description: ''
       required:
         - name
         - title
+        - employmentType
+        - standardHours
       properties:
         '@context':
           readOnly: true
@@ -4794,7 +4856,15 @@ components:
           description: 'The description of this JobPosting'
           type: string
         title:
-          description: 'The name of this Job Posting'
+          description: 'The title of this Job Posting'
+          type: string
+        employmentType:
+          description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+          type: string
+        hiringOrganization:
+          description: 'The organization that hires the person'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobStartDate:
           description: 'The start date of the contract'
@@ -4804,48 +4874,13 @@ components:
           description: 'The end date of the contract'
           type: string
           format: date-time
+        standardHours:
+          description: 'The standard amount of hours per week for this JobPosting'
+          type: integer
+        employee:
+          description: 'the employee this JobPosting relates to'
+          $ref: '#/components/schemas/Employee:jsonld-write'
 definitions:
-  Employee-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://www.example.com/person1'
-        maxLength: 255
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://www.example.com/organization1'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-    required:
-      - person
-      - organization
-  Employee-write:
-    properties:
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://www.example.com/person1'
-        maxLength: 255
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://www.example.com/organization1'
-        maxLength: 255
-    required:
-      - person
-      - organization
   AuditTrail-read:
     properties:
       id:
@@ -4950,12 +4985,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-24 13:59:48'
+        example: '2020-04-15 13:46:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-24 13:59:48'
+        example: '2020-04-15 13:46:05'
     required: []
   AuditTrail-write:
     properties:
@@ -5003,12 +5038,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-03-24 13:59:48'
+        example: '2020-04-15 13:46:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-03-24 13:59:48'
+        example: '2020-04-15 13:46:05'
     required: []
   ChangeLog-write:
     properties:
@@ -5018,6 +5053,53 @@ definitions:
         example: 'This log line is suspicius'
         maxLength: 2555
     required: []
+  Employee-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://www.example.com/person1'
+        maxLength: 255
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://www.example.com/organization1'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
+    required:
+      - person
+      - organization
+  Employee-write:
+    properties:
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://www.example.com/person1'
+        maxLength: 255
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://www.example.com/organization1'
+        maxLength: 255
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
+    required:
+      - person
+      - organization
   JobPosting-read:
     properties:
       id:
@@ -5036,10 +5118,19 @@ definitions:
         example: 'This is the best JobPosting ever'
         maxLength: 255
       title:
-        description: 'The name of this Job Posting'
+        description: 'The title of this Job Posting'
         type: string
         example: 'my JobPosting'
         maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
       jobStartDate:
         description: 'The start date of the contract'
         type: \DateTime
@@ -5048,16 +5139,24 @@ definitions:
         description: 'The end date of the contract'
         type: \DateTime
         example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
       dateCreated:
         description: 'The moment this resource was created'
         type: \Datetime
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
     required:
       - name
       - title
       - employmentType
+      - standardHours
   JobPosting-write:
     properties:
       name:
@@ -5071,10 +5170,19 @@ definitions:
         example: 'This is the best JobPosting ever'
         maxLength: 255
       title:
-        description: 'The name of this Job Posting'
+        description: 'The title of this Job Posting'
         type: string
         example: 'my JobPosting'
         maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
       jobStartDate:
         description: 'The start date of the contract'
         type: \DateTime
@@ -5083,17 +5191,19 @@ definitions:
         description: 'The end date of the contract'
         type: \DateTime
         example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
     required:
       - name
       - title
       - employmentType
+      - standardHours
 tags:
-  -
-    name: Employee
-    description: |
-      
-      
-      
   -
     name: AuditTrail
     description: |
@@ -5106,6 +5216,12 @@ tags:
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: Employee
+    description: |
+      
+      
+      
   -
     name: JobPosting
     description: |
@@ -5130,8 +5246,8 @@ securityDefinitions:
 host: irc.zaakonline.nl
 servers:
   -
-    description: 'Demo Omgeving'
-    url: 'http://proto.demo.common-ground.dev'
+    name: conduction.nl
+    url: mrc.dev.conduction.nl
 externalDocs:
   -
     description: 'OAS Documentatie'
