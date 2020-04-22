@@ -10,23 +10,18 @@ settings:
   version: V.0.1
   id: 
   description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
-  repro: 'https://github.com/ConductionNL/medewerkercatalogus'
-  subdomain: mrc  
-  domains:
-    - conduction.nl
-    - zaakonline.nl
-    - larping.eu
-    - common-ground.dev
-    - trouwplanner.online
-    - huwelijksplanner.online
-  domainsJson: ["conduction.nl","zaakonline.nl","larping.eu","common-ground.dev","trouwplanner.online","huwelijksplanner.online"]
+  type: component
+  repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
+  demo: mrc.zaakonline.nl
+  container: https://hub.docker.com/repository/docker/conduction/mrc-php
+  domain: conduction.nl
+  subdomain: mrc
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands
   state: Noord-Holland
   locality: Amsterdam
-  unit: Common-Ground  
-  demo: mrc.zaakonline.nl
+  unit: Common-Ground
   env: dev
   debug: 1
   cache: 1

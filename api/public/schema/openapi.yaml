@@ -1,14 +1,14 @@
 openapi: 3.0.2
 info:
-  title: 'Medewerker Catalogus'
+  title: 'Medewerker Catalogus Component'
   version: V.0.1
   description: |
     API Details
-    - Component: Medewerker Catalogus
+    - Component: Medewerker Catalogus Component
     - Reference: mrc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus) / [zip](https://github.com/ConductionNL/medewerkercatalogus/archive/master.zip)
+    - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus/api/helm) / [zip](https://github.com/ConductionNL/medewerkercatalogus/api/helm/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
@@ -4573,6 +4573,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         person:
           description: 'The person that is employed'
           externalDocs:
@@ -4598,13 +4599,13 @@ components:
           $ref: '#/components/schemas/JobPosting-read'
       required:
         - person
-        - sourceOrganisation
+        - organization
     Employee-write:
       type: object
       description: 'All properties that the entity Employee holds.'
       required:
         - person
-        - sourceOrganisation
+        - organization
       properties:
         person:
           description: 'The person that is employed'
@@ -4637,6 +4638,7 @@ components:
           externalDocs:
             url: 'http://schema.org/identifier'
           type: string
+          format: uuid
         person:
           description: 'The person that is employed'
           externalDocs:
@@ -4662,13 +4664,13 @@ components:
           $ref: '#/components/schemas/JobPosting:jsonld-read'
       required:
         - person
-        - sourceOrganisation
+        - organization
     'Employee:jsonld-write':
       type: object
       description: 'All properties that the entity Employee holds.'
       required:
         - person
-        - sourceOrganisation
+        - organization
       properties:
         '@context':
           readOnly: true
@@ -5007,12 +5009,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
     required: []
   AuditTrail-write:
     properties:
@@ -5060,12 +5062,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
     required: []
   ChangeLog-write:
     properties:
@@ -5088,15 +5090,24 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
-      sourceOrganisation:
+      organization:
         description: 'The organisation where this person is employed'
         type: string
         example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
     required:
       - person
-      - sourceOrganisation
+      - organization
   Employee-write:
     properties:
       person:
@@ -5105,15 +5116,121 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
-      sourceOrganisation:
+      organization:
         description: 'The organisation where this person is employed'
         type: string
         example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
     required:
       - person
-      - sourceOrganisation
+      - organization
+  JobPosting-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
+  JobPosting-write:
+    properties:
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
 tags:
   -
     name: AuditTrail
@@ -5131,6 +5248,12 @@ tags:
     name: Employee
     description: |
       All properties that the entity Employee holds.
+      
+      
+  -
+    name: JobPosting
+    description: |
+      
       
       
 securityDefinitions:
