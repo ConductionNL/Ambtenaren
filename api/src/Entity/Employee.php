@@ -17,6 +17,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * All properties that the entity Employee holds.
+ *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
@@ -54,6 +56,7 @@ class Employee
 {
     /**
      * @var UuidInterface
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -67,13 +70,15 @@ class Employee
 
     /**
      * @var string The person that is employed
-     * @example https://www.example.com/person1
+     *
+     * @example https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Gedmo\Versioned
      * @Assert\Length(
      *     max = 255
      * )
      * @Assert\NotNull
+     * @Assert\Url
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
@@ -81,13 +86,15 @@ class Employee
 
     /**
      * @var string The organisation where this person is employed
-     * @example https://www.example.com/organization1
+     *
+     * @example https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Gedmo\Versioned
      * @Assert\Length(
      *     max = 255
      * )
      * @Assert\NotNull
+     * @Assert\Url
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */

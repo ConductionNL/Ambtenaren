@@ -1,10 +1,10 @@
 openapi: 3.0.2
 info:
-  title: 'Medewerker Catalogus'
+  title: 'Medewerker Catalogus Component'
   version: V.0.1
   description: |
     API Details
-    - Component: Medewerker Catalogus
+    - Component: Medewerker Catalogus Component
     - Reference: mrc
     - Enviroment: dev
     - Version: V.0.1
@@ -4566,7 +4566,7 @@ components:
           type: string
     Employee-read:
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       properties:
         id:
           readOnly: true
@@ -4576,9 +4576,13 @@ components:
           format: uuid
         person:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         organization:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         dateCreated:
           readOnly: true
@@ -4598,23 +4602,27 @@ components:
         - organization
     Employee-write:
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       required:
         - person
         - organization
       properties:
         person:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         organization:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting-write'
     'Employee:jsonld-read':
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       properties:
         '@context':
           readOnly: true
@@ -4633,9 +4641,13 @@ components:
           format: uuid
         person:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         organization:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         dateCreated:
           readOnly: true
@@ -4655,7 +4667,7 @@ components:
         - organization
     'Employee:jsonld-write':
       type: object
-      description: ''
+      description: 'All properties that the entity Employee holds.'
       required:
         - person
         - organization
@@ -4671,9 +4683,13 @@ components:
           type: string
         person:
           description: 'The person that is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         organization:
           description: 'The organisation where this person is employed'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
         jobPosting:
           description: 'the JobPosting associated to this employee'
@@ -4993,12 +5009,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
     required: []
   AuditTrail-write:
     properties:
@@ -5046,12 +5062,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-04-21 20:30:21'
+        example: '2020-04-22 11:45:01'
     required: []
   ChangeLog-write:
     properties:
@@ -5071,13 +5087,15 @@ definitions:
       person:
         description: 'The person that is employed'
         type: string
-        example: 'https://www.example.com/person1'
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       organization:
         description: 'The organisation where this person is employed'
         type: string
-        example: 'https://www.example.com/organization1'
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       dateCreated:
         description: 'The moment this resource was created'
         type: \Datetime
@@ -5095,13 +5113,15 @@ definitions:
       person:
         description: 'The person that is employed'
         type: string
-        example: 'https://www.example.com/person1'
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       organization:
         description: 'The organisation where this person is employed'
         type: string
-        example: 'https://www.example.com/organization1'
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
+        format: url
       jobPosting:
         description: 'the JobPosting associated to this employee'
         type: \JobPosting
@@ -5227,7 +5247,7 @@ tags:
   -
     name: Employee
     description: |
-      
+      All properties that the entity Employee holds.
       
       
   -
