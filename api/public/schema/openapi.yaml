@@ -3867,6 +3867,943 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  /goals:
+    get:
+      tags:
+        - Goal
+      operationId: getGoalCollection
+      summary: 'Retrieves the collection of Goal resources.'
+      responses:
+        200:
+          description: 'Goal collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Goal:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Goal:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Goal-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[priority]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[status]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: priority
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'priority[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'status[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Goal
+      operationId: postGoalCollection
+      summary: 'Creates a Goal resource.'
+      responses:
+        201:
+          description: 'Goal resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+          links:
+            GetGoalItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getGoalItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /goals/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Goal:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Goal:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+        description: 'The new Goal resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/goals/{id}':
+    get:
+      tags:
+        - Goal
+      operationId: getGoalItem
+      summary: 'Retrieves a Goal resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Goal resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Goal
+      operationId: deleteGoalItem
+      summary: 'Removes the Goal resource.'
+      responses:
+        204:
+          description: 'Goal resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Goal
+      operationId: putGoalItem
+      summary: 'Replaces the Goal resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Goal resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Goal:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Goal:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+        description: 'The updated Goal resource'
+    patch:
+      tags:
+        - Goal
+      operationId: patchGoalItem
+      summary: 'Updates the Goal resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Goal resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Goal:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Goal-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Goal:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Goal-write'
+        description: 'The updated Goal resource'
   /interests:
     get:
       tags:
@@ -6625,6 +7562,154 @@ components:
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting:jsonld-write'
+    Goal-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'name of the goal'
+          type: string
+        description:
+          description: 'Description of the goal'
+          type: string
+        priority:
+          description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+          type: string
+        status:
+          description: 'Status of the goal'
+          type: string
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+        employee:
+          description: 'The Employee to which this Goal belongs to'
+          $ref: '#/components/schemas/Employee-read'
+      required:
+        - name
+        - description
+        - priority
+        - status
+    Goal-write:
+      type: object
+      description: ''
+      required:
+        - name
+        - description
+        - priority
+        - status
+      properties:
+        name:
+          description: 'name of the goal'
+          type: string
+        description:
+          description: 'Description of the goal'
+          type: string
+        priority:
+          description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+          type: string
+        status:
+          description: 'Status of the goal'
+          type: string
+        employee:
+          description: 'The Employee to which this Goal belongs to'
+          $ref: '#/components/schemas/Employee-write'
+    'Goal:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'name of the goal'
+          type: string
+        description:
+          description: 'Description of the goal'
+          type: string
+        priority:
+          description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+          type: string
+        status:
+          description: 'Status of the goal'
+          type: string
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+        employee:
+          description: 'The Employee to which this Goal belongs to'
+          $ref: '#/components/schemas/Employee:jsonld-read'
+      required:
+        - name
+        - description
+        - priority
+        - status
+    'Goal:jsonld-write':
+      type: object
+      description: ''
+      required:
+        - name
+        - description
+        - priority
+        - status
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'name of the goal'
+          type: string
+        description:
+          description: 'Description of the goal'
+          type: string
+        priority:
+          description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+          type: string
+        status:
+          description: 'Status of the goal'
+          type: string
+        employee:
+          description: 'The Employee to which this Goal belongs to'
+          $ref: '#/components/schemas/Employee:jsonld-write'
     Interest-read:
       type: object
       description: ''
@@ -7056,12 +8141,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:09:09'
+        example: '2020-05-04 11:17:57'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:09:09'
+        example: '2020-05-04 11:17:57'
     required: []
   AuditTrail-write:
     properties:
@@ -7109,12 +8194,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:09:09'
+        example: '2020-05-04 11:17:57'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:09:09'
+        example: '2020-05-04 11:17:57'
     required: []
   ChangeLog-write:
     properties:
@@ -7234,6 +8319,77 @@ definitions:
     required:
       - person
       - organization
+  Goal-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'name of the goal'
+        type: string
+        example: 'goal name'
+        maxLength: 255
+      description:
+        description: 'Description of the goal'
+        type: string
+        example: 'goal description'
+        maxLength: 2550
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+        type: string
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this Goal belongs to'
+        type: string
+    required:
+      - name
+      - description
+      - priority
+      - status
+  Goal-write:
+    properties:
+      name:
+        description: 'name of the goal'
+        type: string
+        example: 'goal name'
+        maxLength: 255
+      description:
+        description: 'Description of the goal'
+        type: string
+        example: 'goal description'
+        maxLength: 2550
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+        type: string
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
+        maxLength: 255
+      employee:
+        description: 'The Employee to which this Goal belongs to'
+        type: string
+    required:
+      - name
+      - description
+      - priority
+      - status
   Interest-read:
     properties:
       id:
@@ -7407,6 +8563,12 @@ tags:
     name: Employee
     description: |
       All properties that the entity Employee holds.
+      
+      
+  -
+    name: Goal
+    description: |
+      
       
       
   -

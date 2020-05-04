@@ -9,6 +9,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -126,6 +127,34 @@ class Employee
      */
     private $jobPosting;
 
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $goals;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $interests;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $competencies;
+
+    public function __construct()
+    {
+        $this->goals = new ArrayCollection();
+        $this->interests = new ArrayCollection();
+        $this->competencies = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -191,6 +220,101 @@ class Employee
         // set the owning side of the relation if necessary
         if ($jobPosting->getEmployee() !== $this) {
             $jobPosting->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Goal[]
+     */
+    public function getGoals(): Collection
+    {
+        return $this->goals;
+    }
+
+    public function addGoal(Goal $goal): self
+    {
+        if (!$this->goals->contains($goal)) {
+            $this->goals[] = $goal;
+            $goal->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoal(Goal $goal): self
+    {
+        if ($this->goals->contains($goal)) {
+            $this->goals->removeElement($goal);
+            // set the owning side to null (unless already changed)
+            if ($goal->setEmployee() === $this) {
+                $goal->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->contains($interest)) {
+            $this->interests->removeElement($interest);
+            // set the owning side to null (unless already changed)
+            if ($interest->setEmployee() === $this) {
+                $interest->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection|Competence[]
+     */
+    public function getCompetencies(): Collection
+    {
+        return $this->competencies;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competencies->contains($competence)) {
+            $this->competencies[] = $competence;
+            $competence->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        if ($this->competencies->contains($competence)) {
+            $this->competencies->removeElement($competence);
+            // set the owning side to null (unless already changed)
+            if ($competence->setEmployee() === $this) {
+                $competence->setEmployee(null);
+            }
         }
 
         return $this;
