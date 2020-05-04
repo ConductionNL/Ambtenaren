@@ -7465,6 +7465,19 @@ components:
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting-read'
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal-read'
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Interest-read'
+        competencies:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence-read'
       required:
         - person
         - organization
@@ -7488,6 +7501,19 @@ components:
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting-write'
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal-write'
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Interest-write'
+        competencies:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence-write'
     'Employee:jsonld-read':
       type: object
       description: 'All properties that the entity Employee holds.'
@@ -7530,6 +7556,19 @@ components:
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting:jsonld-read'
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal:jsonld-read'
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Interest:jsonld-read'
+        competencies:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence:jsonld-read'
       required:
         - person
         - organization
@@ -7562,6 +7601,19 @@ components:
         jobPosting:
           description: 'the JobPosting associated to this employee'
           $ref: '#/components/schemas/JobPosting:jsonld-write'
+        goals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Goal:jsonld-write'
+        interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Interest:jsonld-write'
+        competencies:
+          readOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Competence:jsonld-write'
     Goal-read:
       type: object
       description: ''
@@ -8141,12 +8193,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:17:57'
+        example: '2020-05-04 11:56:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:17:57'
+        example: '2020-05-04 11:56:05'
     required: []
   AuditTrail-write:
     properties:
@@ -8194,12 +8246,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:17:57'
+        example: '2020-05-04 11:56:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:17:57'
+        example: '2020-05-04 11:56:05'
     required: []
   ChangeLog-write:
     properties:
@@ -8239,7 +8291,7 @@ definitions:
         type: \Datetime
       employee:
         description: 'The Employee to which this Competence belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description
@@ -8263,7 +8315,7 @@ definitions:
         maxLength: 255
       employee:
         description: 'The Employee to which this Competence belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description
@@ -8296,6 +8348,9 @@ definitions:
       jobPosting:
         description: 'the JobPosting associated to this employee'
         type: \JobPosting
+      goals: []
+      interests: []
+      competencies: []
     required:
       - person
       - organization
@@ -8316,6 +8371,9 @@ definitions:
       jobPosting:
         description: 'the JobPosting associated to this employee'
         type: \JobPosting
+      goals: []
+      interests: []
+      competencies: []
     required:
       - person
       - organization
@@ -8354,7 +8412,7 @@ definitions:
         type: \Datetime
       employee:
         description: 'The Employee to which this Goal belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description
@@ -8384,7 +8442,7 @@ definitions:
         maxLength: 255
       employee:
         description: 'The Employee to which this Goal belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description
@@ -8415,7 +8473,7 @@ definitions:
         type: \Datetime
       employee:
         description: 'The Employee to which this Interest belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description
@@ -8433,7 +8491,7 @@ definitions:
         maxLength: 2550
       employee:
         description: 'The Employee to which this Interest belongs to'
-        type: string
+        type: \Employee
     required:
       - name
       - description

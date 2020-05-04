@@ -94,7 +94,7 @@ class Interest
     private $dateModified;
 
     /**
-     * @var string The Employee to which this Interest belongs to
+     * @var Employee The Employee to which this Interest belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})

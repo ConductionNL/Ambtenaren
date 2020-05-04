@@ -107,7 +107,7 @@ class Competence
     private $dateModified;
 
     /**
-     * @var string The Employee to which this Competence belongs to
+     * @var Employee The Employee to which this Competence belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
