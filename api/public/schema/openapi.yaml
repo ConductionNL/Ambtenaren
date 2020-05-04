@@ -8193,12 +8193,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:56:05'
+        example: '2020-05-04 11:59:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:56:05'
+        example: '2020-05-04 11:59:11'
     required: []
   AuditTrail-write:
     properties:
@@ -8246,12 +8246,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 11:56:05'
+        example: '2020-05-04 11:59:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 11:56:05'
+        example: '2020-05-04 11:59:11'
     required: []
   ChangeLog-write:
     properties:
@@ -8377,6 +8377,109 @@ definitions:
     required:
       - person
       - organization
+  JobPosting-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
+  JobPosting-write:
+    properties:
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
   Goal-read:
     properties:
       id:
@@ -8495,109 +8598,6 @@ definitions:
     required:
       - name
       - description
-  JobPosting-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      description:
-        description: 'The description of this JobPosting'
-        type: string
-        example: 'This is the best JobPosting ever'
-        maxLength: 255
-      title:
-        description: 'The title of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      employmentType:
-        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
-        type: string
-        example: full-time
-      hiringOrganization:
-        description: 'The organization that hires the person'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/1'
-        format: url
-      jobStartDate:
-        description: 'The start date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      validThrough:
-        description: 'The end date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      standardHours:
-        description: 'The standard amount of hours per week for this JobPosting'
-        type: int
-        example: '40'
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
-    required:
-      - name
-      - title
-      - employmentType
-      - standardHours
-  JobPosting-write:
-    properties:
-      name:
-        description: 'The name of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      description:
-        description: 'The description of this JobPosting'
-        type: string
-        example: 'This is the best JobPosting ever'
-        maxLength: 255
-      title:
-        description: 'The title of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      employmentType:
-        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
-        type: string
-        example: full-time
-      hiringOrganization:
-        description: 'The organization that hires the person'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/1'
-        format: url
-      jobStartDate:
-        description: 'The start date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      validThrough:
-        description: 'The end date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      standardHours:
-        description: 'The standard amount of hours per week for this JobPosting'
-        type: int
-        example: '40'
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
-    required:
-      - name
-      - title
-      - employmentType
-      - standardHours
 tags:
   -
     name: AuditTrail
@@ -8624,6 +8624,12 @@ tags:
       
       
   -
+    name: JobPosting
+    description: |
+      
+      
+      
+  -
     name: Goal
     description: |
       
@@ -8635,27 +8641,21 @@ tags:
       
       
       
-  -
-    name: JobPosting
-    description: |
-      
-      
-      
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the JobPosting resource'
-      write: 'write right to the JobPosting resource'
+      read: 'read right to the Interest resource'
+      write: 'write right to the Interest resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the JobPosting resource'
-      write: 'write right to the JobPosting resource'
+      read: 'read right to the Interest resource'
+      write: 'write right to the Interest resource'
 host: irc.zaakonline.nl
 servers:
   -
