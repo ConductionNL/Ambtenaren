@@ -50,9 +50,9 @@ class Interest
     private $id;
 
     /**
-     * @var string Name of the product
+     * @var string Name of the interest
      *
-     * @example Art and me
+     * @example name of interest
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
@@ -63,9 +63,9 @@ class Interest
     private $name;
 
     /**
-     * @var string Description of the product
+     * @var string Description of the interest
      *
-     * @example A painting about my cat
+     * @example description of the interest
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
