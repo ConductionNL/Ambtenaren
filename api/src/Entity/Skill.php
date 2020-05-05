@@ -52,9 +52,9 @@ class Skill
     private $id;
 
     /**
-     * @var string Name of the Results
+     * @var string Name of the Skill
      *
-     * @example Result name
+     * @example Skill name
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
@@ -65,9 +65,9 @@ class Skill
     private $name;
 
     /**
-     * @var string Description of the results
+     * @var string Description of the skill
      *
-     * @example description of the results
+     * @example description of the skill
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
@@ -78,9 +78,9 @@ class Skill
     private $description;
 
     /**
-     * @var string Priority of the goal **beginner**, **intermediate**, **advanced**
+     * @var string Level of the skill **beginner**, **intermediate**, **advanced**
      *
-     * @example goal priority
+     * @example advanced
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
