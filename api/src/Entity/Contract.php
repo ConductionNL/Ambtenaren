@@ -183,11 +183,11 @@ class Contract
     private $dateModified;
 
     /**
-     * @var Employee The Employee to which this Goal belongs to
+     * @var Employee The Employee to which this contract belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobfunctions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="contracts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

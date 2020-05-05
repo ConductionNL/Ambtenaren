@@ -95,11 +95,11 @@ class JobFunction
     private $dateModified;
 
     /**
-     * @var Employee The Employee to which this Goal belongs to
+     * @var Employee The Employee to which this jobFunction belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobfunctions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobFunctions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

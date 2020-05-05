@@ -110,7 +110,7 @@ class Skill
     private $dateModified;
 
     /**
-     * @var Employee The Employee to which this Goal belongs to
+     * @var Employee The Employee to which this skill belongs to
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
