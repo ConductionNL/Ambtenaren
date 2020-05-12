@@ -9,6 +9,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -126,6 +128,66 @@ class Employee
      */
     private $jobPosting;
 
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $goals;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $interests;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $competencies;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $skills;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $applications;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $jobFunctions;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="employee")
+     * @MaxDepth(1)
+     */
+    private $contracts;
+
+    public function __construct()
+    {
+        $this->goals = new ArrayCollection();
+        $this->interests = new ArrayCollection();
+        $this->competencies = new ArrayCollection();
+        $this->skills = new ArrayCollection();
+        $this->applications = new ArrayCollection();
+        $this->jobFunctions = new ArrayCollection();
+        $this->contracts = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -191,6 +253,225 @@ class Employee
         // set the owning side of the relation if necessary
         if ($jobPosting->getEmployee() !== $this) {
             $jobPosting->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Goal[]
+     */
+    public function getGoals(): Collection
+    {
+        return $this->goals;
+    }
+
+    public function addGoal(Goal $goal): self
+    {
+        if (!$this->goals->contains($goal)) {
+            $this->goals[] = $goal;
+            $goal->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGoal(Goal $goal): self
+    {
+        if ($this->goals->contains($goal)) {
+            $this->goals->removeElement($goal);
+            // set the owning side to null (unless already changed)
+            if ($goal->setEmployee() === $this) {
+                $goal->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Interest[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(Interest $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+            $interest->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(Interest $interest): self
+    {
+        if ($this->interests->contains($interest)) {
+            $this->interests->removeElement($interest);
+            // set the owning side to null (unless already changed)
+            if ($interest->setEmployee() === $this) {
+                $interest->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Collection|Competence[]
+     */
+    public function getCompetencies(): Collection
+    {
+        return $this->competencies;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competencies->contains($competence)) {
+            $this->competencies[] = $competence;
+            $competence->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        if ($this->competencies->contains($competence)) {
+            $this->competencies->removeElement($competence);
+            // set the owning side to null (unless already changed)
+            if ($competence->setEmployee() === $this) {
+                $competence->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+            $skill->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skills->contains($skill)) {
+            $this->skills->removeElement($skill);
+            // set the owning side to null (unless already changed)
+            if ($skill->setEmployee() === $this) {
+                $skill->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->setEmployee() === $this) {
+                $application->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JobFunction[]
+     */
+    public function getJobFunctions(): Collection
+    {
+        return $this->jobFunctions;
+    }
+
+    public function addJobFunction(JobFunction $jobFunction): self
+    {
+        if (!$this->jobFunctions->contains($jobFunction)) {
+            $this->jobFunctions[] = $jobFunction;
+            $jobFunction->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobFunction(JobFunction $jobFunction): self
+    {
+        if ($this->jobFunctions->contains($jobFunction)) {
+            $this->jobFunctions->removeElement($jobFunction);
+            // set the owning side to null (unless already changed)
+            if ($jobFunction->setEmployee() === $this) {
+                $jobFunction->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contract[]
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+
+    public function addContract(Contract $contract): self
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts[] = $contract;
+            $contract->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContract(Contract $contract): self
+    {
+        if ($this->contracts->contains($contract)) {
+            $this->contracts->removeElement($contract);
+            // set the owning side to null (unless already changed)
+            if ($contract->setEmployee() === $this) {
+                $contract->setEmployee(null);
+            }
         }
 
         return $this;
