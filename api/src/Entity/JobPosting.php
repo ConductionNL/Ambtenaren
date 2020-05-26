@@ -182,12 +182,12 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
