@@ -2,22 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -110,6 +107,7 @@ class Contract
 
     /**
      * @var int The standard amount of hours per week for this contract
+     *
      * @example 40
      *
      * @Assert\NotNull
@@ -146,6 +144,7 @@ class Contract
 
     /**
      * @var int how many months the contract is set to.
+     *
      * @example 6
      *
      * @Assert\NotNull
@@ -156,6 +155,7 @@ class Contract
 
     /**
      * @var int Salary of the function.
+     *
      * @example 1900
      *
      * @Assert\NotNull
@@ -165,7 +165,7 @@ class Contract
     private $salary;
 
     /**
-     * @var Datetime $dateCreated The moment this resource was created
+     * @var Datetime The moment this resource was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -174,7 +174,7 @@ class Contract
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this resource last Modified
+     * @var Datetime The moment this resource last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
@@ -312,7 +312,7 @@ class Contract
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }
