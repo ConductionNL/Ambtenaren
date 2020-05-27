@@ -2,21 +2,20 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * All properties that the entity Employee holds.
@@ -103,7 +102,7 @@ class Employee
     private $organization;
 
     /**
-     * @var Datetime $dateCreated The moment this resource was created
+     * @var Datetime The moment this resource was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -112,7 +111,7 @@ class Employee
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this resource last Modified
+     * @var Datetime The moment this resource last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
@@ -219,26 +218,26 @@ class Employee
 
     public function getDateCreated(): ?\DateTimeInterface
     {
-    	return $this->dateCreated;
+        return $this->dateCreated;
     }
 
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
-    	$this->dateCreated= $dateCreated;
+        $this->dateCreated = $dateCreated;
 
-    	return $this;
+        return $this;
     }
 
     public function getDateModified(): ?\DateTimeInterface
     {
-    	return $this->dateModified;
+        return $this->dateModified;
     }
 
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
-    	$this->dateModified = $dateModified;
+        $this->dateModified = $dateModified;
 
-    	return $this;
+        return $this;
     }
 
     public function getJobPosting(): ?JobPosting
@@ -319,8 +318,6 @@ class Employee
 
         return $this;
     }
-
-
 
     /**
      * @return Collection|Competence[]

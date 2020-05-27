@@ -2,19 +2,18 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -55,6 +54,7 @@ class JobPosting
 {
     /**
      * @var UuidInterface
+     *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
      *
      * @Assert\Uuid
@@ -68,6 +68,7 @@ class JobPosting
 
     /**
      * @var string The name of this Job Posting
+     *
      * @example my JobPosting
      *
      * @Gedmo\Versioned
@@ -82,6 +83,7 @@ class JobPosting
 
     /**
      * @var string The description of this JobPosting
+     *
      * @example This is the best JobPosting ever
      *
      * @Gedmo\Versioned
@@ -95,6 +97,7 @@ class JobPosting
 
     /**
      * @var string The title of this Job Posting
+     *
      * @example my JobPosting
      *
      * @Gedmo\Versioned
@@ -109,6 +112,7 @@ class JobPosting
 
     /**
      * @var string The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**
+     *
      * @example full-time
      *
      * @Gedmo\Versioned
@@ -121,6 +125,7 @@ class JobPosting
 
     /**
      * @var string The organization that hires the person
+     *
      * @example https://cc.zaakonline.nl/organizations/1
      *
      * @Gedmo\Versioned
@@ -132,6 +137,7 @@ class JobPosting
 
     /**
      * @var \DateTime The start date of the contract
+     *
      * @example 01-01-2020
      *
      * @Groups({"read", "write"})
@@ -140,8 +146,8 @@ class JobPosting
     private $jobStartDate;
 
     /**
-     *
      * @var \DateTime The end date of the contract
+     *
      * @example 01-01-2020
      *
      * @Groups({"read", "write"})
@@ -151,6 +157,7 @@ class JobPosting
 
     /**
      * @var int The standard amount of hours per week for this JobPosting
+     *
      * @example 40
      *
      * @Assert\NotNull
@@ -160,7 +167,7 @@ class JobPosting
     private $standardHours;
 
     /**
-     * @var Datetime $dateCreated The moment this resource was created
+     * @var Datetime The moment this resource was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -169,7 +176,7 @@ class JobPosting
     private $dateCreated;
 
     /**
-     * @var Datetime $dateModified  The moment this resource last Modified
+     * @var Datetime The moment this resource last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
@@ -182,12 +189,12 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
