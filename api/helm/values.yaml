@@ -14,7 +14,7 @@ settings:
   repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
   demo: mrc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/mrc-php
-  domain: conduction.nl
+  domain: dev
   subdomain: mrc
   organisationName: Conduction
   email: info@conduction.nl
