@@ -9,12 +9,12 @@ settings:
   title: Medewerker Catalogus Component
   version: V.0.1
   id: 
-  description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.&#039;'
+  description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
   type: component
   repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
   demo: mrc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/mrc-php
-  domain: dev
+  domain: conduction.nl
   subdomain: mrc
   organisationName: Conduction
   email: info@conduction.nl
