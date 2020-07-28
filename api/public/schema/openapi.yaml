@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /applications:
@@ -12404,7 +12404,10 @@ components:
           nullable: true
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-read'
       required:
         - name
         - title
@@ -12452,7 +12455,10 @@ components:
           type: integer
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-write'
     'JobPosting:jsonld-read':
       type: object
       description: ''
@@ -12515,7 +12521,10 @@ components:
           nullable: true
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-read'
       required:
         - name
         - title
@@ -12572,7 +12581,10 @@ components:
           type: integer
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-write'
     Skill-read:
       type: object
       description: ''
@@ -12777,292 +12789,6 @@ definitions:
       - description
       - status
       - motivation
-  Employee-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      jobPosting:
-        description: 'the JobPosting associated to this employee'
-        type: \JobPosting
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      applications: []
-      jobFunctions: []
-      contracts: []
-    required:
-      - person
-      - organization
-  Employee-write:
-    properties:
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      jobPosting:
-        description: 'the JobPosting associated to this employee'
-        type: \JobPosting
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      applications: []
-      jobFunctions: []
-      contracts: []
-    required:
-      - person
-      - organization
-  JobPosting-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      description:
-        description: 'The description of this JobPosting'
-        type: string
-        example: 'This is the best JobPosting ever'
-        maxLength: 255
-      title:
-        description: 'The title of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      employmentType:
-        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
-        type: string
-        example: full-time
-      hiringOrganization:
-        description: 'The organization that hires the person'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/1'
-        format: url
-      jobStartDate:
-        description: 'The start date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      validThrough:
-        description: 'The end date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      standardHours:
-        description: 'The standard amount of hours per week for this JobPosting'
-        type: int
-        example: '40'
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
-    required:
-      - name
-      - title
-      - employmentType
-      - standardHours
-  JobPosting-write:
-    properties:
-      name:
-        description: 'The name of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      description:
-        description: 'The description of this JobPosting'
-        type: string
-        example: 'This is the best JobPosting ever'
-        maxLength: 255
-      title:
-        description: 'The title of this Job Posting'
-        type: string
-        example: 'my JobPosting'
-        maxLength: 255
-      employmentType:
-        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
-        type: string
-        example: full-time
-      hiringOrganization:
-        description: 'The organization that hires the person'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/1'
-        format: url
-      jobStartDate:
-        description: 'The start date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      validThrough:
-        description: 'The end date of the contract'
-        type: \DateTime
-        example: 01-01-2020
-      standardHours:
-        description: 'The standard amount of hours per week for this JobPosting'
-        type: int
-        example: '40'
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
-    required:
-      - name
-      - title
-      - employmentType
-      - standardHours
-  Goal-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'name of the goal'
-        type: string
-        example: 'goal name'
-        maxLength: 255
-      description:
-        description: 'Description of the goal'
-        type: string
-        example: 'goal description'
-        maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
-        type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this Goal belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - priority
-      - status
-  Goal-write:
-    properties:
-      name:
-        description: 'name of the goal'
-        type: string
-        example: 'goal name'
-        maxLength: 255
-      description:
-        description: 'Description of the goal'
-        type: string
-        example: 'goal description'
-        maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
-        type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
-        maxLength: 255
-      employee:
-        description: 'The Employee to which this Goal belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - priority
-      - status
-  Interest-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this Interest belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-  Interest-write:
-    properties:
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      employee:
-        description: 'The Employee to which this Interest belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
   Competence-read:
     properties:
       id:
@@ -13122,112 +12848,6 @@ definitions:
       - name
       - description
       - grade
-  Skill-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the Skill'
-        type: string
-        example: 'Skill name'
-        maxLength: 255
-      description:
-        description: 'Description of the skill'
-        type: string
-        example: 'description of the skill'
-        maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
-        type: string
-        example: advanced
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
-  Skill-write:
-    properties:
-      name:
-        description: 'Name of the Skill'
-        type: string
-        example: 'Skill name'
-        maxLength: 255
-      description:
-        description: 'Description of the skill'
-        type: string
-        example: 'description of the skill'
-        maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
-        type: string
-        example: advanced
-        maxLength: 255
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
-  JobFunction-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the Job Function'
-        type: string
-        example: 'Job Function name'
-        maxLength: 255
-      description:
-        description: 'Description of the Job Function'
-        type: string
-        example: 'description of the job function'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this jobFunction belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-  JobFunction-write:
-    properties:
-      name:
-        description: 'Name of the Job Function'
-        type: string
-        example: 'Job Function name'
-        maxLength: 255
-      description:
-        description: 'Description of the Job Function'
-        type: string
-        example: 'description of the job function'
-        maxLength: 2550
-      employee:
-        description: 'The Employee to which this jobFunction belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
   Contract-read:
     properties:
       id:
@@ -13357,59 +12977,398 @@ definitions:
       - jobFunction
       - duration
       - salary
-  ChangeLog-read:
+  Employee-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      applications: []
+      jobFunctions: []
+      contracts: []
+    required:
+      - person
+      - organization
+  Employee-write:
+    properties:
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      jobPosting:
+        description: 'the JobPosting associated to this employee'
+        type: \JobPosting
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      applications: []
+      jobFunctions: []
+      contracts: []
+    required:
+      - person
+      - organization
+  Goal-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'name of the goal'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
+        example: 'goal name'
+        maxLength: 255
+      description:
+        description: 'Description of the goal'
         type: string
-      objectId:
-        description: ''
+        example: 'goal description'
+        maxLength: 2550
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
         type: string
-      objectClass:
-        description: ''
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
         type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
+        example: 'goal status'
         maxLength: 255
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-18 08:17:08'
+        description: 'The moment this resource was created'
+        type: \Datetime
       dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-18 08:17:08'
-    required: []
-  ChangeLog-write:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this Goal belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - priority
+      - status
+  Goal-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'name of the goal'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
+        example: 'goal name'
+        maxLength: 255
+      description:
+        description: 'Description of the goal'
+        type: string
+        example: 'goal description'
+        maxLength: 2550
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+        type: string
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
+        maxLength: 255
+      employee:
+        description: 'The Employee to which this Goal belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - priority
+      - status
+  Interest-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this Interest belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  Interest-write:
+    properties:
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      employee:
+        description: 'The Employee to which this Interest belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  JobFunction-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the Job Function'
+        type: string
+        example: 'Job Function name'
+        maxLength: 255
+      description:
+        description: 'Description of the Job Function'
+        type: string
+        example: 'description of the job function'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this jobFunction belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  JobFunction-write:
+    properties:
+      name:
+        description: 'Name of the Job Function'
+        type: string
+        example: 'Job Function name'
+        maxLength: 255
+      description:
+        description: 'Description of the Job Function'
+        type: string
+        example: 'description of the job function'
+        maxLength: 2550
+      employee:
+        description: 'The Employee to which this jobFunction belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  JobPosting-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
+  JobPosting-write:
+    properties:
+      name:
+        description: 'The name of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      description:
+        description: 'The description of this JobPosting'
+        type: string
+        example: 'This is the best JobPosting ever'
+        maxLength: 255
+      title:
+        description: 'The title of this Job Posting'
+        type: string
+        example: 'my JobPosting'
+        maxLength: 255
+      employmentType:
+        description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+        type: string
+        example: full-time
+      hiringOrganization:
+        description: 'The organization that hires the person'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/1'
+        format: url
+      jobStartDate:
+        description: 'The start date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      validThrough:
+        description: 'The end date of the contract'
+        type: \DateTime
+        example: 01-01-2020
+      standardHours:
+        description: 'The standard amount of hours per week for this JobPosting'
+        type: int
+        example: '40'
+      employee:
+        description: 'the employee this JobPosting relates to'
+        type: \Employee
+    required:
+      - name
+      - title
+      - employmentType
+      - standardHours
+  Skill-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the Skill'
+        type: string
+        example: 'Skill name'
+        maxLength: 255
+      description:
+        description: 'Description of the skill'
+        type: string
+        example: 'description of the skill'
+        maxLength: 2550
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+        type: string
+        example: advanced
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
+  Skill-write:
+    properties:
+      name:
+        description: 'Name of the Skill'
+        type: string
+        example: 'Skill name'
+        maxLength: 255
+      description:
+        description: 'Description of the skill'
+        type: string
+        example: 'description of the skill'
+        maxLength: 2550
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+        type: string
+        example: advanced
+        maxLength: 255
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
   AuditTrail-read:
     properties:
       id:
@@ -13514,12 +13473,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-07-28 12:36:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-07-28 12:36:11'
     required: []
   AuditTrail-write:
     properties:
@@ -13527,6 +13486,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-07-28 12:36:11'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-07-28 12:36:11'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -13537,15 +13549,21 @@ tags:
       
       
   -
-    name: Employee
+    name: Competence
     description: |
-      All properties that the entity Employee holds.
+      
       
       
   -
-    name: JobPosting
+    name: Contract
     description: |
       
+      
+      
+  -
+    name: Employee
+    description: |
+      All properties that the entity Employee holds.
       
       
   -
@@ -13561,7 +13579,13 @@ tags:
       
       
   -
-    name: Competence
+    name: JobFunction
+    description: |
+      
+      
+      
+  -
+    name: JobPosting
     description: |
       
       
@@ -13573,25 +13597,13 @@ tags:
       
       
   -
-    name: JobFunction
-    description: |
-      
-      
-      
-  -
-    name: Contract
-    description: |
-      
-      
-      
-  -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -13602,15 +13614,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
