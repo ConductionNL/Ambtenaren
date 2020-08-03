@@ -3,14 +3,14 @@ entries:
   mrc:
   - apiVersion: v1
     appVersion: V.0.1
-    created: "2020-07-28T12:35:52.883528665Z"
+    created: "2020-08-03T14:18:04.338558083Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 7c544d806a37ab198b20ab23be3b3b0ea0bda56ae08d01d99517be2545c0ae9b
+    digest: 7bbb7f77a451cc8e1fe242a5d7386a2027ed75b3a4a53036379facb96b338baf
     home: mrc.zaakonline.nl
     icon: mrc.zaakonline.nl
     name: mrc
     urls:
     - mrc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-28T12:35:52.876961965Z"
+generated: "2020-08-03T14:18:04.333432483Z"

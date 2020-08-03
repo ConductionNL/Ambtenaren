@@ -40,6 +40,7 @@ class ConductionFixtures extends Fixture
         $jobPosting->setDescription('Dit is de beschrijving van deze test vacature');
         $jobPosting->setTitle('Test Vacature');
         $jobPosting->setEmploymentType('full-time');
+        $jobPosting->setJobLocationType('TELECOMMUTE');
         $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
