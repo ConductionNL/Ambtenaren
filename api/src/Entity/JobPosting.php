@@ -125,6 +125,20 @@ class JobPosting
     private $employmentType;
 
     /**
+     * @var string A description of the job location (e.g TELECOMMUTE for telecommute jobs).
+     *
+     * @example TELECOMMUTE
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="text", nullable="true")
+     */
+    private $jobLocationType;
+
+    /**
      * @var string The organization that hires the person
      *
      * @example https://cc.zaakonline.nl/organizations/1
@@ -251,6 +265,18 @@ class JobPosting
     public function setEmploymentType(string $employmentType): self
     {
         $this->employmentType = $employmentType;
+
+        return $this;
+    }
+
+    public function getJobLocationType(): ?string
+    {
+        return $this->jobLocationType;
+    }
+
+    public function setJobLocationType(?string $jobLocationType): self
+    {
+        $this->jobLocationType = $jobLocationType;
 
         return $this;
     }
