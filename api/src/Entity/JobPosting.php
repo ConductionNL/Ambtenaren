@@ -134,7 +134,7 @@ class JobPosting
      *     max = 255
      * )
      * @Groups({"read", "write"})
-     * @ORM\Column(type="text", nullable="true")
+     * @ORM\Column(type="text", length=255)
      */
     private $jobLocationType;
 
