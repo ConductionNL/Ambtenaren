@@ -11740,7 +11740,7 @@ components:
           $ref: '#/components/schemas/Employee:jsonld-write'
     Employee-read:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         id:
           readOnly: true
@@ -11808,7 +11808,7 @@ components:
         - organization
     Employee-write:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -11860,7 +11860,7 @@ components:
             $ref: '#/components/schemas/Contract-write'
     'Employee:jsonld-read':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         '@context':
           readOnly: true
@@ -11937,7 +11937,7 @@ components:
         - organization
     'Employee:jsonld-write':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -13520,12 +13520,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-03 14:18:22'
+        example: '2020-08-06 10:28:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-03 14:18:22'
+        example: '2020-08-06 10:28:37'
     required: []
   AuditTrail-write:
     properties:
@@ -13573,12 +13573,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-08-03 14:18:22'
+        example: '2020-08-06 10:28:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-08-03 14:18:22'
+        example: '2020-08-06 10:28:37'
     required: []
   ChangeLog-write:
     properties:
@@ -13610,9 +13610,9 @@ tags:
   -
     name: Employee
     description: |
-      All properties that the entity Employee holds.
+      All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.
       
-      
+      This can be an employee, but also, for example, a student or intern.
   -
     name: Goal
     description: |
