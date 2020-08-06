@@ -18,7 +18,8 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * All properties that the entity Employee holds.
+ * All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.
+ * This can be an employee, but also, for example, a student or intern.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
