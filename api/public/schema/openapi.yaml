@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /applications:
@@ -8790,6 +8790,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[jobLocationType]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[hiringOrganization]'
           in: query
           required: false
@@ -9011,6 +9020,22 @@ paths:
             type: string
         -
           name: 'employmentType[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: jobLocationType
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobLocationType[]'
           in: query
           required: false
           schema:
@@ -11715,7 +11740,7 @@ components:
           $ref: '#/components/schemas/Employee:jsonld-write'
     Employee-read:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         id:
           readOnly: true
@@ -11783,7 +11808,7 @@ components:
         - organization
     Employee-write:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -11835,7 +11860,7 @@ components:
             $ref: '#/components/schemas/Contract-write'
     'Employee:jsonld-read':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         '@context':
           readOnly: true
@@ -11912,7 +11937,7 @@ components:
         - organization
     'Employee:jsonld-write':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -12374,6 +12399,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12404,7 +12432,10 @@ components:
           nullable: true
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-read'
       required:
         - name
         - title
@@ -12432,6 +12463,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12452,7 +12486,10 @@ components:
           type: integer
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-write'
     'JobPosting:jsonld-read':
       type: object
       description: ''
@@ -12485,6 +12522,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12515,7 +12555,10 @@ components:
           nullable: true
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-read'
       required:
         - name
         - title
@@ -12552,6 +12595,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12572,7 +12618,10 @@ components:
           type: integer
         employee:
           description: 'the employee this JobPosting relates to'
-          $ref: '#/components/schemas/Employee:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-write'
     Skill-read:
       type: object
       description: ''
@@ -12868,6 +12917,11 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      jobLocationType:
+        description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+        type: string
+        example: TELECOMMUTE
+        maxLength: 255
       hiringOrganization:
         description: 'The organization that hires the person'
         type: string
@@ -12920,6 +12974,11 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      jobLocationType:
+        description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+        type: string
+        example: TELECOMMUTE
+        maxLength: 255
       hiringOrganization:
         description: 'The organization that hires the person'
         type: string
@@ -13395,12 +13454,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-08-06 10:42:55'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-08-06 10:42:55'
     required: []
   ChangeLog-write:
     properties:
@@ -13514,12 +13573,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-08-06 10:42:55'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-18 08:17:08'
+        example: '2020-08-06 10:42:55'
     required: []
   AuditTrail-write:
     properties:
@@ -13539,9 +13598,9 @@ tags:
   -
     name: Employee
     description: |
-      All properties that the entity Employee holds.
+      All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.
       
-      
+      This can be an employee, but also, for example, a student or intern.
   -
     name: JobPosting
     description: |
