@@ -4,9 +4,9 @@
 
 settings:
   registryBase: docker.io/conduction
-  projectName: pc
-  name: pc
-  title: Proto component commonground
+  projectName: mrc
+  name: mrc
+  title: Medewerker Catalogus Component
   version: V1.0
   majorVersion: v1
   id: 
@@ -15,9 +15,9 @@ settings:
   repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
   demo: mrc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/mrc-php
-  domain: conduction.nl
-  subdomain: pc
-  subpath: pc
+  domain: zuid-drecht.nl
+  subdomain: mrc
+  subpath: mrc
   subpathRouting: true
   organisationName: Conduction
   email: info@conduction.nl

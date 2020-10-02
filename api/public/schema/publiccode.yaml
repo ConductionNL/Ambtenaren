@@ -6,8 +6,8 @@ url: "https://github.com/ConductionNL/medewerkercatalogus/api/helm"
 landingURL: "mrc.zaakonline.nl" 
 isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
 softwareVersion: "V1.0"
-releaseDate: "2020-15-09"
-logo: pc.zaakonline.nl 
+releaseDate: "2020-02-10"
+logo: mrc.zaakonline.nl 
 monochromeLogo: img/logo-mono.svg
 
 inputTypes:
