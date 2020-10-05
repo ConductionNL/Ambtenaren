@@ -9117,7 +9117,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"my JobPosting\",\n    \"description\": \"This is the best JobPosting ever\",\n    \"title\": \"my JobPosting\",\n    \"employmentType\": \"full-time\",\n    \"hiringOrganization\": \"https://cc.zaakonline.nl/organizations/1\",\n    \"jobStartDate\": \"01-01-2020\",\n    \"validThrough\": \"01-01-2020\",\n    \"standardHours\": 40,\n    \"employee\": \"/employees/{{employee}}\"\n}",
+							"raw": "{\n    \"name\": \"my JobPosting\",\n    \"description\": \"This is the best JobPosting ever\",\n    \"title\": \"my JobPosting\",\n    \"employmentType\": \"full-time\",\n    \"hiringOrganization\": \"https://cc.zaakonline.nl/organizations/1\",\n    \"jobStartDate\": \"01-01-2020\",\n    \"validThrough\": \"01-01-2020\",\n    \"standardHours\": 40,\n    \"employee\": \"/employees/{{employee}}\",\n    \"jobLocationType\": \"TELECOMMUTE\"\n}",
 							"options": {
 								"raw": {}
 							}
@@ -13103,12 +13103,12 @@
 	],
 	"variable": [
 		{
-			"id": "287490ec-fadf-4640-89c3-4923ff6240bf",
+			"id": "9e6bd0de-0c2b-4eef-b7f9-e8ec8adbef4e",
 			"key": "baseUrl",
 			"value": "localhost"
 		},
 		{
-			"id": "09c8a272-743b-41a8-9eed-d7270bd61d8d",
+			"id": "cdf4f072-50ab-4640-b780-99ad5d3054b9",
 			"key": "authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		}
