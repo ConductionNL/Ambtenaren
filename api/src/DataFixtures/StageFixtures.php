@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class ConductionFixtures extends Fixture
+class StageFixtures extends Fixture
 {
     private $params;
     /**
