@@ -120,7 +120,6 @@ class Employee
      */
     private $dateModified;
 
-
     /**
      * @Groups({"read","write"})
      * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee")
