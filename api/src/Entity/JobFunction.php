@@ -102,7 +102,7 @@ class JobFunction
      * )
      * @Assert\Url
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $esco;
 
