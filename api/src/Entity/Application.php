@@ -127,9 +127,34 @@ class Application
      */
     private $employee;
 
+    /**
+     * @var JobPosting the JobPosting associated to this application
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="application", cascade={"persist", "remove"})
+     */
+    private $jobPosting;
+
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getJobPosting(): ?JobPosting
+    {
+        return $this->jobPosting;
+    }
+
+    public function setJobPosting(JobPosting $jobPosting): self
+    {
+        $this->jobPosting = $jobPosting;
+
+        // set the owning side of the relation if necessary
+        if ($jobPosting->getApplication() !== $this) {
+            $jobPosting->setApplication($this);
+        }
+
+        return $this;
     }
 
     public function getName(): ?string
