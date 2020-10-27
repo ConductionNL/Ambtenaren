@@ -1,18 +1,18 @@
 openapi: 3.0.2
 info:
   title: 'Medewerker Catalogus Component'
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: Medewerker Catalogus Component
     - Reference: mrc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/medewerkercatalogus/api/helm) / [zip](https://github.com/ConductionNL/medewerkercatalogus/api/helm/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
+    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
   /applications:
@@ -7894,6 +7894,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[esco]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -8013,6 +8022,22 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: esco
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'esco[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -8790,6 +8815,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[jobLocationType]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[hiringOrganization]'
           in: query
           required: false
@@ -9011,6 +9045,22 @@ paths:
             type: string
         -
           name: 'employmentType[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: jobLocationType
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jobLocationType[]'
           in: query
           required: false
           schema:
@@ -10029,6 +10079,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[esco]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -10164,6 +10223,22 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: esco
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'esco[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -10847,6 +10922,12 @@ components:
         employee:
           description: 'The Employee to which this application belongs to'
           $ref: '#/components/schemas/Employee-read'
+        jobPosting:
+          description: 'the JobPosting associated to this application'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/JobPosting-read'
       required:
         - name
         - description
@@ -10876,6 +10957,12 @@ components:
         employee:
           description: 'The Employee to which this application belongs to'
           $ref: '#/components/schemas/Employee-write'
+        jobPosting:
+          description: 'the JobPosting associated to this application'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/JobPosting-write'
     'Application:jsonld-read':
       type: object
       description: ''
@@ -10921,6 +11008,12 @@ components:
         employee:
           description: 'The Employee to which this application belongs to'
           $ref: '#/components/schemas/Employee:jsonld-read'
+        jobPosting:
+          description: 'the JobPosting associated to this application'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/JobPosting:jsonld-read'
       required:
         - name
         - description
@@ -10959,6 +11052,12 @@ components:
         employee:
           description: 'The Employee to which this application belongs to'
           $ref: '#/components/schemas/Employee:jsonld-write'
+        jobPosting:
+          description: 'the JobPosting associated to this application'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/JobPosting:jsonld-write'
     AuditTrail-read:
       type: object
       description: 'An resource representing a log line.'
@@ -11020,18 +11119,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -11039,6 +11143,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -11150,18 +11255,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -11169,6 +11279,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -11715,7 +11826,7 @@ components:
           $ref: '#/components/schemas/Employee:jsonld-write'
     Employee-read:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         id:
           readOnly: true
@@ -11743,12 +11854,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        jobPosting:
-          description: 'the JobPosting associated to this employee'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/JobPosting-read'
         goals:
           type: array
           items:
@@ -11783,7 +11888,7 @@ components:
         - organization
     Employee-write:
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -11798,12 +11903,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        jobPosting:
-          description: 'the JobPosting associated to this employee'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/JobPosting-write'
         goals:
           type: array
           items:
@@ -11835,7 +11934,7 @@ components:
             $ref: '#/components/schemas/Contract-write'
     'Employee:jsonld-read':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       properties:
         '@context':
           readOnly: true
@@ -11872,12 +11971,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        jobPosting:
-          description: 'the JobPosting associated to this employee'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/JobPosting:jsonld-read'
         goals:
           type: array
           items:
@@ -11912,7 +12005,7 @@ components:
         - organization
     'Employee:jsonld-write':
       type: object
-      description: 'All properties that the entity Employee holds.'
+      description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
         - organization
@@ -11936,12 +12029,6 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-        jobPosting:
-          description: 'the JobPosting associated to this employee'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/JobPosting:jsonld-write'
         goals:
           type: array
           items:
@@ -12262,6 +12349,12 @@ components:
           type: string
           format: date-time
           nullable: true
+        esco:
+          description: 'The ESCO where this Jobfunction is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this jobFunction belongs to'
           $ref: '#/components/schemas/Employee-read'
@@ -12281,6 +12374,12 @@ components:
         description:
           description: 'Description of the Job Function'
           type: string
+        esco:
+          description: 'The ESCO where this Jobfunction is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this jobFunction belongs to'
           $ref: '#/components/schemas/Employee-write'
@@ -12320,6 +12419,12 @@ components:
           type: string
           format: date-time
           nullable: true
+        esco:
+          description: 'The ESCO where this Jobfunction is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this jobFunction belongs to'
           $ref: '#/components/schemas/Employee:jsonld-read'
@@ -12348,6 +12453,12 @@ components:
         description:
           description: 'Description of the Job Function'
           type: string
+        esco:
+          description: 'The ESCO where this Jobfunction is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this jobFunction belongs to'
           $ref: '#/components/schemas/Employee:jsonld-write'
@@ -12373,6 +12484,9 @@ components:
           type: string
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
+          type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
           type: string
         hiringOrganization:
           description: 'The organization that hires the person'
@@ -12402,12 +12516,12 @@ components:
           type: string
           format: date-time
           nullable: true
-        employee:
-          description: 'the employee this JobPosting relates to'
+        application:
+          description: 'the application this JobPosting relates to'
           nullable: true
           anyOf:
             -
-              $ref: '#/components/schemas/Employee-read'
+              $ref: '#/components/schemas/Application-read'
       required:
         - name
         - title
@@ -12435,6 +12549,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12453,12 +12570,12 @@ components:
         standardHours:
           description: 'The standard amount of hours per week for this JobPosting'
           type: integer
-        employee:
-          description: 'the employee this JobPosting relates to'
+        application:
+          description: 'the application this JobPosting relates to'
           nullable: true
           anyOf:
             -
-              $ref: '#/components/schemas/Employee-write'
+              $ref: '#/components/schemas/Application-write'
     'JobPosting:jsonld-read':
       type: object
       description: ''
@@ -12491,6 +12608,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12519,12 +12639,12 @@ components:
           type: string
           format: date-time
           nullable: true
-        employee:
-          description: 'the employee this JobPosting relates to'
+        application:
+          description: 'the application this JobPosting relates to'
           nullable: true
           anyOf:
             -
-              $ref: '#/components/schemas/Employee:jsonld-read'
+              $ref: '#/components/schemas/Application:jsonld-read'
       required:
         - name
         - title
@@ -12561,6 +12681,9 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        jobLocationType:
+          description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+          type: string
         hiringOrganization:
           description: 'The organization that hires the person'
           externalDocs:
@@ -12579,12 +12702,12 @@ components:
         standardHours:
           description: 'The standard amount of hours per week for this JobPosting'
           type: integer
-        employee:
-          description: 'the employee this JobPosting relates to'
+        application:
+          description: 'the application this JobPosting relates to'
           nullable: true
           anyOf:
             -
-              $ref: '#/components/schemas/Employee:jsonld-write'
+              $ref: '#/components/schemas/Application:jsonld-write'
     Skill-read:
       type: object
       description: ''
@@ -12615,6 +12738,12 @@ components:
           type: string
           format: date-time
           nullable: true
+        esco:
+          description: 'The ESCO where this Skill is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
           $ref: '#/components/schemas/Employee-read'
@@ -12639,6 +12768,12 @@ components:
         level:
           description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
           type: string
+        esco:
+          description: 'The ESCO where this Skill is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
           $ref: '#/components/schemas/Employee-write'
@@ -12681,6 +12816,12 @@ components:
           type: string
           format: date-time
           nullable: true
+        esco:
+          description: 'The ESCO where this Skill is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
           $ref: '#/components/schemas/Employee:jsonld-read'
@@ -12714,6 +12855,12 @@ components:
         level:
           description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
           type: string
+        esco:
+          description: 'The ESCO where this Skill is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
           $ref: '#/components/schemas/Employee:jsonld-write'
@@ -12754,6 +12901,9 @@ definitions:
       employee:
         description: 'The Employee to which this application belongs to'
         type: \Employee
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
     required:
       - name
       - description
@@ -12784,6 +12934,9 @@ definitions:
       employee:
         description: 'The Employee to which this application belongs to'
         type: \Employee
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
     required:
       - name
       - description
@@ -13002,9 +13155,6 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
-      jobPosting:
-        description: 'the JobPosting associated to this employee'
-        type: \JobPosting
       goals: []
       interests: []
       competencies: []
@@ -13029,9 +13179,6 @@ definitions:
         example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
-      jobPosting:
-        description: 'the JobPosting associated to this employee'
-        type: \JobPosting
       goals: []
       interests: []
       competencies: []
@@ -13183,6 +13330,12 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
+      esco:
+        description: 'The ESCO where this Jobfunction is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
       employee:
         description: 'The Employee to which this jobFunction belongs to'
         type: \Employee
@@ -13201,6 +13354,12 @@ definitions:
         type: string
         example: 'description of the job function'
         maxLength: 2550
+      esco:
+        description: 'The ESCO where this Jobfunction is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
       employee:
         description: 'The Employee to which this jobFunction belongs to'
         type: \Employee
@@ -13233,6 +13392,11 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      jobLocationType:
+        description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+        type: string
+        example: TELECOMMUTE
+        maxLength: 255
       hiringOrganization:
         description: 'The organization that hires the person'
         type: string
@@ -13256,9 +13420,9 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
+      application:
+        description: 'the application this JobPosting relates to'
+        type: \Application
     required:
       - name
       - title
@@ -13285,6 +13449,11 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      jobLocationType:
+        description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
+        type: string
+        example: TELECOMMUTE
+        maxLength: 255
       hiringOrganization:
         description: 'The organization that hires the person'
         type: string
@@ -13302,9 +13471,9 @@ definitions:
         description: 'The standard amount of hours per week for this JobPosting'
         type: int
         example: '40'
-      employee:
-        description: 'the employee this JobPosting relates to'
-        type: \Employee
+      application:
+        description: 'the application this JobPosting relates to'
+        type: \Application
     required:
       - name
       - title
@@ -13338,6 +13507,12 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
+      esco:
+        description: 'The ESCO where this Skill is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
       employee:
         description: 'The Employee to which this skill belongs to'
         type: \Employee
@@ -13362,6 +13537,12 @@ definitions:
         type: string
         example: advanced
         maxLength: 255
+      esco:
+        description: 'The ESCO where this Skill is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
       employee:
         description: 'The Employee to which this skill belongs to'
         type: \Employee
@@ -13473,12 +13654,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-28 12:36:11'
+        example: '2020-10-26 12:38:44'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-28 12:36:11'
+        example: '2020-10-26 12:38:44'
     required: []
   AuditTrail-write:
     properties:
@@ -13526,12 +13707,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-07-28 12:36:11'
+        example: '2020-10-26 12:38:44'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-07-28 12:36:11'
+        example: '2020-10-26 12:38:44'
     required: []
   ChangeLog-write:
     properties:
@@ -13563,9 +13744,9 @@ tags:
   -
     name: Employee
     description: |
-      All properties that the entity Employee holds.
+      All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.
       
-      
+      This can be an employee, but also, for example, a student or intern.
   -
     name: Goal
     description: |
@@ -13626,8 +13807,8 @@ securityDefinitions:
 host: irc.zaakonline.nl
 servers:
   -
-    name: conduction.nl
-    url: mrc.dev.conduction.nl
+    name: zuid-drecht.nl
+    url: mrc.dev.zuid-drecht.nl
 externalDocs:
   -
     description: 'OAS Documentatie'

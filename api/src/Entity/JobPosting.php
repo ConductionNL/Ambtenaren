@@ -125,6 +125,20 @@ class JobPosting
     private $employmentType;
 
     /**
+     * @var string A description of the job location (e.g TELECOMMUTE for telecommute jobs).
+     *
+     * @example TELECOMMUTE
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="text", length=255)
+     */
+    private $jobLocationType;
+
+    /**
      * @var string The organization that hires the person
      *
      * @example https://cc.zaakonline.nl/organizations/1
@@ -186,14 +200,14 @@ class JobPosting
     private $dateModified;
 
     /**
-     * @var Employee the employee this JobPosting relates to
+     * @var Application the application this JobPosting relates to
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting")
+     * @ORM\OneToOne(targetEntity="App\Entity\Application", inversedBy="jobPosting")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $employee;
+    private $application;
 
     public function getId(): Uuid
     {
@@ -251,6 +265,18 @@ class JobPosting
     public function setEmploymentType(string $employmentType): self
     {
         $this->employmentType = $employmentType;
+
+        return $this;
+    }
+
+    public function getJobLocationType(): ?string
+    {
+        return $this->jobLocationType;
+    }
+
+    public function setJobLocationType(?string $jobLocationType): self
+    {
+        $this->jobLocationType = $jobLocationType;
 
         return $this;
     }
@@ -327,14 +353,14 @@ class JobPosting
         return $this;
     }
 
-    public function getEmployee(): ?Employee
+    public function getApplication(): ?Application
     {
-        return $this->employee;
+        return $this->application;
     }
 
-    public function setEmployee(Employee $employee): self
+    public function setApplication(Application $application): self
     {
-        $this->employee = $employee;
+        $this->application = $application;
 
         return $this;
     }

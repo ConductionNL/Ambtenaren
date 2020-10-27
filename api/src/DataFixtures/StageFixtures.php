@@ -5,11 +5,11 @@ namespace App\DataFixtures;
 use App\Entity\JobPosting;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class ConductionFixtures extends Fixture
+class StageFixtures extends Fixture
 {
     private $params;
     /**
@@ -25,10 +25,13 @@ class ConductionFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // Lets make sure we only run these fixtures on larping enviroment
+        // Lets make sure we only run these fixtures on ZD enviroment
         if (
             !$this->params->get('app_build_all_fixtures') &&
-            $this->params->get('app_domain') != 'conduction.nl' && strpos($this->params->get('app_domain'), 'conduction.nl') == false) {
+            $this->params->get('app_domain') != 'zuiddrecht.nl' && strpos($this->params->get('app_domain'), 'zuiddrecht.nl') == false &&
+            $this->params->get('app_domain') != 'zuid-drecht.nl' && strpos($this->params->get('app_domain'), 'zuid-drecht.nl') == false &&
+            $this->params->get('app_domain') != 'conduction.academy' && strpos($this->params->get('app_domain'), 'conduction.academy') == false
+        ) {
             return false;
         }
         //var_dump($this->params->get('app_domain'));
@@ -40,6 +43,7 @@ class ConductionFixtures extends Fixture
         $jobPosting->setDescription('Dit is de beschrijving van deze test vacature');
         $jobPosting->setTitle('Test Vacature');
         $jobPosting->setEmploymentType('full-time');
+        $jobPosting->setJobLocationType('TELECOMMUTE');
         $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
