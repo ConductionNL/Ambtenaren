@@ -48,32 +48,6 @@ class Application
     private $id;
 
     /**
-     * @var string Name of the application
-     *
-     * @example application name
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $name;
-
-    /**
-     * @var string Description of the application
-     *
-     * @example description of the application
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
-     * @Assert\Length(
-     *     max = 2550
-     * )
-     * @Assert\NotNull
-     */
-    private $description;
-
-    /**
      * @var string Status of the application
      *
      * @example application status
@@ -124,6 +98,7 @@ class Application
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
     private $employee;
 
@@ -153,30 +128,6 @@ class Application
         if ($jobPosting->getApplication() !== $this) {
             $jobPosting->setApplication($this);
         }
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }
