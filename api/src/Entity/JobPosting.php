@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"hiringOrganization": "exact"})
  */
 class JobPosting
 {
@@ -89,7 +89,7 @@ class JobPosting
      *
      * @Gedmo\Versioned
      * @Assert\Length(
-     *     max = 255
+     *     max = 7500
      * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
