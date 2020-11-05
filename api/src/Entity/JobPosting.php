@@ -89,7 +89,7 @@ class JobPosting
      *
      * @Gedmo\Versioned
      * @Assert\Length(
-     *     max = 255
+     *     max = 7500
      * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
