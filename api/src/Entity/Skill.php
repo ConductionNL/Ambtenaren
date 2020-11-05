@@ -106,6 +106,21 @@ class Skill
     private $dateModified;
 
     /**
+     * @var string The ESCO where this Skill is related too
+     *
+     * @example http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Assert\Url
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $esco;
+
+    /**
      * @var Employee The Employee to which this skill belongs to
      *
      * @MaxDepth(1)
@@ -176,6 +191,18 @@ class Skill
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getEsco(): ?string
+    {
+        return $this->esco;
+    }
+
+    public function setEsco(string $esco): self
+    {
+        $this->esco = $esco;
 
         return $this;
     }

@@ -48,32 +48,6 @@ class Application
     private $id;
 
     /**
-     * @var string Name of the application
-     *
-     * @example application name
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $name;
-
-    /**
-     * @var string Description of the application
-     *
-     * @example description of the application
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
-     * @Assert\Length(
-     *     max = 2550
-     * )
-     * @Assert\NotNull
-     */
-    private $description;
-
-    /**
      * @var string Status of the application
      *
      * @example application status
@@ -124,34 +98,36 @@ class Application
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
     private $employee;
+
+    /**
+     * @var JobPosting the JobPosting associated to this application
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="application", cascade={"persist", "remove"})
+     */
+    private $jobPosting;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getJobPosting(): ?JobPosting
     {
-        return $this->name;
+        return $this->jobPosting;
     }
 
-    public function setName(string $name): self
+    public function setJobPosting(JobPosting $jobPosting): self
     {
-        $this->name = $name;
+        $this->jobPosting = $jobPosting;
 
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
+        // set the owning side of the relation if necessary
+        if ($jobPosting->getApplication() !== $this) {
+            $jobPosting->setApplication($this);
+        }
 
         return $this;
     }
