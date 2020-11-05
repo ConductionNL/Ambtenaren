@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/mrc-php) 
     - Datamodel: [postman](/schema/mrc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /applications:
@@ -103,24 +103,6 @@ paths:
       parameters:
         -
           name: 'order[id]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[name]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[description]'
           in: query
           required: false
           schema:
@@ -220,38 +202,6 @@ paths:
             type: string
         -
           name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: name
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'name[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: description
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'description[]'
           in: query
           required: false
           schema:
@@ -8815,6 +8765,42 @@ paths:
               - asc
               - desc
         -
+          name: 'order[educationRequirements]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[summary]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[baseSalary]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[salaryCurrency]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[jobLocationType]'
           in: query
           required: false
@@ -8974,102 +8960,6 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: name
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'name[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: description
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'description[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: title
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'title[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: employmentType
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'employmentType[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: jobLocationType
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'jobLocationType[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: hiringOrganization
           in: query
           required: false
@@ -9085,70 +8975,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: jobStartDate
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'jobStartDate[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: validThrough
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'validThrough[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: standardHours
-          in: query
-          required: false
-          schema:
-            type: integer
-        -
-          name: 'standardHours[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: integer
-          style: form
-          explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -10897,12 +10723,6 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        name:
-          description: 'Name of the application'
-          type: string
-        description:
-          description: 'Description of the application'
-          type: string
         status:
           description: 'Status of the application'
           type: string
@@ -10929,25 +10749,17 @@ components:
             -
               $ref: '#/components/schemas/JobPosting-read'
       required:
-        - name
-        - description
         - status
         - motivation
+        - employee
     Application-write:
       type: object
       description: ''
       required:
-        - name
-        - description
         - status
         - motivation
+        - employee
       properties:
-        name:
-          description: 'Name of the application'
-          type: string
-        description:
-          description: 'Description of the application'
-          type: string
         status:
           description: 'Status of the application'
           type: string
@@ -10983,12 +10795,6 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        name:
-          description: 'Name of the application'
-          type: string
-        description:
-          description: 'Description of the application'
-          type: string
         status:
           description: 'Status of the application'
           type: string
@@ -11015,18 +10821,16 @@ components:
             -
               $ref: '#/components/schemas/JobPosting:jsonld-read'
       required:
-        - name
-        - description
         - status
         - motivation
+        - employee
     'Application:jsonld-write':
       type: object
       description: ''
       required:
-        - name
-        - description
         - status
         - motivation
+        - employee
       properties:
         '@context':
           readOnly: true
@@ -11036,12 +10840,6 @@ components:
           type: string
         '@type':
           readOnly: true
-          type: string
-        name:
-          description: 'Name of the application'
-          type: string
-        description:
-          description: 'Description of the application'
           type: string
         status:
           description: 'Status of the application'
@@ -12485,6 +12283,22 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        educationRequirements:
+          description: 'The education requirements of this JobPosting'
+          type: string
+          nullable: true
+        summary:
+          description: 'The summary requirements of this JobPosting'
+          type: string
+          nullable: true
+        baseSalary:
+          description: 'Salary of the jobposting.'
+          type: integer
+          nullable: true
+        salaryCurrency:
+          description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+          type: string
+          nullable: true
         jobLocationType:
           description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
           type: string
@@ -12549,6 +12363,22 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        educationRequirements:
+          description: 'The education requirements of this JobPosting'
+          type: string
+          nullable: true
+        summary:
+          description: 'The summary requirements of this JobPosting'
+          type: string
+          nullable: true
+        baseSalary:
+          description: 'Salary of the jobposting.'
+          type: integer
+          nullable: true
+        salaryCurrency:
+          description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+          type: string
+          nullable: true
         jobLocationType:
           description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
           type: string
@@ -12608,6 +12438,22 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        educationRequirements:
+          description: 'The education requirements of this JobPosting'
+          type: string
+          nullable: true
+        summary:
+          description: 'The summary requirements of this JobPosting'
+          type: string
+          nullable: true
+        baseSalary:
+          description: 'Salary of the jobposting.'
+          type: integer
+          nullable: true
+        salaryCurrency:
+          description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+          type: string
+          nullable: true
         jobLocationType:
           description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
           type: string
@@ -12681,6 +12527,22 @@ components:
         employmentType:
           description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
           type: string
+        educationRequirements:
+          description: 'The education requirements of this JobPosting'
+          type: string
+          nullable: true
+        summary:
+          description: 'The summary requirements of this JobPosting'
+          type: string
+          nullable: true
+        baseSalary:
+          description: 'Salary of the jobposting.'
+          type: integer
+          nullable: true
+        salaryCurrency:
+          description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+          type: string
+          nullable: true
         jobLocationType:
           description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
           type: string
@@ -12872,16 +12734,6 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      name:
-        description: 'Name of the application'
-        type: string
-        example: 'application name'
-        maxLength: 255
-      description:
-        description: 'Description of the application'
-        type: string
-        example: 'description of the application'
-        maxLength: 2550
       status:
         description: 'Status of the application'
         type: string
@@ -12905,22 +12757,11 @@ definitions:
         description: 'the JobPosting associated to this application'
         type: \JobPosting
     required:
-      - name
-      - description
       - status
       - motivation
+      - employee
   Application-write:
     properties:
-      name:
-        description: 'Name of the application'
-        type: string
-        example: 'application name'
-        maxLength: 255
-      description:
-        description: 'Description of the application'
-        type: string
-        example: 'description of the application'
-        maxLength: 2550
       status:
         description: 'Status of the application'
         type: string
@@ -12938,10 +12779,9 @@ definitions:
         description: 'the JobPosting associated to this application'
         type: \JobPosting
     required:
-      - name
-      - description
       - status
       - motivation
+      - employee
   Competence-read:
     properties:
       id:
@@ -13382,7 +13222,7 @@ definitions:
         description: 'The description of this JobPosting'
         type: string
         example: 'This is the best JobPosting ever'
-        maxLength: 255
+        maxLength: 7500
       title:
         description: 'The title of this Job Posting'
         type: string
@@ -13392,6 +13232,25 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      educationRequirements:
+        description: 'The education requirements of this JobPosting'
+        type: string
+        example: 'MBO-4 opleiding'
+        maxLength: 255
+      summary:
+        description: 'The summary requirements of this JobPosting'
+        type: string
+        example: 'A small summary with information about this jobposting'
+        maxLength: 255
+      baseSalary:
+        description: 'Salary of the jobposting.'
+        type: int
+        example: '1900'
+      salaryCurrency:
+        description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+        type: string
+        example: EUR
+        maxLength: 255
       jobLocationType:
         description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
         type: string
@@ -13439,7 +13298,7 @@ definitions:
         description: 'The description of this JobPosting'
         type: string
         example: 'This is the best JobPosting ever'
-        maxLength: 255
+        maxLength: 7500
       title:
         description: 'The title of this Job Posting'
         type: string
@@ -13449,6 +13308,25 @@ definitions:
         description: 'The type of employment **full-time**, **part-time**, **temporary**, **seasonal**, **internship**'
         type: string
         example: full-time
+      educationRequirements:
+        description: 'The education requirements of this JobPosting'
+        type: string
+        example: 'MBO-4 opleiding'
+        maxLength: 255
+      summary:
+        description: 'The summary requirements of this JobPosting'
+        type: string
+        example: 'A small summary with information about this jobposting'
+        maxLength: 255
+      baseSalary:
+        description: 'Salary of the jobposting.'
+        type: int
+        example: '1900'
+      salaryCurrency:
+        description: 'The salary currency(coded using ISO 4217 ) of this jobPosting'
+        type: string
+        example: EUR
+        maxLength: 255
       jobLocationType:
         description: 'A description of the job location (e.g TELECOMMUTE for telecommute jobs).'
         type: string
@@ -13654,12 +13532,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 12:38:44'
+        example: '2020-11-05 10:51:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 12:38:44'
+        example: '2020-11-05 10:51:08'
     required: []
   AuditTrail-write:
     properties:
@@ -13707,12 +13585,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-26 12:38:44'
+        example: '2020-11-05 10:51:08'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-26 12:38:44'
+        example: '2020-11-05 10:51:08'
     required: []
   ChangeLog-write:
     properties:
