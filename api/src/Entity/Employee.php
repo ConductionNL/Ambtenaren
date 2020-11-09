@@ -149,11 +149,15 @@ class Employee
     private $skills;
 
     /**
-     * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="employee")
-     * @MaxDepth(1)
+     * @var array The URLs of the Applications which this employee has put out
+     *
+     * @example https://url/Application/1, https://url/Application/2
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="simple_array", length=255, nullable=true)
      */
-    private $applications;
+    private ?array $applications = [];
 
     /**
      * @Groups({"read","write"})
@@ -229,6 +233,18 @@ class Employee
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    public function getApplications(): ?array
+    {
+        return $this->applications;
+    }
+
+    public function setApplications(?array $applications): self
+    {
+        $this->applications = $applications;
 
         return $this;
     }
@@ -368,37 +384,6 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($skill->setEmployee() === $this) {
                 $skill->setEmployee(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Application[]
-     */
-    public function getApplications(): Collection
-    {
-        return $this->applications;
-    }
-
-    public function addApplication(Application $application): self
-    {
-        if (!$this->applications->contains($application)) {
-            $this->applications[] = $application;
-            $application->setEmployee($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApplication(Application $application): self
-    {
-        if ($this->applications->contains($application)) {
-            $this->applications->removeElement($application);
-            // set the owning side to null (unless already changed)
-            if ($application->setEmployee() === $this) {
-                $application->setEmployee(null);
             }
         }
 
