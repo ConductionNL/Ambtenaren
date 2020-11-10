@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Employee;
 use App\Entity\JobPosting;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -35,6 +36,13 @@ class StageFixtures extends Fixture
             return false;
         }
         //var_dump($this->params->get('app_domain'));
+
+        //Test employee
+        $employee = new Employee();
+        $employee->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'d961291d-f5c1-46f4-8b4a-6abb41df88db']));
+        $employee->setOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
+        $manager->persist($employee);
+        $manager->flush();
 
         //Test vacature
         $id = Uuid::fromString('3824d042-4b1a-4024-8e83-7943dc9b0e83');
