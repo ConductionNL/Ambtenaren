@@ -40,7 +40,7 @@ class StageFixtures extends Fixture
         //Test employee
         $employee = new Employee();
         $employee->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'d961291d-f5c1-46f4-8b4a-6abb41df88db']));
-        $employee->setOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
+        $employee->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => 'c571bdad-f34c-4e24-94e7-74629cfaccc9']));
         $manager->persist($employee);
         $manager->flush();
 
@@ -52,7 +52,7 @@ class StageFixtures extends Fixture
         $jobPosting->setTitle('Test Vacature');
         $jobPosting->setEmploymentType('full-time');
         $jobPosting->setJobLocationType('TELECOMMUTE');
-        $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
+        $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => 'c571bdad-f34c-4e24-94e7-74629cfaccc9']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
         $date->sub(new \DateInterval('P7W'));
