@@ -8,6 +8,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -92,13 +94,14 @@ class Application
     private $dateModified;
 
     /**
-     * @var Employee The Employee to which this application belongs to
+     * @var string The URL of the Employee to which this application belongs to
      *
-     * @MaxDepth(1)
-     * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="applications")
-     * @ORM\JoinColumn(nullable=false)
+     * @example https://url/employee/1
+     *
+     * @Gedmo\Versioned
      * @Assert\NotNull
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $employee;
 
@@ -180,12 +183,12 @@ class Application
         return $this;
     }
 
-    public function getEmployee(): ?Employee
+    public function getEmployee(): ?string
     {
         return $this->employee;
     }
 
-    public function setEmployee(?Employee $employee): self
+    public function setEmployee(string $employee): self
     {
         $this->employee = $employee;
 
