@@ -52,7 +52,7 @@ class StageFixtures extends Fixture
         $jobPosting->setTitle('Test Vacature');
         $jobPosting->setEmploymentType('full-time');
         $jobPosting->setJobLocationType('TELECOMMUTE');
-        $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'9650a44d-d7d1-454a-ab4f-2338c90e8c2f']));
+        $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'organizations', 'id'=>'55247f46-77d4-438e-90f1-524595767c42']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
         $date->sub(new \DateInterval('P7W'));
