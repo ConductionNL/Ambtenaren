@@ -153,9 +153,8 @@ class Employee
      *
      * @example https://url/Application/1, https://url/Application/2
      *
-     * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="simple_array", length=255, nullable=true)
+     * @ORM\Column(type="simple_array", nullable=true)
      */
     private ?array $applications = [];
 
@@ -179,7 +178,6 @@ class Employee
         $this->interests = new ArrayCollection();
         $this->competencies = new ArrayCollection();
         $this->skills = new ArrayCollection();
-        $this->applications = new ArrayCollection();
         $this->jobFunctions = new ArrayCollection();
         $this->contracts = new ArrayCollection();
     }
@@ -242,7 +240,7 @@ class Employee
         return $this->applications;
     }
 
-    public function setApplications(?array $applications): self
+    public function setApplications(array $applications): self
     {
         $this->applications = $applications;
 

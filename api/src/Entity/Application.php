@@ -8,6 +8,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -97,7 +99,6 @@ class Application
      * @example https://url/employee/1
      *
      * @Gedmo\Versioned
-     * @Assert\Url
      * @Assert\NotNull
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -187,7 +188,7 @@ class Application
         return $this->employee;
     }
 
-    public function setEmployee(?string $employee): self
+    public function setEmployee(string $employee): self
     {
         $this->employee = $employee;
 
