@@ -133,7 +133,6 @@ class JobPosting
      * @Groups({"read","write"})
      * @ORM\Column(type="simple_array", nullable=true)
      */
-
     private $educationRequirements = [];
 
     /**
