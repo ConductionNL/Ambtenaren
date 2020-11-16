@@ -130,9 +130,6 @@ class JobPosting
      * @example MBO-4 opleiding
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *     max = 255
-     * )
      * @Groups({"read","write"})
      * @ORM\Column(type="simple_array", nullable=true)
      */
