@@ -253,7 +253,7 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", inversedBy="jobPosting")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting")
      * @ORM\JoinColumn(nullable=true)
      */
     private $applications;
