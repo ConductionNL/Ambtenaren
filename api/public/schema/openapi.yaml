@@ -147,6 +147,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[employee]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -266,6 +275,22 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: employee
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'employee[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -4962,6 +4987,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[applications]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -5010,22 +5044,6 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: person
           in: query
           required: false
@@ -5041,46 +5059,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: organization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -10740,8 +10718,8 @@ components:
           format: date-time
           nullable: true
         employee:
-          description: 'The Employee to which this application belongs to'
-          $ref: '#/components/schemas/Employee-read'
+          description: 'The URL of the Employee to which this application belongs to'
+          type: string
         jobPosting:
           description: 'the JobPosting associated to this application'
           nullable: true
@@ -10767,8 +10745,8 @@ components:
           description: 'Motivation for the application'
           type: string
         employee:
-          description: 'The Employee to which this application belongs to'
-          $ref: '#/components/schemas/Employee-write'
+          description: 'The URL of the Employee to which this application belongs to'
+          type: string
         jobPosting:
           description: 'the JobPosting associated to this application'
           nullable: true
@@ -10812,8 +10790,8 @@ components:
           format: date-time
           nullable: true
         employee:
-          description: 'The Employee to which this application belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-read'
+          description: 'The URL of the Employee to which this application belongs to'
+          type: string
         jobPosting:
           description: 'the JobPosting associated to this application'
           nullable: true
@@ -10848,8 +10826,8 @@ components:
           description: 'Motivation for the application'
           type: string
         employee:
-          description: 'The Employee to which this application belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-write'
+          description: 'The URL of the Employee to which this application belongs to'
+          type: string
         jobPosting:
           description: 'the JobPosting associated to this application'
           nullable: true
@@ -11642,6 +11620,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this resource was created'
           type: string
@@ -11670,9 +11649,11 @@ components:
           items:
             $ref: '#/components/schemas/Skill-read'
         applications:
+          description: 'The URLs of the Applications which this employee has put out'
           type: array
           items:
-            $ref: '#/components/schemas/Application-read'
+            type: string
+          nullable: true
         jobFunctions:
           type: array
           items:
@@ -11683,13 +11664,11 @@ components:
             $ref: '#/components/schemas/Contract-read'
       required:
         - person
-        - organization
     Employee-write:
       type: object
       description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
-        - organization
       properties:
         person:
           description: 'The person that is employed'
@@ -11701,6 +11680,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         goals:
           type: array
           items:
@@ -11719,9 +11699,11 @@ components:
           items:
             $ref: '#/components/schemas/Skill-write'
         applications:
+          description: 'The URLs of the Applications which this employee has put out'
           type: array
           items:
-            $ref: '#/components/schemas/Application-write'
+            type: string
+          nullable: true
         jobFunctions:
           type: array
           items:
@@ -11759,6 +11741,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this resource was created'
           type: string
@@ -11787,9 +11770,11 @@ components:
           items:
             $ref: '#/components/schemas/Skill:jsonld-read'
         applications:
+          description: 'The URLs of the Applications which this employee has put out'
           type: array
           items:
-            $ref: '#/components/schemas/Application:jsonld-read'
+            type: string
+          nullable: true
         jobFunctions:
           type: array
           items:
@@ -11800,13 +11785,11 @@ components:
             $ref: '#/components/schemas/Contract:jsonld-read'
       required:
         - person
-        - organization
     'Employee:jsonld-write':
       type: object
       description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
       required:
         - person
-        - organization
       properties:
         '@context':
           readOnly: true
@@ -11827,6 +11810,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         goals:
           type: array
           items:
@@ -11845,9 +11829,11 @@ components:
           items:
             $ref: '#/components/schemas/Skill:jsonld-write'
         applications:
+          description: 'The URLs of the Applications which this employee has put out'
           type: array
           items:
-            $ref: '#/components/schemas/Application:jsonld-write'
+            type: string
+          nullable: true
         jobFunctions:
           type: array
           items:
@@ -12285,7 +12271,9 @@ components:
           type: string
         educationRequirements:
           description: 'The education requirements of this JobPosting'
-          type: string
+          type: array
+          items:
+            type: string
           nullable: true
         summary:
           description: 'The summary requirements of this JobPosting'
@@ -12365,7 +12353,9 @@ components:
           type: string
         educationRequirements:
           description: 'The education requirements of this JobPosting'
-          type: string
+          type: array
+          items:
+            type: string
           nullable: true
         summary:
           description: 'The summary requirements of this JobPosting'
@@ -12440,7 +12430,9 @@ components:
           type: string
         educationRequirements:
           description: 'The education requirements of this JobPosting'
-          type: string
+          type: array
+          items:
+            type: string
           nullable: true
         summary:
           description: 'The summary requirements of this JobPosting'
@@ -12529,7 +12521,9 @@ components:
           type: string
         educationRequirements:
           description: 'The education requirements of this JobPosting'
-          type: string
+          type: array
+          items:
+            type: string
           nullable: true
         summary:
           description: 'The summary requirements of this JobPosting'
@@ -12751,8 +12745,9 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       employee:
-        description: 'The Employee to which this application belongs to'
-        type: \Employee
+        description: 'The URL of the Employee to which this application belongs to'
+        type: string
+        example: 'https://url/employee/1'
       jobPosting:
         description: 'the JobPosting associated to this application'
         type: \JobPosting
@@ -12773,8 +12768,9 @@ definitions:
         example: 'motivation for the application'
         maxLength: 2550
       employee:
-        description: 'The Employee to which this application belongs to'
-        type: \Employee
+        description: 'The URL of the Employee to which this application belongs to'
+        type: string
+        example: 'https://url/employee/1'
       jobPosting:
         description: 'the JobPosting associated to this application'
         type: \JobPosting
@@ -12995,16 +12991,18 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
+      applications:
+        description: 'The URLs of the Applications which this employee has put out'
+        type: array
+        example: 'https://url/Application/1, https://url/Application/2'
       goals: []
       interests: []
       competencies: []
       skills: []
-      applications: []
       jobFunctions: []
       contracts: []
     required:
       - person
-      - organization
   Employee-write:
     properties:
       person:
@@ -13019,16 +13017,18 @@ definitions:
         example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
         maxLength: 255
         format: url
+      applications:
+        description: 'The URLs of the Applications which this employee has put out'
+        type: array
+        example: 'https://url/Application/1, https://url/Application/2'
       goals: []
       interests: []
       competencies: []
       skills: []
-      applications: []
       jobFunctions: []
       contracts: []
     required:
       - person
-      - organization
   Goal-read:
     properties:
       id:
@@ -13234,9 +13234,8 @@ definitions:
         example: full-time
       educationRequirements:
         description: 'The education requirements of this JobPosting'
-        type: string
+        type: array
         example: 'MBO-4 opleiding'
-        maxLength: 255
       summary:
         description: 'The summary requirements of this JobPosting'
         type: string
@@ -13310,9 +13309,8 @@ definitions:
         example: full-time
       educationRequirements:
         description: 'The education requirements of this JobPosting'
-        type: string
+        type: array
         example: 'MBO-4 opleiding'
-        maxLength: 255
       summary:
         description: 'The summary requirements of this JobPosting'
         type: string
@@ -13532,12 +13530,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-05 10:51:08'
+        example: '2020-11-16 11:30:49'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-05 10:51:08'
+        example: '2020-11-16 11:30:49'
     required: []
   AuditTrail-write:
     properties:
@@ -13585,12 +13583,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-05 10:51:08'
+        example: '2020-11-16 11:30:49'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-05 10:51:08'
+        example: '2020-11-16 11:30:49'
     required: []
   ChangeLog-write:
     properties:

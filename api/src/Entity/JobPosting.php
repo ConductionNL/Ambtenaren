@@ -210,7 +210,7 @@ class JobPosting
     private $jobStartDate;
 
     /**
-     * @var \DateTime The end date of the contract
+     * @var \DateTime The end date of the application procces
      *
      * @example 01-01-2020
      *
@@ -253,10 +253,10 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Application", inversedBy="jobPosting")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", inversedBy="jobPosting")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $application;
+    private $applications;
 
     public function getId(): Uuid
     {

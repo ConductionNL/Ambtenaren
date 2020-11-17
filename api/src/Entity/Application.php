@@ -107,7 +107,7 @@ class Application
      * @var JobPosting the JobPosting associated to this application
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="application", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobPosting", mappedBy="applications", cascade={"persist", "remove"})
      */
     private $jobPosting;
 
