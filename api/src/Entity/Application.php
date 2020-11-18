@@ -121,14 +121,9 @@ class Application
         return $this->jobPosting;
     }
 
-    public function setJobPosting(JobPosting $jobPosting): self
+    public function setJobPosting(?JobPosting $jobPosting): self
     {
         $this->jobPosting = $jobPosting;
-
-        // set the owning side of the relation if necessary
-        if ($jobPosting->getApplication() !== $this) {
-            $jobPosting->setApplication($this);
-        }
 
         return $this;
     }
