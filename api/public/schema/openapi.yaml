@@ -12301,7 +12301,7 @@ components:
           type: string
           format: date-time
         validThrough:
-          description: 'The end date of the contract'
+          description: 'The end date of the application procces'
           type: string
           format: date-time
           nullable: true
@@ -12318,12 +12318,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        application:
-          description: 'the application this JobPosting relates to'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Application-read'
       required:
         - name
         - title
@@ -12383,19 +12377,13 @@ components:
           type: string
           format: date-time
         validThrough:
-          description: 'The end date of the contract'
+          description: 'The end date of the application procces'
           type: string
           format: date-time
           nullable: true
         standardHours:
           description: 'The standard amount of hours per week for this JobPosting'
           type: integer
-        application:
-          description: 'the application this JobPosting relates to'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Application-write'
     'JobPosting:jsonld-read':
       type: object
       description: ''
@@ -12460,7 +12448,7 @@ components:
           type: string
           format: date-time
         validThrough:
-          description: 'The end date of the contract'
+          description: 'The end date of the application procces'
           type: string
           format: date-time
           nullable: true
@@ -12477,12 +12465,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        application:
-          description: 'the application this JobPosting relates to'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Application:jsonld-read'
       required:
         - name
         - title
@@ -12551,19 +12533,13 @@ components:
           type: string
           format: date-time
         validThrough:
-          description: 'The end date of the contract'
+          description: 'The end date of the application procces'
           type: string
           format: date-time
           nullable: true
         standardHours:
           description: 'The standard amount of hours per week for this JobPosting'
           type: integer
-        application:
-          description: 'the application this JobPosting relates to'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Application:jsonld-write'
     Skill-read:
       type: object
       description: ''
@@ -13265,7 +13241,7 @@ definitions:
         type: \DateTime
         example: 01-01-2020
       validThrough:
-        description: 'The end date of the contract'
+        description: 'The end date of the application procces'
         type: \DateTime
         example: 01-01-2020
       standardHours:
@@ -13278,7 +13254,7 @@ definitions:
       dateModified:
         description: 'The moment this resource last Modified'
         type: \Datetime
-      application:
+      applications:
         description: 'the application this JobPosting relates to'
         type: \Application
     required:
@@ -13340,14 +13316,14 @@ definitions:
         type: \DateTime
         example: 01-01-2020
       validThrough:
-        description: 'The end date of the contract'
+        description: 'The end date of the application procces'
         type: \DateTime
         example: 01-01-2020
       standardHours:
         description: 'The standard amount of hours per week for this JobPosting'
         type: int
         example: '40'
-      application:
+      applications:
         description: 'the application this JobPosting relates to'
         type: \Application
     required:
@@ -13530,12 +13506,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-16 11:30:49'
+        example: '2020-11-17 11:16:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-16 11:30:49'
+        example: '2020-11-17 11:16:10'
     required: []
   AuditTrail-write:
     properties:
@@ -13583,12 +13559,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-16 11:30:49'
+        example: '2020-11-17 11:16:10'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-16 11:30:49'
+        example: '2020-11-17 11:16:10'
     required: []
   ChangeLog-write:
     properties:

@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"employee":"ipartial", "jobPosting.id":"exact"})
  */
 class Application
 {
@@ -107,7 +107,7 @@ class Application
      * @var JobPosting the JobPosting associated to this application
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="application", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobPosting", inversedBy="applications", cascade={"persist", "remove"})
      */
     private $jobPosting;
 
@@ -121,14 +121,9 @@ class Application
         return $this->jobPosting;
     }
 
-    public function setJobPosting(JobPosting $jobPosting): self
+    public function setJobPosting(?JobPosting $jobPosting): self
     {
         $this->jobPosting = $jobPosting;
-
-        // set the owning side of the relation if necessary
-        if ($jobPosting->getApplication() !== $this) {
-            $jobPosting->setApplication($this);
-        }
 
         return $this;
     }
