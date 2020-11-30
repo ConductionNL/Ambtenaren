@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"employee.id":"exact", "jobPosting.id":"exact"})
  */
 class Application
 {
@@ -46,32 +46,6 @@ class Application
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
-
-    /**
-     * @var string Name of the application
-     *
-     * @example application name
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $name;
-
-    /**
-     * @var string Description of the application
-     *
-     * @example description of the application
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
-     * @Assert\Length(
-     *     max = 2550
-     * )
-     * @Assert\NotNull
-     */
-    private $description;
 
     /**
      * @var string Status of the application
@@ -118,11 +92,17 @@ class Application
     private $dateModified;
 
     /**
-     * @var Employee The Employee to which this application belongs to
-     *
+     * @var JobPosting the JobPosting associated to this application
+     * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="applications")
+     * @ORM\ManyToOne(targetEntity="App\Entity\JobPosting", inversedBy="applications", cascade={"persist", "remove"})
+     */
+    private $jobPosting;
+
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
@@ -132,26 +112,14 @@ class Application
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getJobPosting(): ?JobPosting
     {
-        return $this->name;
+        return $this->jobPosting;
     }
 
-    public function setName(string $name): self
+    public function setJobPosting(?JobPosting $jobPosting): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
+        $this->jobPosting = $jobPosting;
 
         return $this;
     }

@@ -52,7 +52,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"person":"exact"})
  */
 class Employee
 {
@@ -95,10 +95,9 @@ class Employee
      * @Assert\Length(
      *     max = 255
      * )
-     * @Assert\NotNull
      * @Assert\Url
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $organization;
 
@@ -119,14 +118,6 @@ class Employee
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateModified;
-
-    /**
-     * @var JobPosting the JobPosting associated to this employee
-     * @Groups({"read", "write"})
-     * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\JobPosting", mappedBy="employee", cascade={"persist", "remove"})
-     */
-    private $jobPosting;
 
     /**
      * @Groups({"read","write"})
@@ -158,13 +149,6 @@ class Employee
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="employee")
-     * @MaxDepth(1)
-     */
-    private $applications;
-
-    /**
-     * @Groups({"read","write"})
      * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee")
      * @MaxDepth(1)
      */
@@ -177,15 +161,22 @@ class Employee
      */
     private $contracts;
 
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true)
+     */
+    private $applications;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
         $this->interests = new ArrayCollection();
         $this->competencies = new ArrayCollection();
         $this->skills = new ArrayCollection();
-        $this->applications = new ArrayCollection();
         $this->jobFunctions = new ArrayCollection();
         $this->contracts = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId()
@@ -383,37 +374,6 @@ class Employee
     }
 
     /**
-     * @return Collection|Application[]
-     */
-    public function getApplications(): Collection
-    {
-        return $this->applications;
-    }
-
-    public function addApplication(Application $application): self
-    {
-        if (!$this->applications->contains($application)) {
-            $this->applications[] = $application;
-            $application->setEmployee($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApplication(Application $application): self
-    {
-        if ($this->applications->contains($application)) {
-            $this->applications->removeElement($application);
-            // set the owning side to null (unless already changed)
-            if ($application->setEmployee() === $this) {
-                $application->setEmployee(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|JobFunction[]
      */
     public function getJobFunctions(): Collection
@@ -469,6 +429,37 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($contract->setEmployee() === $this) {
                 $contract->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getEmployee() === $this) {
+                $application->setEmployee(null);
             }
         }
 

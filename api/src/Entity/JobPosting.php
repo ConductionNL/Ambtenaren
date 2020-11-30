@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"hiringOrganization": "exact", "employmentType": "ipartial"})
  */
 class JobPosting
 {
@@ -89,7 +89,7 @@ class JobPosting
      *
      * @Gedmo\Versioned
      * @Assert\Length(
-     *     max = 255
+     *     max = 7500
      * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
@@ -123,6 +123,55 @@ class JobPosting
      * @ORM\Column(type="string", length=255)
      */
     private $employmentType;
+
+    /**
+     * @var array The education requirements of this JobPosting
+     *
+     * @example MBO-4 opleiding
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $educationRequirements = [];
+
+    /**
+     * @var string The summary requirements of this JobPosting
+     *
+     * @example A small summary with information about this jobposting
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $summary;
+
+    /**
+     * @var int Salary of the jobposting.
+     *
+     * @example 1900
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $baseSalary;
+
+    /**
+     * @var string The salary currency(coded using ISO 4217 ) of this jobPosting
+     *
+     * @example EUR
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read","write"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $salaryCurrency;
 
     /**
      * @var string A description of the job location (e.g TELECOMMUTE for telecommute jobs).
@@ -161,7 +210,7 @@ class JobPosting
     private $jobStartDate;
 
     /**
-     * @var \DateTime The end date of the contract
+     * @var \DateTime The end date of the application procces
      *
      * @example 01-01-2020
      *
@@ -200,14 +249,14 @@ class JobPosting
     private $dateModified;
 
     /**
-     * @var Employee the employee this JobPosting relates to
+     * @var Application the application this JobPosting relates to
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Employee", inversedBy="jobPosting")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $employee;
+    private $applications;
 
     public function getId(): Uuid
     {
@@ -265,6 +314,54 @@ class JobPosting
     public function setEmploymentType(string $employmentType): self
     {
         $this->employmentType = $employmentType;
+
+        return $this;
+    }
+
+    public function getEducationRequirements(): ?array
+    {
+        return $this->educationRequirements;
+    }
+
+    public function setEducationRequirements(?array $educationRequirements): self
+    {
+        $this->educationRequirements = $educationRequirements;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getBaseSalary(): ?int
+    {
+        return $this->baseSalary;
+    }
+
+    public function setBaseSalary(int $baseSalary): self
+    {
+        $this->baseSalary = $baseSalary;
+
+        return $this;
+    }
+
+    public function getSalaryCurrency(): ?string
+    {
+        return $this->salaryCurrency;
+    }
+
+    public function setSalaryCurrency(?string $salaryCurrency): self
+    {
+        $this->salaryCurrency = $salaryCurrency;
 
         return $this;
     }
@@ -353,14 +450,14 @@ class JobPosting
         return $this;
     }
 
-    public function getEmployee(): ?Employee
+    public function getApplication(): ?Application
     {
-        return $this->employee;
+        return $this->application;
     }
 
-    public function setEmployee(Employee $employee): self
+    public function setApplication(Application $application): self
     {
-        $this->employee = $employee;
+        $this->application = $application;
 
         return $this;
     }
