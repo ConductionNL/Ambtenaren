@@ -3,7 +3,7 @@ entries:
   mrc:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-11-23T14:40:29.1493731Z"
+    created: "2020-12-08T15:44:16.2261206Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
     digest: 633a390cdbe5885d146837f79a7f90253717cd66d20b4fcf94248d01dcc71549
@@ -13,4 +13,4 @@ entries:
     urls:
     - mrc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-23T14:40:29.1367364Z"
+generated: "2020-12-08T15:44:15.9784063Z"

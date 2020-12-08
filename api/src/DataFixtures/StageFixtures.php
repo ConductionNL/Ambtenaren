@@ -2,8 +2,10 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Competence;
 use App\Entity\Employee;
 use App\Entity\JobPosting;
+use App\Entity\Skill;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -64,6 +66,41 @@ class StageFixtures extends Fixture
         $manager->persist($jobPosting);
         $manager->flush();
         $jobPosting = $manager->getRepository('App:JobPosting')->findOneBy(['id'=> $id]);
+
+        $manager->flush();
+
+        //skills
+        $skill = new Skill();
+        $skill->setName('php');
+        $skill->setDescription('basis php kennis');
+        $skill->setLevel('beginner');
+        $manager->persist($skill);
+
+        $manager->flush();
+
+        $skill = new Skill();
+        $skill->setName('javascript');
+        $skill->setDescription('basis javascript kennis');
+        $skill->setLevel('beginner');
+        $manager->persist($skill);
+
+        $manager->flush();
+
+        //competences
+        $competence = new Competence();
+        $competence->setName('teamwork');
+        $competence->setDescription('hoe goed werk jij in teamverband');
+        $competence->setGrade('goed');
+        $manager->persist($competence);
+
+        $manager->flush();
+
+        //competences
+        $competence = new Competence();
+        $competence->setName('plannen');
+        $competence->setDescription('hoe goed ben jij in plannen');
+        $competence->setGrade('gemiddeld');
+        $manager->persist($competence);
 
         $manager->flush();
     }
