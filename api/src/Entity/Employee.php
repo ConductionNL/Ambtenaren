@@ -148,16 +148,6 @@ class Employee
     private $skills;
 
     /**
-     * @var array The URLs of the Applications which this employee has put out
-     *
-     * @example https://url/Application/1, https://url/Application/2
-     *
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="simple_array", nullable=true)
-     */
-    private ?array $applications = [];
-
-    /**
      * @Groups({"read","write"})
      * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee")
      * @MaxDepth(1)
@@ -171,6 +161,13 @@ class Employee
      */
     private $contracts;
 
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true)
+     */
+    private $applications;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -179,6 +176,7 @@ class Employee
         $this->skills = new ArrayCollection();
         $this->jobFunctions = new ArrayCollection();
         $this->contracts = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId()
@@ -230,18 +228,6 @@ class Employee
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
-
-        return $this;
-    }
-
-    public function getApplications(): ?array
-    {
-        return $this->applications;
-    }
-
-    public function setApplications(array $applications): self
-    {
-        $this->applications = $applications;
 
         return $this;
     }
@@ -443,6 +429,37 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($contract->setEmployee() === $this) {
                 $contract->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getEmployee() === $this) {
+                $application->setEmployee(null);
             }
         }
 

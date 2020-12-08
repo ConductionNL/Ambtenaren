@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"employee":"ipartial", "jobPosting.id":"exact"})
+ * @ApiFilter(SearchFilter::class, properties={"employee.id":"exact", "jobPosting.id":"exact"})
  */
 class Application
 {
@@ -92,24 +92,20 @@ class Application
     private $dateModified;
 
     /**
-     * @var string The URL of the Employee to which this application belongs to
-     *
-     * @example https://url/employee/1
-     *
-     * @Gedmo\Versioned
-     * @Assert\NotNull
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private $employee;
-
-    /**
      * @var JobPosting the JobPosting associated to this application
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity="App\Entity\JobPosting", inversedBy="applications", cascade={"persist", "remove"})
      */
     private $jobPosting;
+
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="applications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employee;
 
     public function getId()
     {
@@ -176,12 +172,12 @@ class Application
         return $this;
     }
 
-    public function getEmployee(): ?string
+    public function getEmployee(): ?Employee
     {
         return $this->employee;
     }
 
-    public function setEmployee(string $employee): self
+    public function setEmployee(?Employee $employee): self
     {
         $this->employee = $employee;
 
