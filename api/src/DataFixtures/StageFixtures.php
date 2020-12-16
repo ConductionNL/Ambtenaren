@@ -114,7 +114,6 @@ class StageFixtures extends Fixture
         $jobPosting->setJobLocationType('Amsterdam');
         $jobPosting->setEducationRequirements('Waar zijn wij naar op zoek: ', 'Geen 9-5 mentaliteit', 'Duidelijk begrip van wat programmeren inhoudt', 'Ervaring met...', 'Zelfstandig', 'Teamspeler', 'Communicatief vaardig', 'Wat ga je doen: ', 'Programmeren', 'DevOps', 'Serverbeheer', 'Infrastructuur', 'Wat bieden wij: ', 'Gezelligheid', 'Uitdaging', 'Een sterke basis voor je toekomst', 'De nieuwste technieken');
         $jobPosting->setSalaryCurrency('In overleg');
-        $jobPosting->setEducationRequirements('MBO', 'HBO');
         $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => 'c571bdad-f34c-4e24-94e7-74629cfaccc9']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
