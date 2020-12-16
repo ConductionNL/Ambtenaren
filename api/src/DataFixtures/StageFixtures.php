@@ -53,7 +53,7 @@ class StageFixtures extends Fixture
         $jobPosting->setDescription('Dit is de beschrijving van deze test vacature');
         $jobPosting->setTitle('Test Vacature');
         $jobPosting->setEmploymentType('full-time');
-        $jobPosting->setJobLocationType('TELECOMMUTE');
+        $jobPosting->setJobLocationType('telecommute');
         $jobPosting->setHiringOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => 'c571bdad-f34c-4e24-94e7-74629cfaccc9']));
         $manager->persist($jobPosting);
         $date = new \DateTime();
