@@ -110,7 +110,7 @@ class StageFixtures extends Fixture
         $jobPosting->setName('Full stack developer');
         $jobPosting->setDescription('Lijkt jou het leuk om mee te werken aan super vette projecten waarbij wij de laatste technieken gebruiken? Ben je op zoek naar uitdaging in je werk en wil je je skills een enorme boost geven door het werken met top notch developers? Als jij die gedreven, leergierige en ook een beetje chaos-bestendig bent, dan ben je bij ons aan het juiste adres!  Solliciteer en hopelijk kunnen we je snel verwelkomen in ons team!');
         $jobPosting->setTitle('Full stack developer');
-        $jobPosting->setEmploymentType('stage');
+        $jobPosting->setEmploymentType('internship');
         $jobPosting->setJobLocationType('Amsterdam');
         $jobPosting->setEducationRequirements(['Waar zijn wij naar op zoek: ', 'Geen 9-5 mentaliteit', 'Duidelijk begrip van wat programmeren inhoudt', 'Ervaring met...', 'Zelfstandig', 'Teamspeler', 'Communicatief vaardig', 'Wat ga je doen: ', 'Programmeren', 'DevOps', 'Serverbeheer', 'Infrastructuur', 'Wat bieden wij: ', 'Gezelligheid', 'Uitdaging', 'Een sterke basis voor je toekomst', 'De nieuwste technieken']);
         $jobPosting->setbaseSalary(0);
@@ -128,5 +128,6 @@ class StageFixtures extends Fixture
         $jobPosting = $manager->getRepository('App:JobPosting')->findOneBy(['id'=> $id]);
 
         $manager->flush();
+
     }
 }
