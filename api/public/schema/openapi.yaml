@@ -11180,7 +11180,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this Competence belongs to'
-          $ref: '#/components/schemas/Employee-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-read'
       required:
         - name
         - description
@@ -11204,7 +11207,10 @@ components:
           type: string
         employee:
           description: 'The Employee to which this Competence belongs to'
-          $ref: '#/components/schemas/Employee-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-write'
     'Competence:jsonld-read':
       type: object
       description: ''
@@ -11246,7 +11252,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this Competence belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-read'
       required:
         - name
         - description
@@ -11279,7 +11288,10 @@ components:
           type: string
         employee:
           description: 'The Employee to which this Competence belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-write'
     Contract-read:
       type: object
       description: ''
@@ -12494,7 +12506,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
-          $ref: '#/components/schemas/Employee-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-read'
       required:
         - name
         - description
@@ -12524,7 +12539,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
-          $ref: '#/components/schemas/Employee-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee-write'
     'Skill:jsonld-read':
       type: object
       description: ''
@@ -12572,7 +12590,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-read'
       required:
         - name
         - description
@@ -12611,7 +12632,10 @@ components:
           nullable: true
         employee:
           description: 'The Employee to which this skill belongs to'
-          $ref: '#/components/schemas/Employee:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Employee:jsonld-write'
 definitions:
   Application-read:
     properties:
@@ -13408,12 +13432,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-23 14:42:10'
+        example: '2020-12-17 08:11:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-23 14:42:10'
+        example: '2020-12-17 08:11:34'
     required: []
   AuditTrail-write:
     properties:
@@ -13461,12 +13485,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-23 14:42:10'
+        example: '2020-12-17 08:11:34'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-23 14:42:10'
+        example: '2020-12-17 08:11:34'
     required: []
   ChangeLog-write:
     properties:
