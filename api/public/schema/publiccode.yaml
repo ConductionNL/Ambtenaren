@@ -119,4 +119,4 @@ dependsOn:
 
 installations:
     - type: helm
-      url: "https://github.com/ConductionNL/medewerkercatalogus/raw/master/api/helm/mrc-0.1.0.tgz"
+      url: "https://raw.githubusercontent.com/ConductionNL/medewerkercatalogus/master/api/helm/"
