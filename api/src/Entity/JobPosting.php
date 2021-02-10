@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"hiringOrganization": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"hiringOrganization": "exact", "employmentType": "ipartial"})
  */
 class JobPosting
 {
@@ -210,7 +210,7 @@ class JobPosting
     private $jobStartDate;
 
     /**
-     * @var \DateTime The end date of the contract
+     * @var \DateTime The end date of the application procces
      *
      * @example 01-01-2020
      *
@@ -253,10 +253,10 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity="App\Entity\Application", inversedBy="jobPosting")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $application;
+    private $applications;
 
     public function getId(): Uuid
     {
