@@ -128,6 +128,5 @@ class StageFixtures extends Fixture
         $jobPosting = $manager->getRepository('App:JobPosting')->findOneBy(['id'=> $id]);
 
         $manager->flush();
-
     }
 }
