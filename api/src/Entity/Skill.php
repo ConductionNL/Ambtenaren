@@ -126,7 +126,7 @@ class Skill
      * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="skills")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $employee;
 
