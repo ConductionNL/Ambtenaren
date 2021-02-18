@@ -4,11 +4,11 @@
 
 settings:
   registryBase: docker.io/conduction
-  projectName: medewerkercatalogus/api/helm
-  name: medewerkercatalogus/api/helm
+  projectName: medewerkercatalogus
+  name: medewerkercatalogus
   version: V1.0
   description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
-  repro: https://github.com/ConductionNL/medewerkercatalogus/api/helm
+  repro: https://github.com/ConductionNL/medewerkercatalogus
   demo: mrc.zaakonline.nl
   domain: zuid-drecht.nl
   subdomain: medewerkercatalogus/api/helm
