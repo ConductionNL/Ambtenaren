@@ -3,10 +3,10 @@ entries:
   mrc:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-02-11T11:12:54.8341743Z"
+    created: "2021-02-18T03:07:36.8546651Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 8447022f617b83d62bc680ae09abb7555ce91cfd72270be70a0c876b10e249bb
+    digest: 4ca8f185247192f6e8157128314d5aa8406f237418c9e1dc059cf48d03a4cdd6
     home: mrc.zaakonline.nl
     icon: mrc.zaakonline.nl
     name: mrc
@@ -18,7 +18,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-02-11T11:12:54.8471945Z"
+    created: "2021-02-18T03:07:36.8944231Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -47,4 +47,4 @@ entries:
     urls:
     - charts/postgresql-10.1.1.tgz
     version: 10.1.1
-generated: "2021-02-11T11:12:54.8208574Z"
+generated: "2021-02-18T03:07:36.8251427Z"
