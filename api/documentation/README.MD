@@ -1,4 +1,4 @@
-# medewerkercatalogus/api/helm
+# medewerkercatalogus
 
 Description
 ----
