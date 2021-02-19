@@ -11,13 +11,14 @@ settings:
   repro: https://github.com/ConductionNL/medewerkercatalogus
   demo: mrc.zaakonline.nl
   domain: zuid-drecht.nl
-  subdomain: medewerkercatalogus/api/helm
-  subpath: medewerkercatalogus/api/helm
+  subdomain: medewerkercatalogus
+  subpath: medewerkercatalogus
   subpathRouting: true
   env: dev
   web: false
   debug: 1
   cache: false
+  type: component
   replicaCount: 1
   corsAllowOrigin: ['*']
   trustedHosts: '^.+$'
