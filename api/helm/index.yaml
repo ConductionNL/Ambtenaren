@@ -1,24 +1,37 @@
 apiVersion: v1
 entries:
-  mrc:
+  medewerkercatalogus:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-02-18T03:07:36.8546651Z"
+    created: "2021-02-19T15:05:10.7231849Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 4ca8f185247192f6e8157128314d5aa8406f237418c9e1dc059cf48d03a4cdd6
-    home: mrc.zaakonline.nl
-    icon: mrc.zaakonline.nl
-    name: mrc
+    digest: c96ed1b4db22e3a7acf2ff936c5376de6d318baa83faa861bf5d613226a5584d
+    home: https://www.conduction.nl
+    icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
+    keywords:
+    - commonground
+    - haven
+    - nlx
+    - component
+    maintainers:
+    - email: ruben@conduction.nl
+      name: Ruben van der Linde
+    - email: info@conduction.nl
+      name: Conduction
+    name: medewerkercatalogus
+    sources:
+    - https://commonground.conduction.nl/
+    - https://www.commonground.nl/
     urls:
-    - mrc-0.1.0.tgz
+    - medewerkercatalogus-0.1.0.tgz
     version: 0.1.0
   postgresql:
   - annotations:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-02-18T03:07:36.8944231Z"
+    created: "2021-02-19T15:05:10.7481913Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -47,4 +60,4 @@ entries:
     urls:
     - charts/postgresql-10.1.1.tgz
     version: 10.1.1
-generated: "2021-02-18T03:07:36.8251427Z"
+generated: "2021-02-19T15:05:10.6988264Z"

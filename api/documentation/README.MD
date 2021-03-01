@@ -1,4 +1,4 @@
-# mrc
+# medewerkercatalogus
 
 Description
 ----
