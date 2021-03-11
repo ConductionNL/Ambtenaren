@@ -4789,6 +4789,1071 @@ paths:
             schema:
               $ref: '#/components/schemas/Contract-write'
         description: 'The updated Contract resource'
+  /education:
+    get:
+      tags:
+        - Education
+      operationId: getEducationCollection
+      summary: 'Retrieves the collection of Education resources.'
+      responses:
+        200:
+          description: 'Education collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Education:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Education:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Education-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[startDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[endDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[institution]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[degreeGrantedStatus]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[iscedEducationLevelCode]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'startDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: startDate
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startDate[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: endDate
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'endDate[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: institution
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'institution[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: degreeGrantedStatus
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'degreeGrantedStatus[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: iscedEducationLevelCode
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'iscedEducationLevelCode[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Education
+      operationId: postEducationCollection
+      summary: 'Creates a Education resource.'
+      responses:
+        201:
+          description: 'Education resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+          links:
+            GetEducationItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getEducationItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /education/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Education:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Education:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+        description: 'The new Education resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/education/{id}':
+    get:
+      tags:
+        - Education
+      operationId: getEducationItem
+      summary: 'Retrieves a Education resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Education resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - Education
+      operationId: putEducationItem
+      summary: 'Replaces the Education resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Education resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Education:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Education:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Education-write'
+        description: 'The updated Education resource'
+    delete:
+      tags:
+        - Education
+      operationId: deleteEducationItem
+      summary: 'Removes the Education resource.'
+      responses:
+        204:
+          description: 'Education resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/emails/{id}/audit_trail':
+    get:
+      tags:
+        - Education
+      operationId: get_audit_trailEducationItem
+      summary: 'Retrieves a Education resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Education resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/emails/{id}/change_log':
+    get:
+      tags:
+        - Education
+      operationId: get_change_logsEducationItem
+      summary: 'Retrieves a Education resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Education resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Education:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Education-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
   /employees:
     get:
       tags:
@@ -11551,6 +12616,142 @@ components:
         employee:
           description: 'The Employee to which this contract belongs to'
           $ref: '#/components/schemas/Employee:jsonld-write'
+    Education-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this Education.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        startDate:
+          description: 'The moment this education starts.'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The moment this education ends.'
+          type: string
+          format: date-time
+          nullable: true
+        institution:
+          description: 'The institution of this Education.'
+          type: string
+          nullable: true
+        degreeGrantedStatus:
+          description: 'The degree granted status of this education. **Granted**, **notGranted**'
+          type: string
+          nullable: true
+        iscedEducationLevelCode:
+          description: 'The Isced Education Level Code of this Education.'
+          type: string
+          nullable: true
+    Education-write:
+      type: object
+      description: ''
+      properties:
+        startDate:
+          description: 'The moment this education starts.'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The moment this education ends.'
+          type: string
+          format: date-time
+          nullable: true
+        institution:
+          description: 'The institution of this Education.'
+          type: string
+          nullable: true
+        degreeGrantedStatus:
+          description: 'The degree granted status of this education. **Granted**, **notGranted**'
+          type: string
+          nullable: true
+        iscedEducationLevelCode:
+          description: 'The Isced Education Level Code of this Education.'
+          type: string
+          nullable: true
+    'Education:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this Education.'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        startDate:
+          description: 'The moment this education starts.'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The moment this education ends.'
+          type: string
+          format: date-time
+          nullable: true
+        institution:
+          description: 'The institution of this Education.'
+          type: string
+          nullable: true
+        degreeGrantedStatus:
+          description: 'The degree granted status of this education. **Granted**, **notGranted**'
+          type: string
+          nullable: true
+        iscedEducationLevelCode:
+          description: 'The Isced Education Level Code of this Education.'
+          type: string
+          nullable: true
+    'Education:jsonld-write':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        startDate:
+          description: 'The moment this education starts.'
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          description: 'The moment this education ends.'
+          type: string
+          format: date-time
+          nullable: true
+        institution:
+          description: 'The institution of this Education.'
+          type: string
+          nullable: true
+        degreeGrantedStatus:
+          description: 'The degree granted status of this education. **Granted**, **notGranted**'
+          type: string
+          nullable: true
+        iscedEducationLevelCode:
+          description: 'The Isced Education Level Code of this Education.'
+          type: string
+          nullable: true
     Employee-read:
       type: object
       description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
@@ -12652,7 +13853,56 @@ components:
             -
               $ref: '#/components/schemas/Employee:jsonld-write'
 definitions:
-  Skill-read:
+  Application-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      status:
+        description: 'Status of the application'
+        type: string
+        example: 'application status'
+        maxLength: 255
+      motivation:
+        description: 'Motivation for the application'
+        type: string
+        example: 'motivation for the application'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
+      employee: []
+    required:
+      - status
+      - motivation
+  Application-write:
+    properties:
+      status:
+        description: 'Status of the application'
+        type: string
+        example: 'application status'
+        maxLength: 255
+      motivation:
+        description: 'Motivation for the application'
+        type: string
+        example: 'motivation for the application'
+        maxLength: 2550
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
+      employee: []
+    required:
+      - status
+      - motivation
+  Competence-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
@@ -12660,95 +13910,19 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'Name of the Skill'
+        description: 'name of the competence'
         type: string
-        example: 'Skill name'
+        example: 'competence name'
         maxLength: 255
       description:
-        description: 'Description of the skill'
+        description: 'Description of the competence'
         type: string
-        example: 'description of the skill'
+        example: 'competence description'
         maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+      grade:
+        description: 'Grade of the competence'
         type: string
-        example: advanced
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      esco:
-        description: 'The ESCO where this Skill is related too'
-        type: string
-        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
-        maxLength: 255
-        format: url
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
-  Skill-write:
-    properties:
-      name:
-        description: 'Name of the Skill'
-        type: string
-        example: 'Skill name'
-        maxLength: 255
-      description:
-        description: 'Description of the skill'
-        type: string
-        example: 'description of the skill'
-        maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
-        type: string
-        example: advanced
-        maxLength: 255
-      esco:
-        description: 'The ESCO where this Skill is related too'
-        type: string
-        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
-        maxLength: 255
-        format: url
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
-  Goal-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'name of the goal'
-        type: string
-        example: 'goal name'
-        maxLength: 255
-      description:
-        description: 'Description of the goal'
-        type: string
-        example: 'goal description'
-        maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
-        type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
+        example: 'Grade of the competence'
         maxLength: 255
       dateCreated:
         description: 'The moment this resource was created'
@@ -12757,100 +13931,36 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       employee:
-        description: 'The Employee to which this Goal belongs to'
+        description: 'The Employee to which this Competence belongs to'
         type: \Employee
     required:
       - name
       - description
-      - priority
-      - status
-  Goal-write:
+      - grade
+  Competence-write:
     properties:
       name:
-        description: 'name of the goal'
+        description: 'name of the competence'
         type: string
-        example: 'goal name'
+        example: 'competence name'
         maxLength: 255
       description:
-        description: 'Description of the goal'
+        description: 'Description of the competence'
         type: string
-        example: 'goal description'
+        example: 'competence description'
         maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+      grade:
+        description: 'Grade of the competence'
         type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
+        example: 'Grade of the competence'
         maxLength: 255
       employee:
-        description: 'The Employee to which this Goal belongs to'
+        description: 'The Employee to which this Competence belongs to'
         type: \Employee
     required:
       - name
       - description
-      - priority
-      - status
-  Employee-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      jobFunctions: []
-      contracts: []
-      applications: []
-    required:
-      - person
-  Employee-write:
-    properties:
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      jobFunctions: []
-      contracts: []
-      applications: []
-    required:
-      - person
+      - grade
   Contract-read:
     properties:
       id:
@@ -12980,7 +14090,111 @@ definitions:
       - jobFunction
       - duration
       - salary
-  Competence-read:
+  Education-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this Education.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      startDate:
+        description: 'The moment this education starts.'
+        type: \DateTime
+      endDate:
+        description: 'The moment this education ends.'
+        type: \DateTime
+      institution:
+        description: 'The institution of this Education.'
+        type: string
+        maxLength: 255
+      degreeGrantedStatus:
+        description: 'The degree granted status of this education. **Granted**, **notGranted**'
+        type: string
+        example: Granted
+      iscedEducationLevelCode:
+        description: 'The Isced Education Level Code of this Education.'
+        type: string
+        example: HBO
+    required: []
+  Education-write:
+    properties:
+      startDate:
+        description: 'The moment this education starts.'
+        type: \DateTime
+      endDate:
+        description: 'The moment this education ends.'
+        type: \DateTime
+      institution:
+        description: 'The institution of this Education.'
+        type: string
+        maxLength: 255
+      degreeGrantedStatus:
+        description: 'The degree granted status of this education. **Granted**, **notGranted**'
+        type: string
+        example: Granted
+      iscedEducationLevelCode:
+        description: 'The Isced Education Level Code of this Education.'
+        type: string
+        example: HBO
+    required: []
+  Employee-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      jobFunctions: []
+      contracts: []
+      applications: []
+    required:
+      - person
+  Employee-write:
+    properties:
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      jobFunctions: []
+      contracts: []
+      applications: []
+    required:
+      - person
+  Goal-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
@@ -12988,19 +14202,24 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'name of the competence'
+        description: 'name of the goal'
         type: string
-        example: 'competence name'
+        example: 'goal name'
         maxLength: 255
       description:
-        description: 'Description of the competence'
+        description: 'Description of the goal'
         type: string
-        example: 'competence description'
+        example: 'goal description'
         maxLength: 2550
-      grade:
-        description: 'Grade of the competence'
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
         type: string
-        example: 'Grade of the competence'
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
         maxLength: 255
       dateCreated:
         description: 'The moment this resource was created'
@@ -13009,36 +14228,90 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       employee:
-        description: 'The Employee to which this Competence belongs to'
+        description: 'The Employee to which this Goal belongs to'
         type: \Employee
     required:
       - name
       - description
-      - grade
-  Competence-write:
+      - priority
+      - status
+  Goal-write:
     properties:
       name:
-        description: 'name of the competence'
+        description: 'name of the goal'
         type: string
-        example: 'competence name'
+        example: 'goal name'
         maxLength: 255
       description:
-        description: 'Description of the competence'
+        description: 'Description of the goal'
         type: string
-        example: 'competence description'
+        example: 'goal description'
         maxLength: 2550
-      grade:
-        description: 'Grade of the competence'
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
         type: string
-        example: 'Grade of the competence'
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
         maxLength: 255
       employee:
-        description: 'The Employee to which this Competence belongs to'
+        description: 'The Employee to which this Goal belongs to'
         type: \Employee
     required:
       - name
       - description
-      - grade
+      - priority
+      - status
+  Interest-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this Interest belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  Interest-write:
+    properties:
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      employee:
+        description: 'The Employee to which this Interest belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
   JobFunction-read:
     properties:
       id:
@@ -13094,102 +14367,6 @@ definitions:
         format: url
       employee:
         description: 'The Employee to which this jobFunction belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-  Application-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      status:
-        description: 'Status of the application'
-        type: string
-        example: 'application status'
-        maxLength: 255
-      motivation:
-        description: 'Motivation for the application'
-        type: string
-        example: 'motivation for the application'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      jobPosting:
-        description: 'the JobPosting associated to this application'
-        type: \JobPosting
-      employee: []
-    required:
-      - status
-      - motivation
-  Application-write:
-    properties:
-      status:
-        description: 'Status of the application'
-        type: string
-        example: 'application status'
-        maxLength: 255
-      motivation:
-        description: 'Motivation for the application'
-        type: string
-        example: 'motivation for the application'
-        maxLength: 2550
-      jobPosting:
-        description: 'the JobPosting associated to this application'
-        type: \JobPosting
-      employee: []
-    required:
-      - status
-      - motivation
-  Interest-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this Interest belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-  Interest-write:
-    properties:
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      employee:
-        description: 'The Employee to which this Interest belongs to'
         type: \Employee
     required:
       - name
@@ -13343,59 +14520,77 @@ definitions:
       - title
       - employmentType
       - standardHours
-  ChangeLog-read:
+  Skill-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'Name of the Skill'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
+        example: 'Skill name'
+        maxLength: 255
+      description:
+        description: 'Description of the skill'
         type: string
-      objectId:
-        description: ''
+        example: 'description of the skill'
+        maxLength: 2550
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
         type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
+        example: advanced
         maxLength: 255
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2021-03-09 09:24:35'
+        description: 'The moment this resource was created'
+        type: \Datetime
       dateModified:
-        description: 'The moment this request last Modified'
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      esco:
+        description: 'The ESCO where this Skill is related too'
         type: string
-        format: date-time
-        example: '2021-03-09 09:24:35'
-    required: []
-  ChangeLog-write:
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
+  Skill-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'Name of the Skill'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
+        example: 'Skill name'
+        maxLength: 255
+      description:
+        description: 'Description of the skill'
+        type: string
+        example: 'description of the skill'
+        maxLength: 2550
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+        type: string
+        example: advanced
+        maxLength: 255
+      esco:
+        description: 'The ESCO where this Skill is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
   AuditTrail-read:
     properties:
       id:
@@ -13500,12 +14695,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-03-09 09:24:35'
+        example: '2021-03-11 10:32:53'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-03-09 09:24:35'
+        example: '2021-03-11 10:32:53'
     required: []
   AuditTrail-write:
     properties:
@@ -13515,14 +14710,77 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2021-03-11 10:32:53'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2021-03-11 10:32:53'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
 tags:
   -
-    name: Skill
+    name: Application
     description: |+
 
 
   -
-    name: Goal
+    name: Competence
+    description: |+
+
+
+  -
+    name: Contract
+    description: |+
+
+
+  -
+    name: Education
     description: |+
 
 
@@ -13533,22 +14791,7 @@ tags:
 
       This can be an employee, but also, for example, a student or intern.
   -
-    name: Contract
-    description: |+
-
-
-  -
-    name: Competence
-    description: |+
-
-
-  -
-    name: JobFunction
-    description: |+
-
-
-  -
-    name: Application
+    name: Goal
     description: |+
 
 
@@ -13558,18 +14801,28 @@ tags:
 
 
   -
+    name: JobFunction
+    description: |+
+
+
+  -
     name: JobPosting
     description: |+
 
 
   -
-    name: ChangeLog
+    name: Skill
+    description: |+
+
+
+  -
+    name: AuditTrail
     description: |-
       An resource representing a log line.
 
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |-
       An resource representing a log line.
 
@@ -13580,15 +14833,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
