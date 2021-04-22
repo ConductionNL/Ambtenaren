@@ -75,8 +75,8 @@ class Education
     /**
      * @var string The name of the education
      *
-     * @Groups({"read", "write")
-     * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $name;
 
@@ -149,7 +149,7 @@ class Education
     {
         return $this->name;
     }
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
