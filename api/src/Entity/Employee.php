@@ -172,7 +172,7 @@ class Employee
     private $applications;
 
     /**
-     * @var boolean Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)
+     * @var bool Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)
      *
      * @Groups({"read","write"})
      * @ORM\Column(type="boolean")
