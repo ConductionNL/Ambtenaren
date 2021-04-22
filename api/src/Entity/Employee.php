@@ -171,6 +171,22 @@ class Employee
      */
     private $applications;
 
+    /**
+     * @var bool Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="boolean")
+     */
+    private bool $hasPoliceCertificate = false;
+
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     *
+     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true)
+     */
+    private Collection $educations;
+
     public function __construct()
     {
         $this->goals = new ArrayCollection();
@@ -180,6 +196,7 @@ class Employee
         $this->jobFunctions = new ArrayCollection();
         $this->contracts = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->educations = new ArrayCollection();
     }
 
     public function getId()
@@ -463,6 +480,48 @@ class Employee
             // set the owning side to null (unless already changed)
             if ($application->getEmployee() === $this) {
                 $application->setEmployee(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getHasPoliceCertificate(): ?bool
+    {
+        return $this->hasPoliceCertificate;
+    }
+
+    public function setHasPoliceCertificate(bool $hasPoliceCertificate): self
+    {
+        $this->hasPoliceCertificate = $hasPoliceCertificate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Education[]
+     */
+    public function getEducations(): Collection
+    {
+        return $this->educations;
+    }
+
+    public function addEducation(Education $education): self
+    {
+        if (!$this->educations->contains($education)) {
+            $this->educations[] = $education;
+            $education->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEducation(Education $education): self
+    {
+        if ($this->educations->removeElement($education)) {
+            // set the owning side to null (unless already changed)
+            if ($education->getEmployee() === $this) {
+                $education->setEmployee(null);
             }
         }
 
