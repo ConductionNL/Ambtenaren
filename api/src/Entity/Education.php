@@ -140,7 +140,7 @@ class Education
      */
     private $employee;
 
-    public function getId(): ?int
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }
