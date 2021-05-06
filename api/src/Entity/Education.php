@@ -79,6 +79,14 @@ class Education
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $name;
+    
+    /**
+     * @var string The description of the education
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private string $description;
 
     /**
      * @var DateTime The moment this education starts.
@@ -153,6 +161,18 @@ class Education
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
