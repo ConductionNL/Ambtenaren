@@ -14,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -72,6 +73,22 @@ class Education
     private $id;
 
     /**
+     * @var string The name of the education
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private string $name;
+    
+    /**
+     * @var string The description of the education
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private string $description;
+
+    /**
      * @var DateTime The moment this education starts.
      *
      * @Groups({"read", "write"})
@@ -123,9 +140,41 @@ class Education
      */
     private $iscedEducationLevelCode;
 
-    public function getId(): ?int
+    /**
+     * @Groups({"read", "write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="educations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employee;
+
+    public function getId(): ?UuidInterface
     {
         return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     public function getStartDate(): ?\DateTimeInterface
@@ -184,6 +233,18 @@ class Education
     public function setIscedEducationLevelCode(?string $iscedEducationLevelCode): self
     {
         $this->iscedEducationLevelCode = $iscedEducationLevelCode;
+
+        return $this;
+    }
+
+    public function getEmployee(): ?Employee
+    {
+        return $this->employee;
+    }
+
+    public function setEmployee(?Employee $employee): self
+    {
+        $this->employee = $employee;
 
         return $this;
     }
