@@ -76,20 +76,20 @@ class Education
      * @var string The name of the education
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private string $name;
-    
+
     /**
-     * @var string The description of the education
+     * @var string|null The description of the education
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $description;
+    private ?string $description;
 
     /**
-     * @var DateTime The moment this education starts.
+     * @var DateTime|null The moment this education starts.
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime", nullable=true)
@@ -97,7 +97,7 @@ class Education
     private ?DateTime $startDate;
 
     /**
-     * @var DateTime The moment this education ends.
+     * @var DateTime|null The moment this education ends.
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime", nullable=true)
@@ -158,14 +158,14 @@ class Education
         return $this->name;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
