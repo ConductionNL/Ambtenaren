@@ -1,8 +1,14 @@
 # mrc
+[![StyleCI](https://github.styleci.io/repos/206144408/shield?branch=master)](https://github.styleci.io/repos/206144408?branch=master)
+[![Docker Image CI](https://github.com/ConductionNL/medewerkercatalogus/workflows/Docker%20Image%20CI/badge.svg?branch=master)](https://github.com/ConductionNL/medewerkercatalogus/actions?query=workflow%3A"Docker+Image+CI")
+[![Artifacthub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/medewerkercatalogus)](https://artifacthub.io/packages/helm/medewerkercatalogus/medewerkercatalogus)
+[![BCH compliance](https://bettercodehub.com/edge/badge/ConductionNL/medewerkercatalogus?branch=master)](https://bettercodehub.com/)
 
 Description
 ----
-Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.
+Het Medewerker Registratie Component bevat medewerkers en de daarbij behorende HRM systematiek, hierbij kan bijvoorbeeld worden gedacht aan contractmanagement en functie of competentie overzichten. Deze functionaliteit wordt eigenlijk onttrokken aan de e-HRM norm (ofwel de HR-XML standaard, in Nederland losjes geïmplementeerd als SETU). Waarbij het stuk portfolio opbouw is losgetrokken en in het Portfolio Component zit (om de e-portfolio norm te ondersteunen).
+
+Naast het simpelweg bijhouden van medewerkers is dit component echter ook bedoeld als HR tool met betrekking tot groei ambities in de trant van competenties en vaardigheden. Gecombineerd met het Portfolio Component kan het daarmee ook de basis vormen voor coachings- en of onderwijssystemen, waarbij bepaalde leer of groei doelen worden bijgehouden.
 
 Additional Information
 ----
