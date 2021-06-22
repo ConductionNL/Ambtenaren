@@ -1,12 +1,66 @@
 apiVersion: v1
 entries:
   medewerkercatalogus:
+  - annotations:
+      artifacthub.io/containsSecurityUpdates: "true"
+    apiVersion: v2
+    appVersion: V1.0
+    created: "2021-06-22T14:34:21.3611794Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.1.1
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.7.7
+    description: Het Medewerker Registratie Component bevat medewerkers en de daarbij
+      behorende HRM systematiek, hierbij kan bijvoorbeeld worden gedacht aan contractmanagement
+      en functie of competentie overzichten. Deze functionaliteit wordt eigenlijk
+      onttrokken aan de e-HRM norm (ofwel de HR-XML standaard, in Nederland losjes
+      geïmplementeerd als SETU). Waarbij het stuk portfolio opbouw is losgetrokken
+      en in het Portfolio Component zit (om de e-portfolio norm te ondersteunen).
+      Naast het simpelweg bijhouden van medewerkers is dit component echter ook bedoeld
+      als HR tool met betrekking tot groei ambities in de trant van competenties en
+      vaardigheden. Gecombineerd met het Portfolio Component kan het daarmee ook de
+      basis vormen voor coachings- en of onderwijssystemen, waarbij bepaalde leer
+      of groei doelen worden bijgehouden.
+    digest: d0e9e60fe7b125e673b000b3d4eeab58524879324dc7f756e6226a678236abbf
+    home: https://www.conduction.nl
+    icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
+    keywords:
+    - commonground
+    - haven
+    - nlx
+    - component
+    maintainers:
+    - email: ruben@conduction.nl
+      name: Ruben van der Linde
+    - email: info@conduction.nl
+      name: Conduction
+    name: medewerkercatalogus
+    sources:
+    - https://commonground.conduction.nl/
+    - https://www.commonground.nl/
+    urls:
+    - medewerkercatalogus-1.0.0.tgz
+    version: 1.0.0
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-04-21T13:05:19.4069321Z"
-    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
-      beschikbaar.
-    digest: 1a2676ba7f8b5ca8d8d99d29b606e0bdb5a18180a1fa1d03a05bc49a9ed24921
+    created: "2021-06-22T14:34:21.3505062Z"
+    description: Het Medewerker Registratie Component bevat medewerkers en de daarbij
+      behorende HRM systematiek, hierbij kan bijvoorbeeld worden gedacht aan contractmanagement
+      en functie of competentie overzichten. Deze functionaliteit wordt eigenlijk
+      onttrokken aan de e-HRM norm (ofwel de HR-XML standaard, in Nederland losjes
+      geïmplementeerd als SETU). Waarbij het stuk portfolio opbouw is losgetrokken
+      en in het Portfolio Component zit (om de e-portfolio norm te ondersteunen).
+      Naast het simpelweg bijhouden van medewerkers is dit component echter ook bedoeld
+      als HR tool met betrekking tot groei ambities in de trant van competenties en
+      vaardigheden. Gecombineerd met het Portfolio Component kan het daarmee ook de
+      basis vormen voor coachings- en of onderwijssystemen, waarbij bepaalde leer
+      of groei doelen worden bijgehouden.
+    digest: a95d5effc766973757fcd5c6f84e6f8c15e9ce56b9c4e31b2d8e34c981002c7a
     home: https://www.conduction.nl
     icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
     keywords:
@@ -31,7 +85,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-04-21T13:05:19.4290938Z"
+    created: "2021-06-22T14:34:21.3721155Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -60,4 +114,38 @@ entries:
     urls:
     - charts/postgresql-10.1.1.tgz
     version: 10.1.1
-generated: "2021-04-21T13:05:19.3929053Z"
+  redis:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 6.0.11
+    created: "2021-06-22T14:34:21.3770226Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Open source, advanced key-value store. It is often referred to as
+      a data structure server since keys can contain strings, hashes, lists, sets
+      and sorted sets.
+    digest: 2d70861d16fc410ed6d6c818b97f7b0d519031147e5c7b42c5691d4c38742c44
+    home: https://github.com/bitnami/charts/tree/master/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    - http://redis.io/
+    urls:
+    - charts/redis-12.7.7.tgz
+    version: 12.7.7
+generated: "2021-06-22T14:34:21.3380109Z"
