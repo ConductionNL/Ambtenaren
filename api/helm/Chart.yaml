@@ -1,8 +1,10 @@
-apiVersion: v1
+annotations:
+    artifacthub.io/containsSecurityUpdates: "true"
+apiVersion: v2
 appVersion: V1.0
-description: 'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'
+description: 'Het Medewerker Registratie Component bevat medewerkers en de daarbij behorende HRM systematiek, hierbij kan bijvoorbeeld worden gedacht aan contractmanagement en functie of competentie overzichten. Deze functionaliteit wordt eigenlijk onttrokken aan de e-HRM norm (ofwel de HR-XML standaard, in Nederland losjes geïmplementeerd als SETU). Waarbij het stuk portfolio opbouw is losgetrokken en in het Portfolio Component zit (om de e-portfolio norm te ondersteunen). Naast het simpelweg bijhouden van medewerkers is dit component echter ook bedoeld als HR tool met betrekking tot groei ambities in de trant van competenties en vaardigheden. Gecombineerd met het Portfolio Component kan het daarmee ook de basis vormen voor coachings- en of onderwijssystemen, waarbij bepaalde leer of groei doelen worden bijgehouden.'
 name: medewerkercatalogus
-version: 0.1.0
+version: 1.0.0
 home: https://www.conduction.nl
 icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
 sources:
@@ -23,3 +25,7 @@ dependencies:
       repository: https://charts.bitnami.com/bitnami
       version: 10.1.1
       condition: postgresql.enabled
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.7.7
+      condition: redis.enabled
