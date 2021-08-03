@@ -12,7 +12,7 @@ info:
     - Docker Image: [online]() 
     - Datamodel: [postman](/schema/medewerkercatalogus.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
 
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
+    Het Medewerker Registratie Component bevat medewerkers en de daarbij behorende HRM systematiek, hierbij kan bijvoorbeeld worden gedacht aan contractmanagement en functie of competentie overzichten. Deze functionaliteit wordt eigenlijk onttrokken aan de e-HRM norm (ofwel de HR-XML standaard, in Nederland losjes geïmplementeerd als SETU). Waarbij het stuk portfolio opbouw is losgetrokken en in het Portfolio Component zit (om de e-portfolio norm te ondersteunen). Naast het simpelweg bijhouden van medewerkers is dit component echter ook bedoeld als HR tool met betrekking tot groei ambities in de trant van competenties en vaardigheden. Gecombineerd met het Portfolio Component kan het daarmee ook de basis vormen voor coachings- en of onderwijssystemen, waarbij bepaalde leer of groei doelen worden bijgehouden.         
 paths:
   /applications:
     get:
@@ -4885,6 +4885,24 @@ paths:
               - asc
               - desc
         -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[startDate]'
           in: query
           required: false
@@ -4985,6 +5003,38 @@ paths:
             type: string
         -
           name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
           in: query
           required: false
           schema:
@@ -5941,6 +5991,12 @@ paths:
                   $ref: '#/components/schemas/Employee-read'
       parameters:
         -
+          name: hasPoliceCertificate
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'order[id]'
           in: query
           required: false
@@ -5986,6 +6042,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[hasPoliceCertificate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -6005,30 +6070,6 @@ paths:
             type: string
         -
           name: 'dateCreated[strictly_after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[strictly_before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[strictly_after]'
           in: query
           required: false
           schema:
@@ -12627,6 +12668,13 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
+        name:
+          description: 'The name of the education'
+          type: string
+        description:
+          description: 'The description of the education'
+          type: string
+          nullable: true
         startDate:
           description: 'The moment this education starts.'
           type: string
@@ -12649,10 +12697,19 @@ components:
           description: 'The Isced Education Level Code of this Education.'
           type: string
           nullable: true
+        employee:
+          $ref: '#/components/schemas/Employee-read'
     Education-write:
       type: object
       description: ''
       properties:
+        name:
+          description: 'The name of the education'
+          type: string
+        description:
+          description: 'The description of the education'
+          type: string
+          nullable: true
         startDate:
           description: 'The moment this education starts.'
           type: string
@@ -12675,6 +12732,8 @@ components:
           description: 'The Isced Education Level Code of this Education.'
           type: string
           nullable: true
+        employee:
+          $ref: '#/components/schemas/Employee-write'
     'Education:jsonld-read':
       type: object
       description: ''
@@ -12695,6 +12754,13 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
+        name:
+          description: 'The name of the education'
+          type: string
+        description:
+          description: 'The description of the education'
+          type: string
+          nullable: true
         startDate:
           description: 'The moment this education starts.'
           type: string
@@ -12717,6 +12783,8 @@ components:
           description: 'The Isced Education Level Code of this Education.'
           type: string
           nullable: true
+        employee:
+          $ref: '#/components/schemas/Employee:jsonld-read'
     'Education:jsonld-write':
       type: object
       description: ''
@@ -12730,6 +12798,13 @@ components:
         '@type':
           readOnly: true
           type: string
+        name:
+          description: 'The name of the education'
+          type: string
+        description:
+          description: 'The description of the education'
+          type: string
+          nullable: true
         startDate:
           description: 'The moment this education starts.'
           type: string
@@ -12752,6 +12827,8 @@ components:
           description: 'The Isced Education Level Code of this Education.'
           type: string
           nullable: true
+        employee:
+          $ref: '#/components/schemas/Employee:jsonld-write'
     Employee-read:
       type: object
       description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
@@ -12812,6 +12889,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Application-read'
+        hasPoliceCertificate:
+          description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+          type: boolean
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education-read'
       required:
         - person
     Employee-write:
@@ -12860,6 +12944,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Application-write'
+        hasPoliceCertificate:
+          description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+          type: boolean
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education-write'
     'Employee:jsonld-read':
       type: object
       description: 'All properties that the entity Employee holds. An Employee is a human with goals, skills and/or interests.'
@@ -12929,6 +13020,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Application:jsonld-read'
+        hasPoliceCertificate:
+          description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+          type: boolean
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education:jsonld-read'
       required:
         - person
     'Employee:jsonld-write':
@@ -12986,6 +13084,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Application:jsonld-write'
+        hasPoliceCertificate:
+          description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+          type: boolean
+        educations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Education:jsonld-write'
     Goal-read:
       type: object
       description: ''
@@ -13853,56 +13958,7 @@ components:
             -
               $ref: '#/components/schemas/Employee:jsonld-write'
 definitions:
-  Application-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      status:
-        description: 'Status of the application'
-        type: string
-        example: 'application status'
-        maxLength: 255
-      motivation:
-        description: 'Motivation for the application'
-        type: string
-        example: 'motivation for the application'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      jobPosting:
-        description: 'the JobPosting associated to this application'
-        type: \JobPosting
-      employee: []
-    required:
-      - status
-      - motivation
-  Application-write:
-    properties:
-      status:
-        description: 'Status of the application'
-        type: string
-        example: 'application status'
-        maxLength: 255
-      motivation:
-        description: 'Motivation for the application'
-        type: string
-        example: 'motivation for the application'
-        maxLength: 2550
-      jobPosting:
-        description: 'the JobPosting associated to this application'
-        type: \JobPosting
-      employee: []
-    required:
-      - status
-      - motivation
-  Competence-read:
+  Skill-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
@@ -13910,19 +13966,95 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'name of the competence'
+        description: 'Name of the Skill'
         type: string
-        example: 'competence name'
+        example: 'Skill name'
         maxLength: 255
       description:
-        description: 'Description of the competence'
+        description: 'Description of the skill'
         type: string
-        example: 'competence description'
+        example: 'description of the skill'
         maxLength: 2550
-      grade:
-        description: 'Grade of the competence'
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
         type: string
-        example: 'Grade of the competence'
+        example: advanced
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      esco:
+        description: 'The ESCO where this Skill is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
+  Skill-write:
+    properties:
+      name:
+        description: 'Name of the Skill'
+        type: string
+        example: 'Skill name'
+        maxLength: 255
+      description:
+        description: 'Description of the skill'
+        type: string
+        example: 'description of the skill'
+        maxLength: 2550
+      level:
+        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+        type: string
+        example: advanced
+        maxLength: 255
+      esco:
+        description: 'The ESCO where this Skill is related too'
+        type: string
+        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
+        maxLength: 255
+        format: url
+      employee:
+        description: 'The Employee to which this skill belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+      - level
+  Goal-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'name of the goal'
+        type: string
+        example: 'goal name'
+        maxLength: 255
+      description:
+        description: 'Description of the goal'
+        type: string
+        example: 'goal description'
+        maxLength: 2550
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+        type: string
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
         maxLength: 255
       dateCreated:
         description: 'The moment this resource was created'
@@ -13931,36 +14063,169 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       employee:
-        description: 'The Employee to which this Competence belongs to'
+        description: 'The Employee to which this Goal belongs to'
         type: \Employee
     required:
       - name
       - description
-      - grade
-  Competence-write:
+      - priority
+      - status
+  Goal-write:
     properties:
       name:
-        description: 'name of the competence'
+        description: 'name of the goal'
         type: string
-        example: 'competence name'
+        example: 'goal name'
         maxLength: 255
       description:
-        description: 'Description of the competence'
+        description: 'Description of the goal'
         type: string
-        example: 'competence description'
+        example: 'goal description'
         maxLength: 2550
-      grade:
-        description: 'Grade of the competence'
+      priority:
+        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
         type: string
-        example: 'Grade of the competence'
+        example: 'goal priority'
+        maxLength: 255
+      status:
+        description: 'Status of the goal'
+        type: string
+        example: 'goal status'
         maxLength: 255
       employee:
-        description: 'The Employee to which this Competence belongs to'
+        description: 'The Employee to which this Goal belongs to'
         type: \Employee
     required:
       - name
       - description
-      - grade
+      - priority
+      - status
+  Employee-read:
+    properties:
+      id:
+        description: ''
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      hasPoliceCertificate:
+        description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+        type: bool
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      jobFunctions: []
+      contracts: []
+      applications: []
+      educations: []
+    required:
+      - person
+  Employee-write:
+    properties:
+      person:
+        description: 'The person that is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      organization:
+        description: 'The organisation where this person is employed'
+        type: string
+        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
+        maxLength: 255
+        format: url
+      hasPoliceCertificate:
+        description: 'Whether or not the employee has submitted a police certificate (certificate of good conduct, certificate of conduct, etc)'
+        type: bool
+      goals: []
+      interests: []
+      competencies: []
+      skills: []
+      jobFunctions: []
+      contracts: []
+      applications: []
+      educations: []
+    required:
+      - person
+  Education-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this Education.'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of the education'
+        type: string
+      description:
+        description: 'The description of the education'
+        type: string|null
+      startDate:
+        description: 'The moment this education starts.'
+        type: \DateTime|null
+      endDate:
+        description: 'The moment this education ends.'
+        type: \DateTime|null
+      institution:
+        description: 'The institution of this Education.'
+        type: string
+        maxLength: 255
+      degreeGrantedStatus:
+        description: 'The degree granted status of this education. **Granted**, **notGranted**'
+        type: string
+        example: Granted
+      iscedEducationLevelCode:
+        description: 'The Isced Education Level Code of this Education.'
+        type: string
+        example: HBO
+      employee: []
+    required: []
+  Education-write:
+    properties:
+      name:
+        description: 'The name of the education'
+        type: string
+      description:
+        description: 'The description of the education'
+        type: string|null
+      startDate:
+        description: 'The moment this education starts.'
+        type: \DateTime|null
+      endDate:
+        description: 'The moment this education ends.'
+        type: \DateTime|null
+      institution:
+        description: 'The institution of this Education.'
+        type: string
+        maxLength: 255
+      degreeGrantedStatus:
+        description: 'The degree granted status of this education. **Granted**, **notGranted**'
+        type: string
+        example: Granted
+      iscedEducationLevelCode:
+        description: 'The Isced Education Level Code of this Education.'
+        type: string
+        example: HBO
+      employee: []
+    required: []
   Contract-read:
     properties:
       id:
@@ -14090,111 +14355,7 @@ definitions:
       - jobFunction
       - duration
       - salary
-  Education-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this Education.'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      startDate:
-        description: 'The moment this education starts.'
-        type: \DateTime
-      endDate:
-        description: 'The moment this education ends.'
-        type: \DateTime
-      institution:
-        description: 'The institution of this Education.'
-        type: string
-        maxLength: 255
-      degreeGrantedStatus:
-        description: 'The degree granted status of this education. **Granted**, **notGranted**'
-        type: string
-        example: Granted
-      iscedEducationLevelCode:
-        description: 'The Isced Education Level Code of this Education.'
-        type: string
-        example: HBO
-    required: []
-  Education-write:
-    properties:
-      startDate:
-        description: 'The moment this education starts.'
-        type: \DateTime
-      endDate:
-        description: 'The moment this education ends.'
-        type: \DateTime
-      institution:
-        description: 'The institution of this Education.'
-        type: string
-        maxLength: 255
-      degreeGrantedStatus:
-        description: 'The degree granted status of this education. **Granted**, **notGranted**'
-        type: string
-        example: Granted
-      iscedEducationLevelCode:
-        description: 'The Isced Education Level Code of this Education.'
-        type: string
-        example: HBO
-    required: []
-  Employee-read:
-    properties:
-      id:
-        description: ''
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      jobFunctions: []
-      contracts: []
-      applications: []
-    required:
-      - person
-  Employee-write:
-    properties:
-      person:
-        description: 'The person that is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      organization:
-        description: 'The organisation where this person is employed'
-        type: string
-        example: 'https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d'
-        maxLength: 255
-        format: url
-      goals: []
-      interests: []
-      competencies: []
-      skills: []
-      jobFunctions: []
-      contracts: []
-      applications: []
-    required:
-      - person
-  Goal-read:
+  Competence-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
@@ -14202,24 +14363,19 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'name of the goal'
+        description: 'name of the competence'
         type: string
-        example: 'goal name'
+        example: 'competence name'
         maxLength: 255
       description:
-        description: 'Description of the goal'
+        description: 'Description of the competence'
         type: string
-        example: 'goal description'
+        example: 'competence description'
         maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+      grade:
+        description: 'Grade of the competence'
         type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
+        example: 'Grade of the competence'
         maxLength: 255
       dateCreated:
         description: 'The moment this resource was created'
@@ -14228,90 +14384,36 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       employee:
-        description: 'The Employee to which this Goal belongs to'
+        description: 'The Employee to which this Competence belongs to'
         type: \Employee
     required:
       - name
       - description
-      - priority
-      - status
-  Goal-write:
+      - grade
+  Competence-write:
     properties:
       name:
-        description: 'name of the goal'
+        description: 'name of the competence'
         type: string
-        example: 'goal name'
+        example: 'competence name'
         maxLength: 255
       description:
-        description: 'Description of the goal'
+        description: 'Description of the competence'
         type: string
-        example: 'goal description'
+        example: 'competence description'
         maxLength: 2550
-      priority:
-        description: 'Priority of the goal **short-term**, **med-term**, **long-term**'
+      grade:
+        description: 'Grade of the competence'
         type: string
-        example: 'goal priority'
-        maxLength: 255
-      status:
-        description: 'Status of the goal'
-        type: string
-        example: 'goal status'
+        example: 'Grade of the competence'
         maxLength: 255
       employee:
-        description: 'The Employee to which this Goal belongs to'
+        description: 'The Employee to which this Competence belongs to'
         type: \Employee
     required:
       - name
       - description
-      - priority
-      - status
-  Interest-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      employee:
-        description: 'The Employee to which this Interest belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-  Interest-write:
-    properties:
-      name:
-        description: 'Name of the interest'
-        type: string
-        example: 'name of interest'
-        maxLength: 255
-      description:
-        description: 'Description of the interest'
-        type: string
-        example: 'description of the interest'
-        maxLength: 2550
-      employee:
-        description: 'The Employee to which this Interest belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
+      - grade
   JobFunction-read:
     properties:
       id:
@@ -14367,6 +14469,102 @@ definitions:
         format: url
       employee:
         description: 'The Employee to which this jobFunction belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  Application-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      status:
+        description: 'Status of the application'
+        type: string
+        example: 'application status'
+        maxLength: 255
+      motivation:
+        description: 'Motivation for the application'
+        type: string
+        example: 'motivation for the application'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
+      employee: []
+    required:
+      - status
+      - motivation
+  Application-write:
+    properties:
+      status:
+        description: 'Status of the application'
+        type: string
+        example: 'application status'
+        maxLength: 255
+      motivation:
+        description: 'Motivation for the application'
+        type: string
+        example: 'motivation for the application'
+        maxLength: 2550
+      jobPosting:
+        description: 'the JobPosting associated to this application'
+        type: \JobPosting
+      employee: []
+    required:
+      - status
+      - motivation
+  Interest-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      employee:
+        description: 'The Employee to which this Interest belongs to'
+        type: \Employee
+    required:
+      - name
+      - description
+  Interest-write:
+    properties:
+      name:
+        description: 'Name of the interest'
+        type: string
+        example: 'name of interest'
+        maxLength: 255
+      description:
+        description: 'Description of the interest'
+        type: string
+        example: 'description of the interest'
+        maxLength: 2550
+      employee:
+        description: 'The Employee to which this Interest belongs to'
         type: \Employee
     required:
       - name
@@ -14520,77 +14718,59 @@ definitions:
       - title
       - employmentType
       - standardHours
-  Skill-read:
+  ChangeLog-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      name:
-        description: 'Name of the Skill'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'Skill name'
-        maxLength: 255
-      description:
-        description: 'Description of the skill'
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
         type: string
-        example: 'description of the skill'
-        maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
+      objectId:
+        description: ''
         type: string
-        example: advanced
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
         maxLength: 255
       dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2021-06-23 09:10:38'
       dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      esco:
-        description: 'The ESCO where this Skill is related too'
+        description: 'The moment this request last Modified'
         type: string
-        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
-        maxLength: 255
-        format: url
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
-  Skill-write:
+        format: date-time
+        example: '2021-06-23 09:10:38'
+    required: []
+  ChangeLog-write:
     properties:
-      name:
-        description: 'Name of the Skill'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'Skill name'
-        maxLength: 255
-      description:
-        description: 'Description of the skill'
-        type: string
-        example: 'description of the skill'
-        maxLength: 2550
-      level:
-        description: 'Level of the skill **beginner**, **intermediate**, **advanced**'
-        type: string
-        example: advanced
-        maxLength: 255
-      esco:
-        description: 'The ESCO where this Skill is related too'
-        type: string
-        example: 'http://data.europa.eu/esco/skill/bcbf5957-afc6-4f35-930f-15e7e0bda744'
-        maxLength: 255
-        format: url
-      employee:
-        description: 'The Employee to which this skill belongs to'
-        type: \Employee
-    required:
-      - name
-      - description
-      - level
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -14695,12 +14875,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-04-21 13:09:00'
+        example: '2021-06-23 09:10:38'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-04-21 13:09:00'
+        example: '2021-06-23 09:10:38'
     required: []
   AuditTrail-write:
     properties:
@@ -14710,77 +14890,14 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2021-04-21 13:09:00'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2021-04-21 13:09:00'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
 tags:
   -
-    name: Application
+    name: Skill
     description: |+
 
 
   -
-    name: Competence
-    description: |+
-
-
-  -
-    name: Contract
-    description: |+
-
-
-  -
-    name: Education
+    name: Goal
     description: |+
 
 
@@ -14791,12 +14908,17 @@ tags:
 
       This can be an employee, but also, for example, a student or intern.
   -
-    name: Goal
+    name: Education
     description: |+
 
 
   -
-    name: Interest
+    name: Contract
+    description: |+
+
+
+  -
+    name: Competence
     description: |+
 
 
@@ -14806,23 +14928,28 @@ tags:
 
 
   -
+    name: Application
+    description: |+
+
+
+  -
+    name: Interest
+    description: |+
+
+
+  -
     name: JobPosting
     description: |+
 
 
   -
-    name: Skill
-    description: |+
-
-
-  -
-    name: AuditTrail
+    name: ChangeLog
     description: |-
       An resource representing a log line.
 
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |-
       An resource representing a log line.
 
@@ -14833,15 +14960,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
