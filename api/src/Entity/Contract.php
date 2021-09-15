@@ -187,7 +187,7 @@ class Contract
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="contracts", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="contracts", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

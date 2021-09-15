@@ -253,7 +253,7 @@ class JobPosting
      *
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $applications;

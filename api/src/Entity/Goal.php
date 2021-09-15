@@ -123,7 +123,7 @@ class Goal
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="goals", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="goals", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

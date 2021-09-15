@@ -125,7 +125,7 @@ class Skill
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="skills", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="skills", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $employee;

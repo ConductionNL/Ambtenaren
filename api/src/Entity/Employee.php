@@ -186,7 +186,7 @@ class Employee
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      *
-     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true)
      */
     private Collection $educations;
 
