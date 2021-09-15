@@ -111,7 +111,7 @@ class JobFunction
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobFunctions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobFunctions", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

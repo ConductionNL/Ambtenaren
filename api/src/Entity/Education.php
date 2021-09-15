@@ -143,7 +143,7 @@ class Education
     /**
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="educations")
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="educations", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

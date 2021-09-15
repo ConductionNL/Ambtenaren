@@ -127,42 +127,42 @@ class Employee
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $goals;
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $interests;
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $competencies;
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $skills;
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $jobFunctions;
 
     /**
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $contracts;
@@ -170,7 +170,7 @@ class Employee
     /**
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $applications;
 
@@ -186,7 +186,7 @@ class Employee
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      *
-     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private Collection $educations;
 

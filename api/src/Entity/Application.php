@@ -102,7 +102,7 @@ class Application
     /**
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="applications")
+     * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="applications", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

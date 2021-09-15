@@ -96,7 +96,7 @@ class Interest
      *
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="interests")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="interests", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
