@@ -92,6 +92,7 @@ class Application
     private $dateModified;
 
     /**
+     * @Assert\Valid()
      * @var JobPosting the JobPosting associated to this application
      * @Groups({"read", "write"})
      * @MaxDepth(1)
@@ -100,6 +101,7 @@ class Application
     private $jobPosting;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="applications", cascade={"persist"})

@@ -77,6 +77,10 @@ class Education
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Assert\NotNull
      */
     private string $name;
 
@@ -84,7 +88,10 @@ class Education
      * @var string|null The description of the education
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=2550, nullable=true)
+     * @Assert\Length(
+     *     max = 2550
+     * )
      */
     private ?string $description;
 
@@ -105,7 +112,7 @@ class Education
     private ?DateTime $endDate;
 
     /**
-     * @var string The institution of this Education.
+     * @var string|null The institution of this Education.
      *
      * @Assert\Length(
      *     max = 255
@@ -116,7 +123,7 @@ class Education
     private $institution;
 
     /**
-     * @var string The degree granted status of this education. **Granted**, **notGranted**
+     * @var string|null The degree granted status of this education. **Granted**, **notGranted**
      * @Gedmo\Versioned
      *
      * @example Granted
@@ -126,25 +133,33 @@ class Education
      * )
      *
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     max = 255
+     * )
      * @Groups({"read","write"})
      */
     private $degreeGrantedStatus;
 
     /**
-     * @var string The Isced Education Level Code of this Education.
+     * @var string|null The Isced Education Level Code of this Education.
      *
      * @example HBO
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     max = 255
+     * )
      */
     private $iscedEducationLevelCode;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity=Employee::class, inversedBy="educations", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
     private $employee;
 

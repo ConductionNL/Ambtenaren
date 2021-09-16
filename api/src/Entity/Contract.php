@@ -184,11 +184,12 @@ class Contract
 
     /**
      * @var Employee The Employee to which this contract belongs to
-     *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="contracts", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull
      */
     private $employee;
 

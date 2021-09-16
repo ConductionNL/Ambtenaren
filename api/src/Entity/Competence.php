@@ -54,7 +54,7 @@ class Competence
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Assert\NotNull
      */
@@ -97,7 +97,6 @@ class Competence
 
     /**
      * @var Datetime The moment this resource last Modified
-     *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
@@ -107,6 +106,7 @@ class Competence
     /**
      * @var Employee The Employee to which this Competence belongs to
      *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="competencies", cascade={"persist"})

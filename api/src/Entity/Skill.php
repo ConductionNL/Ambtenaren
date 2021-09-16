@@ -123,6 +123,7 @@ class Skill
     /**
      * @var Employee The Employee to which this skill belongs to
      *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"read","write"})
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="skills", cascade={"persist"})
