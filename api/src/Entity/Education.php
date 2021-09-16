@@ -101,7 +101,7 @@ class Education
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $startDate;
+    private ?DateTime $startDate = null;
 
     /**
      * @var DateTime|null The moment this education ends.
@@ -109,7 +109,7 @@ class Education
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $endDate;
+    private ?DateTime $endDate = null;
 
     /**
      * @var string|null The institution of this Education.
