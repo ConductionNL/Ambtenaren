@@ -93,7 +93,7 @@ class Education
      *     max = 2550
      * )
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @var DateTime|null The moment this education starts.
