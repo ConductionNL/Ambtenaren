@@ -93,6 +93,7 @@ class Application
 
     /**
      * @Assert\Valid()
+     *
      * @var JobPosting the JobPosting associated to this application
      * @Groups({"read", "write"})
      * @MaxDepth(1)
