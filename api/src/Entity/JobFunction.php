@@ -109,9 +109,10 @@ class JobFunction
     /**
      * @var Employee The Employee to which this jobFunction belongs to
      *
+     * @Assert\Valid()
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobFunctions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="jobFunctions", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

@@ -88,9 +88,6 @@ class JobPosting
      * @example This is the best JobPosting ever
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *     max = 7500
-     * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
      */
@@ -120,6 +117,9 @@ class JobPosting
      * @Assert\Choice({"full-time","part-time","temporary","internship","seasonal"})
      * @Assert\NotNull
      * @Groups({"read", "write"})
+     * @Assert\Length(
+     *     max = 255
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $employmentType;
@@ -141,9 +141,6 @@ class JobPosting
      * @example A small summary with information about this jobposting
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *     max = 255
-     * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
      */
@@ -165,9 +162,6 @@ class JobPosting
      * @example EUR
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *     max = 255
-     * )
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
      */
@@ -183,7 +177,7 @@ class JobPosting
      *     max = 255
      * )
      * @Groups({"read", "write"})
-     * @ORM\Column(type="text", length=255)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $jobLocationType;
 
@@ -196,6 +190,9 @@ class JobPosting
      * @Assert\Url
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *     max = 255
+     * )
      */
     private $hiringOrganization;
 
@@ -205,7 +202,7 @@ class JobPosting
      * @example 01-01-2020
      *
      * @Groups({"read", "write"})
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $jobStartDate;
 
@@ -251,9 +248,10 @@ class JobPosting
     /**
      * @var Application the application this JobPosting relates to
      *
+     * @Assert\Valid()
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting")
+     * @ORM\OneToMany(targetEntity="App\Entity\Application", mappedBy="jobPosting", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $applications;

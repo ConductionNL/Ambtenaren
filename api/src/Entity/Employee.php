@@ -93,7 +93,7 @@ class Employee
     private $person;
 
     /**
-     * @var string The organisation where this person is employed
+     * @var string|null The organisation where this person is employed
      *
      * @example https://cc.zaakonline.nl/organizations/e2984465-190a-4562-829e-a8cca81aa35d
      *
@@ -126,51 +126,58 @@ class Employee
     private $dateModified;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Goal", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $goals;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Interest", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $interests;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Competence", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $competencies;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $skills;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\JobFunction", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $jobFunctions;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="employee")
+     * @ORM\OneToMany(targetEntity="App\Entity\Contract", mappedBy="employee", cascade={"persist", "remove"})
      * @MaxDepth(1)
      */
     private $contracts;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read", "write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="employee", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $applications;
 
@@ -183,10 +190,11 @@ class Employee
     private bool $hasPoliceCertificate = false;
 
     /**
+     * @Assert\Valid()
      * @Groups({"read", "write"})
      * @MaxDepth(1)
      *
-     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Education::class, mappedBy="employee", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private Collection $educations;
 

@@ -54,7 +54,7 @@ class Interest
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Assert\NotNull
      */
@@ -65,7 +65,7 @@ class Interest
      *
      * @example description of the interest
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
      *     max = 2550
      * )
@@ -94,9 +94,11 @@ class Interest
     /**
      * @var Employee The Employee to which this Interest belongs to
      *
+     * @Assert\Valid()
+     * @Assert\NotNull
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="interests")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="interests", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;

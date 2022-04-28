@@ -54,7 +54,7 @@ class Goal
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Assert\NotNull
      */
@@ -65,7 +65,7 @@ class Goal
      *
      * @example goal description
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
      *     max = 2550
      * )
@@ -120,10 +120,11 @@ class Goal
 
     /**
      * @var Employee The Employee to which this Goal belongs to
-     *
+     * @Assert\Valid()
+     * @Assert\NotNull
      * @MaxDepth(1)
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="goals")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="goals", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
